@@ -30,6 +30,7 @@ public class NavigationActivity extends AppCompatActivity {
     private List<Fragment> fragmentList;
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
     private BottomNavigationView bottomNavigationView;
+    private static final float MIN_SCALE=0.7f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,37 +53,41 @@ public class NavigationActivity extends AppCompatActivity {
     }
 
     private void initViews(){
+
         bottomNavigationView=findViewById(R.id.bottom_navigation_view);
         navigateHome=new MyImgButton(this);
         navigateDashboard=new MyImgButton(this);
         navigateContacts=new MyImgButton(this);
         navigateUser = new MyImgButton(this);
 
+        int selectedColor=getResources().getColor(R.color.main_blue);
+        int unselectedColor=getResources().getColor(R.color.line_gray);
+
         navigateHome.setSelectedImgId(R.drawable.ic_home_selected);
         navigateHome.setUnSelectedImgId(R.drawable.ic_home_unselected);
-        navigateHome.setSelectedTextColor(R.color.main_blue);
-        navigateHome.setUnSelectedTextColor(R.color.line_gray);
+        navigateHome.setSelectedTextColor(selectedColor);
+        navigateHome.setUnSelectedTextColor(unselectedColor);
         navigateHome.setText("Home");
         navigateHome.setUnSelected();
 
         navigateDashboard.setSelectedImgId(R.drawable.ic_dashboard_selected);
         navigateDashboard.setUnSelectedImgId(R.drawable.ic_dashboard_unselected);
-        navigateDashboard.setSelectedTextColor(R.color.main_blue);
-        navigateDashboard.setUnSelectedTextColor(R.color.line_gray);
+        navigateDashboard.setSelectedTextColor(selectedColor);
+        navigateDashboard.setUnSelectedTextColor(unselectedColor);
         navigateDashboard.setText("Dashboard");
         navigateDashboard.setUnSelected();
 
         navigateContacts.setSelectedImgId(R.drawable.ic_contacts_selected);
         navigateContacts.setUnSelectedImgId(R.drawable.ic_contacts_unselected);
-        navigateContacts.setSelectedTextColor(R.color.main_blue);
-        navigateContacts.setUnSelectedTextColor(R.color.line_gray);
+        navigateContacts.setSelectedTextColor(selectedColor);
+        navigateContacts.setUnSelectedTextColor(unselectedColor);
         navigateContacts.setText("Contacts");
         navigateContacts.setUnSelected();
 
         navigateUser.setSelectedImgId(R.drawable.ic_user_selected);
         navigateUser.setUnSelectedImgId(R.drawable.ic_user_unselected);
-        navigateUser.setSelectedTextColor(R.color.main_blue);
-        navigateUser.setUnSelectedTextColor(R.color.line_gray);
+        navigateUser.setSelectedTextColor(selectedColor);
+        navigateUser.setUnSelectedTextColor(unselectedColor);
         navigateUser.setText("User");
         navigateUser.setUnSelected();
 
@@ -135,5 +140,49 @@ public class NavigationActivity extends AppCompatActivity {
                 viewPager.setCurrentItem(position,true);
             }
         });
+
+        viewPager.setPageTransformer(true, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View view, float position) {
+
+                int pageWidth = view.getWidth();
+                if (position < -1) { // [-Infinity,-1)
+                    // This page is way off-screen to the left.
+                    view.setAlpha(0);
+                } else if (position <= 0) { // [-1,0]
+                    // Use the default slide transition when moving to the left page
+                    view.setAlpha(1);
+                    view.setTranslationX(0);
+                    view.setScaleX(1);
+                    view.setScaleY(1);
+                } else if (position <= 1) { // (0,1]
+                    // Fade the page out.
+                    view.setAlpha(1 - position);
+                    // Counteract the default slide transition
+                    //view.setTranslationX(pageWidth * -position);
+                    // Scale the page down (between MIN_SCALE and 1)
+                    float scaleFactor = MIN_SCALE
+                            + (1 - MIN_SCALE) * (1 - Math.abs(position));
+                    view.setScaleX(scaleFactor);
+                    view.setScaleY(scaleFactor);
+                } else { // (1,+Infinity]
+                    // This page is way off-screen to the right.
+                    view.setAlpha(0);
+                }
+
+                /*
+                view.setTranslationX(view.getWidth() * -position);
+
+                if(position <= -1.0F || position >= 1.0F) {
+                    view.setAlpha(0.0F);
+                } else if( position == 0.0F ) {
+                    view.setAlpha(1.0F);
+                } else {
+                    // position is between -1.0F & 0.0F OR 0.0F & 1.0F
+                    view.setAlpha(1.0F - Math.abs(position));
+                }*/
+            }
+        });
+        //viewPager.setPageTransformer(true,new ZoomInTransform());
     }
 }
