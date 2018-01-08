@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="600"
+    android:interpolator="@android:anim/accelerate_interpolator"
+    android:shareInterpolator="true"
+    android:startOffset="600"> <!--这是个神奇的东西，可以和前一个界面的退出动画无缝衔接-->
+    <scale
+        android:fromXScale="0.0"
+        android:toXScale="1.0"
+        android:fromYScale="1.0"
+        android:toYScale="1.0"
+        android:pivotX="50%p"
+        android:pivotY="50%p"
+        />
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="1.0"/>
+</set>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyImgButton">
+        <attr name="src_selected" format="integer"/>
+        <attr name="src_unselected" format="integer"/>
+        <attr name="text_selected_color" format="color"/>
+        <attr name="text_unselected_color" format="color"/>
+        <attr name="text" format="string"/>
+    </declare-styleable>
+</resources>
