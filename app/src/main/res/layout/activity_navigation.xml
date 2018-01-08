@@ -18,54 +18,13 @@
         android:id="@+id/sep_line"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_above="@id/bottom_layout"
+        android:layout_above="@id/bottom_navigation_view"
         android:background="#AAAAAA"/>
-    <LinearLayout
+    <com.example.coderlt.uibestpractice.View.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:id="@+id/bottom_layout"
+        android:id="@+id/bottom_navigation_view"
         android:layout_alignParentBottom="true">
-        <com.example.coderlt.uibestpractice.View.MyImgButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/img_button_home"
-            app:src_unselected="@drawable/ic_home_unselected"
-            app:src_selected="@drawable/ic_home_selected"
-            app:text="主页"
-            app:text_unselected_color="#AAAAAA"
-            app:text_selected_color="@color/main_blue"/>
-        <com.example.coderlt.uibestpractice.View.MyImgButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/img_button_dashboard"
-            app:src_unselected="@drawable/ic_dashboard_unselected"
-            app:src_selected="@drawable/ic_dashboard_selected"
-            app:text="营业报表"
-            app:text_unselected_color="#AAAAAA"
-            app:text_selected_color="@color/main_blue"/>
-        <com.example.coderlt.uibestpractice.View.MyImgButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/img_button_contacts"
-            app:src_unselected="@drawable/ic_contacts_unselected"
-            app:src_selected="@drawable/ic_contacts_selected"
-            app:text="聊天"
-            app:text_unselected_color="#AAAAAA"
-            app:text_selected_color="@color/main_blue"/>
-        <com.example.coderlt.uibestpractice.View.MyImgButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/img_button_user"
-            app:src_unselected="@drawable/ic_user_unselected"
-            app:src_selected="@drawable/ic_user_selected"
-            app:text="个人中心"
-            app:text_unselected_color="#AAAAAA"
-            app:text_selected_color="@color/main_blue"/>
-
-    </LinearLayout>
+    </com.example.coderlt.uibestpractice.View.BottomNavigationView>
 </RelativeLayout>

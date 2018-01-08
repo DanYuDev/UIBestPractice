@@ -59,7 +59,6 @@ public class BottomNavigationView extends LinearLayout {
                 }
             });
             addView(btnList.get(i),layoutParams);
-            btnList.add(btn);
         }
     }
     @Override

@@ -2,6 +2,7 @@ package com.example.coderlt.uibestpractice.View;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -88,6 +89,19 @@ public class MyImgButton extends RelativeLayout {
     public void setUnSelected(){
         mTextView.setTextColor(unSelectedTextColor);
         mImgView.setImageResource(unSelectedImgId);
+    }
+
+    public void setSelectedImgId(int resId){
+        selectedImgId=resId;
+    }
+    public void setUnSelectedImgId(int resId){
+        unSelectedImgId=resId;
+    }
+    public void setSelectedTextColor(int color){
+        selectedTextColor=color;
+    }
+    public void setUnSelectedTextColor(int color){
+        unSelectedTextColor=color;
     }
 
 //     /*设置触摸接口*/

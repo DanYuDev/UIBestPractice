@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.coderlt.uibestpractice.R;
+import com.example.coderlt.uibestpractice.View.BottomNavigationView;
 import com.example.coderlt.uibestpractice.View.MyImgButton;
 import com.example.coderlt.uibestpractice.adapter.MyFragmentPagerAdapter;
 import com.example.coderlt.uibestpractice.fragments.ContactsFragment;
@@ -21,13 +22,14 @@ import com.example.coderlt.uibestpractice.fragments.UserFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NavigationActivity extends AppCompatActivity implements View.OnClickListener{
+public class NavigationActivity extends AppCompatActivity {
     private MyImgButton navigateHome,navigateDashboard,navigateUser,navigateContacts;
-    private MyImgButton selectedButton;
+    private List<MyImgButton> btnList;
     private ViewPager viewPager;
     private FragmentManager fm;
     private List<Fragment> fragmentList;
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +52,48 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void initViews(){
-        navigateHome=findViewById(R.id.img_button_home);
-        navigateDashboard=findViewById(R.id.img_button_dashboard);
-        navigateUser=findViewById(R.id.img_button_user);
-        navigateContacts=findViewById(R.id.img_button_contacts);
+        bottomNavigationView=findViewById(R.id.bottom_navigation_view);
+        navigateHome=new MyImgButton(this);
+        navigateDashboard=new MyImgButton(this);
+        navigateContacts=new MyImgButton(this);
+        navigateUser = new MyImgButton(this);
 
-        navigateHome.setOnClickListener(this);
-        navigateDashboard.setOnClickListener(this);
-        navigateUser.setOnClickListener(this);
-        navigateContacts.setOnClickListener(this);
+        navigateHome.setSelectedImgId(R.drawable.ic_home_selected);
+        navigateHome.setUnSelectedImgId(R.drawable.ic_home_unselected);
+        navigateHome.setSelectedTextColor(R.color.main_blue);
+        navigateHome.setUnSelectedTextColor(R.color.line_gray);
+        navigateHome.setText("Home");
+        navigateHome.setUnSelected();
 
-        navigateHome.setSelected();
-        selectedButton=navigateHome;
+        navigateDashboard.setSelectedImgId(R.drawable.ic_dashboard_selected);
+        navigateDashboard.setUnSelectedImgId(R.drawable.ic_dashboard_unselected);
+        navigateDashboard.setSelectedTextColor(R.color.main_blue);
+        navigateDashboard.setUnSelectedTextColor(R.color.line_gray);
+        navigateDashboard.setText("Dashboard");
+        navigateDashboard.setUnSelected();
 
+        navigateContacts.setSelectedImgId(R.drawable.ic_contacts_selected);
+        navigateContacts.setUnSelectedImgId(R.drawable.ic_contacts_unselected);
+        navigateContacts.setSelectedTextColor(R.color.main_blue);
+        navigateContacts.setUnSelectedTextColor(R.color.line_gray);
+        navigateContacts.setText("Contacts");
+        navigateContacts.setUnSelected();
+
+        navigateUser.setSelectedImgId(R.drawable.ic_user_selected);
+        navigateUser.setUnSelectedImgId(R.drawable.ic_user_unselected);
+        navigateUser.setSelectedTextColor(R.color.main_blue);
+        navigateUser.setUnSelectedTextColor(R.color.line_gray);
+        navigateUser.setText("User");
+        navigateUser.setUnSelected();
+
+        btnList=new ArrayList<>();
+        btnList.add(navigateHome);
+        btnList.add(navigateDashboard);
+        btnList.add(navigateContacts);
+        btnList.add(navigateUser);
+
+        bottomNavigationView.setBtnList(btnList);
+        bottomNavigationView.setCurrentItem(0);
         // init fragmentList
         viewPager=findViewById(R.id.navigation_view_pager);
         HomeFragment fh=new HomeFragment();
@@ -79,31 +110,30 @@ public class NavigationActivity extends AppCompatActivity implements View.OnClic
         fm=getSupportFragmentManager();
         myFragmentPagerAdapter=new MyFragmentPagerAdapter(fm,fragmentList);
         viewPager.setAdapter(myFragmentPagerAdapter);
-    }
-    @Override
-    public void onClick(View v){
-        switch (v.getId()){
-            case R.id.img_button_home:
-                navigateChange(v);
-                break;
-            case R.id.img_button_dashboard:
-                navigateChange(v);
-                break;
-            case R.id.img_button_user:
-                navigateChange(v);
-                break;
-            case R.id.img_button_contacts:
-                navigateChange(v);
-                break;
-            default:
-                break;
-        }
-    }
+        viewPager.setCurrentItem(0);
 
-    private void navigateChange(View v){
-        MyImgButton btn=(MyImgButton)v;
-        selectedButton.setUnSelected();
-        btn.setSelected();
-        selectedButton=btn;
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                bottomNavigationView.setCurrentItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                //
+            }
+        });
+
+        bottomNavigationView.setOnBtnSelectedListener(new BottomNavigationView.OnBtnSelectedListenr() {
+            @Override
+            public void onBtnSelected(int position) {
+                viewPager.setCurrentItem(position,true);
+            }
+        });
     }
 }
