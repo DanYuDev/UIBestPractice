@@ -4,6 +4,12 @@ package com.example.coderlt.uibestpractice.bean;
  * Created by coderlt on 2017/12/28.
  */
 
+/**chat item
+ * 包括语音，文字，图片等各种信息
+ * 所以如何来操作会成为一个问题
+ * 这个问题应该延伸到复杂 recyclerview item
+ * 网上有很多的处理方案
+ */
 public class Msg {
     private String msg;
     private int type;

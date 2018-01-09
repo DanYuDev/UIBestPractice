@@ -5,15 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.coderlt.uibestpractice.activity.NavigationActivity">
-    <include layout="@layout/title_layout"
-        android:id="@+id/navigation_title"/>
     <android.support.v4.view.ViewPager
-        android:background="@color/main_green"
+        android:background="#63A4D0"
         android:id="@+id/navigation_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/sep_line"
-        android:layout_below="@id/navigation_title"/>
+        android:layout_above="@id/sep_line" />
     <View
         android:id="@+id/sep_line"
         android:layout_width="match_parent"
