@@ -232,7 +232,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 = MediaType.parse("application/json; charset=utf-8");
         Log.d(TAG,"Json Args is :"+JSONObject.toJSONString(loginMap));
         Request request=new Request.Builder()
-                .url(Constant.USER.LOGIN_URL)
+                .url(Constant.LOGIN_URL)
                 .post(RequestBody.create(MEDIA_TYPE_JSON,JSONObject.toJSONString(loginMap)))
                 .build();
         client.newCall(request).enqueue(new Callback() {

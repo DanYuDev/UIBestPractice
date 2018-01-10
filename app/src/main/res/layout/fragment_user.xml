@@ -17,6 +17,7 @@
                 android:layout_height="220dp"
                 android:background="@color/main_blue">
                 <!--圆角图片有两种典型的实现方式-->
+                <!--https://github.com/hdodenhof/CircleImageView-->
                 <de.hdodenhof.circleimageview.CircleImageView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/profile_image"
@@ -28,6 +29,7 @@
                     app:civ_border_color="@color/main_blue"/>
             </RelativeLayout>
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/func_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white"/>

@@ -147,9 +147,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         final String requestBody= JSONObject.toJSONString(map);
 
         Request request=new Request.Builder()
-                .url(Constant.USER.REG_URL)
+                .url(Constant.REG_URL)
                 .post(RequestBody.create(Constant.MEDIA_TYPE_JSON,requestBody))
                 .build();
+        //client=new OkHttpClient();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
