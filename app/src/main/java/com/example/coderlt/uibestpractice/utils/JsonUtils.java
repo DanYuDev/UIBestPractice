@@ -15,6 +15,12 @@ import java.util.List;
 
 public class JsonUtils {
     public final String TAG=getClass().getName();
+
+    /*
+     不能通过返回值的形式返回 options，因为adapter里面的adapter只是fragment里面options的一个引用，
+     即地址的引用，当fragment里面的options指向别的时候，这个options的改变就不会对观察者adapter里
+     面的options造成任何影响。
+     */
     public static void DealConfig(String responseText,List<Option> options){
         //List<Option> options=new ArrayList<>();
         JSONArray jsonArray= JSONArray.parseArray(responseText);
