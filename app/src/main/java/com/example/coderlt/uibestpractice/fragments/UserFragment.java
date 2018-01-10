@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.activity.NavigationActivity;
@@ -42,6 +44,7 @@ public class UserFragment extends Fragment {
 
     private final String TAG=getClass().getName();
     private View view;
+    private WebView webView;
     private RecyclerView funcRecycler;
     private List<Option> options;
     private FuncRecyclerAdapter funcAdapter;
@@ -75,6 +78,11 @@ public class UserFragment extends Fragment {
         funcRecycler.setLayoutManager(layoutManager);
         funcRecycler.setAdapter(funcAdapter);
         requestUserInfo();
+
+        webView=view.findViewById(R.id.user_webview);
+        webView.setWebViewClient(new WebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl("https://www.baidu.com/");
         return view;
     }
 

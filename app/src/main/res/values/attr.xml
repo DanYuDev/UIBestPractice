@@ -7,4 +7,8 @@
         <attr name="text_unselected_color" format="color"/>
         <attr name="text" format="string"/>
     </declare-styleable>
+    <declare-styleable name="DCircleImageView">
+        <attr name="src" format="integer"/>
+        <attr name="radius" format="integer"/>
+    </declare-styleable>
 </resources>
