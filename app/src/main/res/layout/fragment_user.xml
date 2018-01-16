@@ -4,56 +4,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <include layout="@layout/title_layout"
-        android:id="@+id/navigation_title"/>
-    <in.srain.cube.views.ptr.PtrFrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:ptr_resistance="1.7"
-        app:ptr_ratio_of_header_height_to_refresh="1.2"
-        app:ptr_duration_to_close="300"
-        app:ptr_duration_to_close_header="2000"
-        app:ptr_keep_header_when_refresh="true"
-        app:ptr_pull_to_fresh="false">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <RelativeLayout
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <in.srain.cube.views.ptr.PtrFrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:background="@color/main_blue">
-                <!--圆角图片有两种典型的实现方式-->
-                <!--https://github.com/hdodenhof/CircleImageView-->
-               <!-- <de.hdodenhof.circleimageview.CircleImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image"
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_default_head"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@color/main_blue"/>-->
-                <com.example.coderlt.uibestpractice.View.DCircleImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_centerInParent="true"
-                    app:src="@drawable/ic_default_head"/>
-            </RelativeLayout>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/func_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"/>
-            <WebView
-                android:id="@+id/user_webview"
+                android:layout_height="match_parent"
+                app:ptr_resistance="1.7"
+                app:ptr_ratio_of_header_height_to_refresh="1.2"
+                app:ptr_duration_to_close="300"
+                app:ptr_duration_to_close_header="2000"
+                app:ptr_keep_header_when_refresh="true"
+                app:ptr_pull_to_fresh="false">
+         <include layout="@layout/title_layout"
+            android:id="@+id/navigation_title"/>
+            <!--之前我试着添加一个 ScrollView，结果总是 webView加载不完整-->
+            <!--我苦思冥想，觉得是滑动冲突问题。。。。。。。。。。。。。。。-->
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            </WebView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:background="@color/main_blue">
+                    <!--圆角图片有两种典型的实现方式-->
+                    <!--https://github.com/hdodenhof/CircleImageView-->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_default_head"
+                        app:civ_border_color="@color/main_blue"
+                        app:civ_border_width="2dp" />
+                    <!--<com.example.coderlt.uibestpractice.View.DCircleImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_centerInParent="true"
+                        app:src="@drawable/ic_default_head"/>-->
+                </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/func_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"/>
+                <WebView
+                    android:id="@+id/user_webview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </WebView>
+            </LinearLayout>
+            </in.srain.cube.views.ptr.PtrFrameLayout>
         </LinearLayout>
-        </ScrollView>
-    </in.srain.cube.views.ptr.PtrFrameLayout>
+
 </LinearLayout>

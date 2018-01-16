@@ -1,6 +1,8 @@
 package com.example.coderlt.uibestpractice.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,9 +10,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -78,10 +82,9 @@ public class UserFragment extends Fragment {
         funcRecycler.setLayoutManager(layoutManager);
         funcRecycler.setAdapter(funcAdapter);
         requestUserInfo();
-
         webView=view.findViewById(R.id.user_webview);
-        webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("https://www.baidu.com/");
         return view;
     }
@@ -110,4 +113,5 @@ public class UserFragment extends Fragment {
             }
         });
     }
+
 }
