@@ -52,6 +52,7 @@ public class LineGraph extends View {
 
     @Override
     protected void onDraw(Canvas canvas){
+        // sorted by the date
         if (len>0)
         {
             PointF temp;

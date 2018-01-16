@@ -19,6 +19,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.example.coderlt.uibestpractice.R;
+import com.example.coderlt.uibestpractice.View.RentalsSunHeaderView;
 import com.example.coderlt.uibestpractice.activity.NavigationActivity;
 import com.example.coderlt.uibestpractice.activity.RegisterActivity;
 import com.example.coderlt.uibestpractice.adapter.FuncRecyclerAdapter;
@@ -34,6 +35,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -45,7 +48,7 @@ import okhttp3.Response;
  */
 
 public class UserFragment extends Fragment {
-
+    private Context mContext;
     private final String TAG=getClass().getName();
     private View view;
     private WebView webView;
@@ -53,6 +56,7 @@ public class UserFragment extends Fragment {
     private List<Option> options;
     private FuncRecyclerAdapter funcAdapter;
     private OkHttpClient client;
+    private PtrFrameLayout ptrFrameLayout;
 
     private static final int REQUEST_FUNC_SUCCESS=0;
 
@@ -74,6 +78,7 @@ public class UserFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mContext=getActivity();
         view = inflater.inflate(R.layout.fragment_user,container,false);
         options=new ArrayList<>();
         funcRecycler=view.findViewById(R.id.func_recycler_view);
@@ -82,10 +87,28 @@ public class UserFragment extends Fragment {
         funcRecycler.setLayoutManager(layoutManager);
         funcRecycler.setAdapter(funcAdapter);
         requestUserInfo();
-        webView=view.findViewById(R.id.user_webview);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://www.baidu.com/");
+
+        ptrFrameLayout=view.findViewById(R.id.ptr_frame);
+        RentalsSunHeaderView header=new RentalsSunHeaderView(mContext);
+        header.setUp(ptrFrameLayout);
+        ptrFrameLayout.addPtrUIHandler(header);
+        ptrFrameLayout.setPtrHandler(new PtrHandler() {
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return true;
+            }
+
+            @Override
+            public void onRefreshBegin(final PtrFrameLayout frame) {
+                frame.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        frame.refreshComplete();
+                    }
+                },2000);
+            }
+        });
+        ptrFrameLayout.setHeaderView(header);
         return view;
     }
 
