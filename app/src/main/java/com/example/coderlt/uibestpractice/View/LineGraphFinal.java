@@ -108,6 +108,7 @@ public class LineGraphFinal extends View {
 //        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_logo_white),
 //                0,0,mPaint);
         canvas.drawPath(linePath,pathPaint);
+        canvas.drawLine(0,mHeight,mWidth,mHeight,mPaint);
     }
 
     public void setDataSet(float[] dataSet){

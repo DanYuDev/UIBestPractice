@@ -6,15 +6,94 @@
     android:background="@android:color/white">
     <include layout="@layout/title_layout"
     android:id="@+id/navigation_title"/>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="240dp"
         android:orientation="vertical"
         android:id="@+id/line_graph_layout"
         android:background="@color/main_blue">
         <com.example.coderlt.uibestpractice.View.LineGraphFinal
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:id="@+id/line_graph"/>
-    </LinearLayout>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/line_graph"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_delete"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_below="@id/line_graph"
+            android:layout_centerHorizontal="true"
+            android:text="调整时间"
+            android:textColor="@android:color/white"/>
+        <ImageView
+            android:id="@+id/time_add"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/line_graph"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_add"/>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/line_graph"
+            android:layout_toLeftOf="@id/time_add"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp">
+        </Spinner>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="营收概览"
+        android:textColor="@color/main_blue"
+        android:paddingLeft="16dp"
+        android:gravity="start|center"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/overview_recycler"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="营收概览"
+        android:textColor="@color/main_blue"
+        android:paddingLeft="16dp"
+        android:gravity="start|center"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/vip_recycler"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="营收概览"
+        android:textColor="@color/main_blue"
+        android:paddingLeft="16dp"
+        android:gravity="start|center"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/detail_recycler"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

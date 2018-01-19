@@ -15,7 +15,7 @@ public class AdvActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(100);
             }catch (InterruptedException ex){
                 ex.printStackTrace();
             }

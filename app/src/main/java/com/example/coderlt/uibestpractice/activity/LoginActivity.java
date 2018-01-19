@@ -276,7 +276,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .putString(Constant.USER.USER_NAME,object.getString("user_name"))
                 .putString(Constant.USER.USER_PHONE,object.getString("user_phone"));
         editor.apply();
-
     }
 
 }
