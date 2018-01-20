@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@android:color/darker_gray">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <!--在外面千套一层，是为了使布局的宽度有效，因为没有父布局的话，外层的layout属性无效，再千套一层，就好了-->
     <RelativeLayout
-        android:layout_width="100dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content">
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:text="爱你"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
         android:gravity="center"
+        android:background="@drawable/corner_dialog"
         android:layout_centerHorizontal="true"
         android:id="@+id/xiaobo_tv"/>
     <View
         android:id="@+id/line1"
-        android:layout_width="wrap_content"
-        android:layout_height="1px"
-        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@android:color/transparent"
         android:layout_below="@id/xiaobo_tv"/>
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:text="永远"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
         android:gravity="center"
+        android:background="@drawable/corner_dialog"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/line1"
         android:id="@+id/yinhe_tv"/>
     <View
         android:id="@+id/line2"
-        android:layout_width="wrap_content"
-        android:layout_height="1px"
-        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@android:color/transparent"
         android:layout_below="@id/yinhe_tv"/>
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:text="高邮"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/corner_dialog"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:id="@+id/zengqi_tv"

@@ -6,11 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 
@@ -26,14 +28,19 @@ import java.util.List;
  * Created by coderlt on 2018/1/7.
  */
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements View.OnClickListener{
     private final String TAG=getClass().getSimpleName();
     private Context mContext;
     private float[] dataSet={58.3f,73.9f,68.7f,90f,23.8f,57f,73.8f};
     private String[] spinnerArray={"年","月","日"};
     private ArrayAdapter<String> adapter;
+
+    //-----------------控件-----------------------------------
     private Spinner spinner;
-    private PopupWindow timeWnd;
+    private PopupWindow moreWnd;
+    private ImageView moreIv;
+    private ImageView backIv;
+    private View popView;
 
     //----------------表格组件--------------------------------
     private RecyclerView overRecycler,vipRecycler,detailRecycler;
@@ -49,9 +56,44 @@ public class DashboardFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_dashboard,container,false);
         LineGraphFinal lineGraph=view.findViewById(R.id.line_graph);
         lineGraph.setDataSet(dataSet);
+        initViews();
         setSpinner();
         setOverRecycler();
+        setPopwnd();
         return view;
+    }
+
+    @Override
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.more_iv:
+                moreWnd.showAtLocation(view, Gravity.BOTTOM|Gravity.CENTER,0,0);
+                popView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        moreWnd.dismiss();
+                    }
+                },2000);
+                break;
+            case R.id.title_left:
+                getActivity().finish();
+                break;
+        }
+    }
+
+    private void initViews(){
+        moreIv=view.findViewById(R.id.more_iv);
+        backIv=view.findViewById(R.id.title_left);
+
+        moreIv.setOnClickListener(this);
+        backIv.setOnClickListener(this);
+    }
+    private void setPopwnd(){
+        popView=LayoutInflater.from(mContext).inflate(R.layout.pop_wnd_layout,null);
+        moreWnd=new PopupWindow(popView,ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        //moreWnd.setClippingEnabled(false);
+        moreWnd.setAnimationStyle(R.style.popwin_anim_style);
     }
 
     private void setSpinner(){
