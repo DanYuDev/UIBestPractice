@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.bean.ScheduleBean;
 
@@ -30,16 +29,33 @@ public class ScheduleArrayAdapter extends ArrayAdapter<ScheduleBean> {
         this.resId=resId;
         mContext=context;
     }
-
+    class VH{
+        TextView nodeTv;
+        View line;
+    }
     @Override
     public View getView(int position , View convertView, ViewGroup parent){
         ScheduleBean bean=getItem(position);
-        View view= LayoutInflater.from(getContext()).inflate(resId,parent,false);
-
+        View view;
+        VH vh;
+        view= LayoutInflater.from(getContext()).inflate(resId,parent,false);
+//        if(convertView==null){
+//            view= LayoutInflater.from(getContext()).inflate(resId,parent,false);
+//            vh=new VH();
+//            vh.nodeTv=view.findViewById(R.id.node_tv);
+//            vh.line=view.findViewById(R.id.vertical_line);
+//            view.setTag(vh);
+//        }
+//
+//        else{
+//            view=convertView;
+//            vh=(VH)view.getTag();
+//        }
 
         tv=view.findViewById(R.id.node_tv);
         tv.setText(bean.getMsg());
         line=view.findViewById(R.id.vertical_line);
+        //line.setBackground(null);
         ViewGroup.LayoutParams lp=line.getLayoutParams();
 
         final DisplayMetrics dm = mContext.getResources().getDisplayMetrics();

@@ -98,6 +98,8 @@ public class LineGraphFinal extends View {
             Log.d(TAG,"x is :"+xSet[i]);
             x=xSet[i];
             y=(mHeight-dataSet[i]*yRatio);
+            //TODO 注意下面这个方法，设置线段两端的点的形状，在画point的时候表现为点的形状
+            mPaint.setStrokeCap(Paint.Cap.ROUND);
             canvas.drawPoint(x,y,mPaint);
             canvas.drawLine(x,mHeight,x,mHeight-10,mPaint);
             canvas.drawText(title[i],x-20,mHeight-20,textPaint);

@@ -50,7 +50,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int ViewType){
         // 感觉这里设计不合理，应该由用户传layout过来
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_item,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).
+                inflate(R.layout.chat_item,parent,false);
         ViewHolder holder=new ViewHolder(view);
         return holder;
     }

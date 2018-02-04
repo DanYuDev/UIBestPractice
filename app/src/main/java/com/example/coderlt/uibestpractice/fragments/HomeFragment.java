@@ -27,19 +27,17 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private View view;
     private Context mContext;
-    private ListView scheduleListView;
-    private ScheduleArrayAdapter scheduleArrayAdapter;
-    private List<ScheduleBean> scheduleList;
+//    private ListView scheduleListView;
+//    private ScheduleArrayAdapter scheduleArrayAdapter;
+//    private List<ScheduleBean> scheduleList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home,container,false);
         mContext=getActivity();
-        initViews();
-        initScheduleListView();
         return view;
     }
 
-    private void initViews(){
+    /*private void initViews(){
         scheduleListView=view.findViewById(R.id.schedule_listview);
     }
 
@@ -56,5 +54,5 @@ public class HomeFragment extends Fragment {
         }
         scheduleArrayAdapter=new ScheduleArrayAdapter(mContext,R.layout.schedule_item,scheduleList);
         scheduleListView.setAdapter(scheduleArrayAdapter);
-    }
+    }*/
 }
