@@ -59,7 +59,7 @@ public class FuncRecyclerAdapter extends RecyclerView.Adapter<FuncRecyclerAdapte
     public void onBindViewHolder(ViewHolder holder, int position)
     {
         Option option= options.get(position);
-        Log.d(TAG,"on bind VH");
+        Log.d(TAG,"on bind VH ");
         holder.tv.setText(option.getName());
         Glide.with(mContext).load(option.getImgUrl()).into(holder.iv);
     }

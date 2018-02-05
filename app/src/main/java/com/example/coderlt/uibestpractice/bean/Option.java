@@ -1,10 +1,12 @@
 package com.example.coderlt.uibestpractice.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by coderlt on 2018/1/10.
  */
 
-public class Option {
+public class Option implements Serializable{
     private String name;
     private String imgUrl;
     private String config_id;

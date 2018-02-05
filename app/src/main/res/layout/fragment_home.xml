@@ -70,6 +70,7 @@
             app:text_unselected_color="@color/main_green"
             app:src_unselected="@drawable/money_out"/>
         <com.example.coderlt.uibestpractice.View.MyImgButton
+            android:id="@+id/sales_img_btn"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignParentRight="true"

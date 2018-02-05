@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/title_layout"
+        android:id="@+id/title_layout"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context="com.example.coderlt.uibestpractice.activity.SalesDetailActivity">
+
+            <View
+                android:id="@+id/table_title_line"
+                android:layout_width="3dp"
+                android:layout_height="30dp"
+                android:background="@color/main_green"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/table_title_line"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:textSize="18sp"
+                android:text="进销存表格"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="10dp"
+                android:id="@+id/sales_table"
+                android:background="@android:color/holo_purple"
+                android:layout_below="@id/table_title_line"
+                >
+            </TableLayout>
+
+            <View
+                android:id="@+id/img_title_line"
+                android:layout_width="3dp"
+                android:layout_height="30dp"
+                android:background="@color/main_green"
+                android:layout_below="@id/sales_table"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_below="@id/sales_table"
+                android:layout_toRightOf="@id/img_title_line"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="进销存图片存根"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="10dp"
+                android:background="@color/mid_blue_a"
+                android:layout_below="@id/img_title_line">
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

@@ -12,10 +12,10 @@ public class Constant {
     public static final int LOGIN_BY_VERIFICATION=0x111;
     public static final int LOGIN_BY_PASSWORD=0x222;
 
-    public static final String LOGIN_URL = "http://192.168.125.80:8080/HangPaiSoftCamp/admin/login.action";
-    public static final String REG_URL= "http://192.168.125.80:8080/HangPaiSoftCamp/addMerchant.action";
-    public static final String CHECK_PHONE_URL="http://localhost:8080/HangPaiSoftCamp/checkPhone.action";
-    public static final String CONFIG_URL= "http://192.168.125.80:8080/HangPaiSoftCamp/selectConfiguration.action";
+    public static final String LOGIN_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/admin/login.action";
+    public static final String REG_URL= "http://192.168.125.81:8080/HangPaiSoftCamp/addMerchant.action";
+    public static final String CHECK_PHONE_URL = "http://localhost:8080/HangPaiSoftCamp/checkPhone.action";
+    public static final String CONFIG_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/selectConfiguration.action";
 
 
     public static MediaType MEDIA_TYPE_JSON

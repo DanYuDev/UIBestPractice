@@ -25,9 +25,11 @@ import com.example.coderlt.uibestpractice.activity.RegisterActivity;
 import com.example.coderlt.uibestpractice.adapter.FuncRecyclerAdapter;
 import com.example.coderlt.uibestpractice.bean.Option;
 import com.example.coderlt.uibestpractice.utils.Constant;
+import com.example.coderlt.uibestpractice.utils.FileUtil;
 import com.example.coderlt.uibestpractice.utils.JsonUtils;
 import com.example.coderlt.uibestpractice.utils.Utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -55,6 +57,8 @@ public class UserFragment extends Fragment {
     private RecyclerView funcRecycler;
     private List<Option> options;
     private FuncRecyclerAdapter funcAdapter;
+    private String cacheFilePath;
+    private File cacheFile;
     private OkHttpClient client;
     private PtrFrameLayout ptrFrameLayout;
 
@@ -80,14 +84,35 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext=getActivity();
         view = inflater.inflate(R.layout.fragment_user,container,false);
-        options=new ArrayList<>();
         funcRecycler=view.findViewById(R.id.func_recycler_view);
+
+        //----------- check if cache options exist ---------------------------------
+        cacheFile = FileUtil.getDiskCacheDir(mContext,"options");
+        if(!cacheFile.exists()){
+            try{
+                cacheFile.createNewFile();
+            }catch (IOException ex){
+                ex.printStackTrace();
+            }
+        }
+        Log.d(TAG,"cacheFile isn't exist.");
+        cacheFilePath = cacheFile.getPath();
+        options = (List<Option>) FileUtil.loadObjectFromFile(cacheFilePath);
+        Log.d(TAG,"Options form file: "+options);
+        if(options == null){
+            Log.d(TAG,"Options is null .");
+            options = new ArrayList<>();
+            requestUserInfo();
+        }
+        //-------------------------------------------------------------------------
+
         funcAdapter=new FuncRecyclerAdapter(options,R.layout.func_item,getActivity());
         GridLayoutManager layoutManager=new GridLayoutManager(getActivity(),3);
         funcRecycler.setLayoutManager(layoutManager);
         funcRecycler.setAdapter(funcAdapter);
-        requestUserInfo();
 
+
+        //--------------------  set refresh layout -----------------------------------
         ptrFrameLayout=view.findViewById(R.id.ptr_frame);
         RentalsSunHeaderView header=new RentalsSunHeaderView(mContext);
         header.setUp(ptrFrameLayout);
@@ -100,6 +125,7 @@ public class UserFragment extends Fragment {
 
             @Override
             public void onRefreshBegin(final PtrFrameLayout frame) {
+                requestUserInfo();
                 frame.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -109,6 +135,7 @@ public class UserFragment extends Fragment {
             }
         });
         ptrFrameLayout.setHeaderView(header);
+        //--------------------------------------------------------------------------------
         return view;
     }
 
@@ -129,6 +156,9 @@ public class UserFragment extends Fragment {
                 responseText=response.body().string();
                 Log.d(TAG,"onResponse success, ResponseText is :"+responseText);
                 JsonUtils.DealConfig(responseText,options);
+
+                //String path = FileUtil.getDiskCacheDir(mContext,"options").getPath();
+                FileUtil.saveObjectToFile(options,cacheFilePath);
 
                 Message msg=new Message();
                 msg.what=REQUEST_FUNC_SUCCESS;
