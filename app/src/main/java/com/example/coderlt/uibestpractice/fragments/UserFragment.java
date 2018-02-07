@@ -140,6 +140,7 @@ public class UserFragment extends Fragment {
     }
 
     private void requestUserInfo(){
+        options.clear();
         Request request=new Request.Builder()
                 .url(Constant.CONFIG_URL)
                 .build();
