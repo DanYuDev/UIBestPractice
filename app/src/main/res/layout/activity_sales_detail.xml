@@ -34,11 +34,12 @@
                 android:text="进销存表格"/>
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:id="@+id/sales_table"
-                android:background="@android:color/holo_purple"
                 android:layout_below="@id/table_title_line"
+                android:divider="@android:drawable/divider_horizontal_bright"
+                android:showDividers="middle|beginning|end"
                 >
             </TableLayout>
 

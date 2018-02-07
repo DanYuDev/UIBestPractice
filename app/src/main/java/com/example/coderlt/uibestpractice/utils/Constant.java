@@ -16,7 +16,7 @@ public class Constant {
     public static final String REG_URL= "http://192.168.125.81:8080/HangPaiSoftCamp/addMerchant.action";
     public static final String CHECK_PHONE_URL = "http://localhost:8080/HangPaiSoftCamp/checkPhone.action";
     public static final String CONFIG_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/selectConfiguration.action";
-
+    public static final String SALES_URL = "https://www.baidu.co";
 
     public static MediaType MEDIA_TYPE_JSON
             = MediaType.parse("application/json; charset=utf-8");
