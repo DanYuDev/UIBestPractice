@@ -1,7 +1,10 @@
 package com.example.coderlt.uibestpractice.activity;
 
 import android.app.Activity;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -16,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coderlt.uibestpractice.R;
+import com.example.coderlt.uibestpractice.View.MyDialog;
 import com.example.coderlt.uibestpractice.bean.Goods;
 import com.example.coderlt.uibestpractice.bean.SalesRecord;
 import com.example.coderlt.uibestpractice.utils.Constant;
@@ -26,6 +31,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -42,7 +48,7 @@ public class SalesDetailActivity extends AppCompatActivity {
     private List<SalesRecord> salesList = new ArrayList<>();
     private OkHttpClient client;
     private String responseText;
-    private ProgressBar progressBar ;
+    private MyDialog progressDialog;
 
     static class MyHandler extends Handler{
         private WeakReference<SalesDetailActivity> wr;
@@ -55,9 +61,11 @@ public class SalesDetailActivity extends AppCompatActivity {
         public void handleMessage(Message msg){
             switch(msg.what){
                 case UPDATE_SALES:
-                    wr.get().progressBar.setVisibility(View.INVISIBLE);
+                    wr.get().progressDialog.dismiss();
+                    wr.get().bindSalesData();
                     break;
                 case USE_DEFAULT:
+                    wr.get().progressDialog.dismiss();
                     wr.get().useDefaultSalesList();
                     break;
 
@@ -78,39 +86,74 @@ public class SalesDetailActivity extends AppCompatActivity {
 
     private void initViews(){
         salesTable = findViewById(R.id.sales_table);
-        //salesTable.setBackgroundColor(Color.LTGRAY);
     }
 
     private void setSalesTable(){
         requestSalesInfo();
-        bindSalesData();
     }
 
     private void bindSalesData(){
         TextView nameTv,priceTv,countTv;
-        for(int i=0;i<salesList.size();i++){
-            SalesRecord record = salesList.get(i);
+        TableRow row;
+        TextView tv;
+        SalesRecord record = null;
+
+        // add table heade
+        // -----------------
+
+        for(int i=0;i<=salesList.size();i++){
+            if(i != 0)
+                record = salesList.get(i-1);
 
             TableRow.LayoutParams lp =
                     new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT,1);
-            TableRow row = new TableRow(this);
-            nameTv = new TextView(this);
-            priceTv = new TextView(this);
-            countTv = new TextView(this);
+            row = new TableRow(this);
+            row.setDividerDrawable(getResources().getDrawable(R.drawable.table_horizental_divider));
+            row.setShowDividers(LinearLayout.SHOW_DIVIDER_BEGINNING |
+                                LinearLayout.SHOW_DIVIDER_MIDDLE |
+                                LinearLayout.SHOW_DIVIDER_END);
 
-            row.addView(nameTv,lp);
-            row.addView(priceTv,lp);
-            row.addView(countTv,lp);
+            for(int j= 0;j<3;j++ ){
+                tv = new TextView(this);
+                tv.setTextColor(Color.parseColor("#666666"));
+                tv.setTextSize(16);
+                tv.setPadding(20,10,20,10);
+                row.addView(tv,lp);
+                switch (j){
+                    case 0:
+                        if(i==0){
+                            tv.setText("商品名");
+                            tv.setTextColor(Color.WHITE);
+                            tv.setBackgroundColor(Color.parseColor("#BEB0F9"));
+                        }else{
+                            tv.setText(record.getGoods().getName());
+                        }
+                        break;
+                    case 1:
+                        if(i==0){
+                            tv.setText("单价");
+                            tv.setTextColor(Color.WHITE);
+                            tv.setBackgroundColor(Color.parseColor("#BEB0F9"));
+                        }else{
+                            tv.setText(record.getGoods().getPrice()+"");
+                        }
+                        break;
+                    case 2:
+                        if(i==0){
+                            tv.setText("数量");
+                            tv.setTextColor(Color.WHITE);
+                            tv.setBackgroundColor(Color.parseColor("#BEB0F9"));
+                        }else{
+                            tv.setText(record.getCount()+"");
+                        }
+                        break;
 
-            nameTv.setText(record.getGoods().getName());
-            priceTv.setText(record.getGoods().getPrice()+"");
-            countTv.setText(record.getCount()+"");
-            nameTv.setTextColor(Color.RED);
-            priceTv.setTextColor(Color.RED);
-            nameTv.setTextColor(Color.RED);
+                }
+            }
+
             TableLayout.LayoutParams tlp = new TableLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            //row.setBackgroundColor(0x29CC00+0x222222*i);
+
             Log.d(TAG,"add a table row");
             salesTable.addView(row,tlp);
         }
@@ -126,13 +169,18 @@ public class SalesDetailActivity extends AppCompatActivity {
     }
 
     private void requestSalesInfo(){
-        client = new OkHttpClient();
-        progressBar = new ProgressBar(this);
+        client = new OkHttpClient.Builder()
+                .connectTimeout(1200, TimeUnit.MILLISECONDS)
+                .build();
+
+        progressDialog = new MyDialog(this,R.style.Dialog);
+        progressDialog.setLayoutResId(R.layout.dialog_layout);
 
         Request request = new Request.Builder()
                 .url(Constant.SALES_URL)
                 .build();
-        progressBar.setVisibility(View.VISIBLE);
+        progressDialog.show();
+
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

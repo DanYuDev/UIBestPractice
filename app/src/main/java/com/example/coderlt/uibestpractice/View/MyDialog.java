@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.coderlt.uibestpractice.R;
@@ -13,6 +14,7 @@ import com.example.coderlt.uibestpractice.R;
  */
 
 public class MyDialog extends Dialog{
+    private static final String  TAG = "MyDialog";
     private Context mContext;
     int     resId;
     public MyDialog(Context context) {
@@ -34,11 +36,13 @@ public class MyDialog extends Dialog{
     }
 
     public void setLayoutResId(int resId){
+        Log.d(TAG,"setLayoutResId() start");
         this.resId=resId;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG,"onCreate .");
         super.onCreate(savedInstanceState);
         View view = View.inflate(mContext, resId,null);
         setContentView(view);
