@@ -63,9 +63,13 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@color/mid_blue_a"
+                android:layout_margin="5dp"
                 android:layout_below="@id/img_title_line">
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:id="@+id/img_recycler"/>
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>

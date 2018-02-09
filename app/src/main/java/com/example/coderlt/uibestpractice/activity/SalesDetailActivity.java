@@ -1,19 +1,27 @@
 package com.example.coderlt.uibestpractice.activity;
 
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Scroller;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -21,7 +29,9 @@ import android.widget.Toast;
 
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.View.MyDialog;
+import com.example.coderlt.uibestpractice.adapter.ImageWallAdapter;
 import com.example.coderlt.uibestpractice.bean.Goods;
+import com.example.coderlt.uibestpractice.bean.ImageInfo;
 import com.example.coderlt.uibestpractice.bean.SalesRecord;
 import com.example.coderlt.uibestpractice.utils.Constant;
 import com.example.coderlt.uibestpractice.utils.JsonUtils;
@@ -49,6 +59,9 @@ public class SalesDetailActivity extends AppCompatActivity {
     private OkHttpClient client;
     private String responseText;
     private MyDialog progressDialog;
+    private List<ImageInfo> imgList = new ArrayList<>();
+    private RecyclerView imgCycler;
+    private ImageWallAdapter adapter;
 
     static class MyHandler extends Handler{
         private WeakReference<SalesDetailActivity> wr;
@@ -82,10 +95,52 @@ public class SalesDetailActivity extends AppCompatActivity {
 
         initViews();
         setSalesTable();
+        setImageCycler();
     }
 
     private void initViews(){
         salesTable = findViewById(R.id.sales_table);
+        imgCycler = findViewById(R.id.img_recycler);
+    }
+
+
+    //TODO 列表卡顿
+    private void setImageCycler(){
+        getImgList();
+        adapter = new ImageWallAdapter(this,R.layout.image_wall_item,imgList);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,3);
+        imgCycler.setLayoutManager(layoutManager);
+        imgCycler.setAdapter(adapter);
+        imgCycler.addItemDecoration(new
+                DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL|DividerItemDecoration.HORIZONTAL));
+
+        imgCycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState==RecyclerView.SCROLL_STATE_IDLE){
+                    adapter.setIsScrolling(true);
+                }else{
+                    adapter.setIsScrolling(false);
+                }
+            }
+        });
+    }
+
+    private void getImgList(){
+        ContentResolver cr = getContentResolver();
+        Cursor cursor = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null,null,null,null);
+        if(cursor!=null){
+            while(cursor.moveToNext()){
+                String name = cursor.getString(cursor.getColumnIndex(
+                        MediaStore.Images.Media.DISPLAY_NAME));
+                String path = cursor.getString(cursor.getColumnIndex(
+                        MediaStore.Images.Media.DATA));
+                imgList.add(new ImageInfo(name,path));
+            }
+        }
     }
 
     private void setSalesTable(){

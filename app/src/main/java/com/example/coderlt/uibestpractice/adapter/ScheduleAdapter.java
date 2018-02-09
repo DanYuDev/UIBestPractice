@@ -52,25 +52,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.VH> {
         Log.d(TAG,"on create VH");
         ScheduleAdapter.VH holder = new ScheduleAdapter.VH(LayoutInflater.from(mContext)
                 .inflate(resId, parent, false));
-//        ver=holder.v.findViewById(R.id.vertical_line);
-//        ver.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                holder.v.findViewById(R.id.vertical_line);
-//                h=holder.msgTv.getLayoutParams().height;
-//                Log.d(TAG,"holder msgTv height is "+h);
-//                RelativeLayout.LayoutParams layoutParams=(RelativeLayout.LayoutParams) ver.getLayoutParams();
-//                layoutParams.height=h;
-//                ver.setLayoutParams(layoutParams);
-//            }
-//        });
-
-//        v=holder.v.findViewById(R.id.vertical_line);
-//        h=holder.msgTv.getLayoutParams().height;
-//        Log.d(TAG,"holder msgTv height is "+h);
-//        RelativeLayout.LayoutParams layoutParams=(RelativeLayout.LayoutParams) v.getLayoutParams();
-//        layoutParams.height=h;
-//        v.setLayoutParams(layoutParams);
         return holder;
     }
 
@@ -89,14 +70,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.VH> {
         Log.d(TAG,"real height is : "+h);
         ver.getLayoutParams().height=h;
         holder.v.requestLayout();
-        //这是最新版本
-//        holder.msgTv.post(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        });
-        //holder.numTv.setText("¥"+data.getNum());
     }
 
     @Override
