@@ -6,6 +6,7 @@ package com.example.coderlt.uibestpractice.bean;
 public class ImageInfo{
     private String name;
     private String path;
+    private boolean checked;
 
     public ImageInfo(String name,String path){
         this.name = name;
@@ -26,6 +27,14 @@ public class ImageInfo{
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }
 

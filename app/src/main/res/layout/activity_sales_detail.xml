@@ -42,35 +42,18 @@
                 android:showDividers="middle|beginning|end"
                 >
             </TableLayout>
-
-            <View
-                android:id="@+id/img_title_line"
-                android:layout_width="3dp"
-                android:layout_height="30dp"
-                android:background="@color/main_green"
-                android:layout_below="@id/sales_table"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_below="@id/sales_table"
-                android:layout_toRightOf="@id/img_title_line"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:text="进销存图片存根"/>
-            <RelativeLayout
+            <Button
+                android:id="@+id/image_wall_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_below="@id/img_title_line">
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:id="@+id/img_recycler"/>
-            </RelativeLayout>
+                android:text="查看图片"
+                android:textColor="@android:color/white"
+                android:background="@android:color/holo_orange_dark"
+                android:layout_below="@id/sales_table"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                />
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>

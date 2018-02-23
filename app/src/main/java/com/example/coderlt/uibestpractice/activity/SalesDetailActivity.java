@@ -2,6 +2,7 @@ package com.example.coderlt.uibestpractice.activity;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -19,6 +20,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Scroller;
@@ -49,7 +51,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SalesDetailActivity extends AppCompatActivity {
+public class SalesDetailActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "SalesDetalActivity";
     private static final int UPDATE_SALES = 0x101010;
     private static final int USE_DEFAULT = 0x101011;
@@ -59,9 +61,7 @@ public class SalesDetailActivity extends AppCompatActivity {
     private OkHttpClient client;
     private String responseText;
     private MyDialog progressDialog;
-    private List<ImageInfo> imgList = new ArrayList<>();
-    private RecyclerView imgCycler;
-    private ImageWallAdapter adapter;
+    private Button imgWallBtn;
 
     static class MyHandler extends Handler{
         private WeakReference<SalesDetailActivity> wr;
@@ -95,53 +95,27 @@ public class SalesDetailActivity extends AppCompatActivity {
 
         initViews();
         setSalesTable();
-        setImageCycler();
     }
 
     private void initViews(){
         salesTable = findViewById(R.id.sales_table);
-        imgCycler = findViewById(R.id.img_recycler);
+        imgWallBtn = findViewById(R.id.image_wall_btn);
+
+        imgWallBtn.setOnClickListener(this);
     }
 
-
-    //TODO 列表卡顿
-    private void setImageCycler(){
-        getImgList();
-        adapter = new ImageWallAdapter(this,R.layout.image_wall_item,imgList);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,3);
-        imgCycler.setLayoutManager(layoutManager);
-        imgCycler.setAdapter(adapter);
-        imgCycler.addItemDecoration(new
-                DividerItemDecoration(this,
-                DividerItemDecoration.VERTICAL|DividerItemDecoration.HORIZONTAL));
-
-        imgCycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState==RecyclerView.SCROLL_STATE_IDLE){
-                    adapter.setIsScrolling(true);
-                }else{
-                    adapter.setIsScrolling(false);
-                }
-            }
-        });
-    }
-
-    private void getImgList(){
-        ContentResolver cr = getContentResolver();
-        Cursor cursor = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                null,null,null,null);
-        if(cursor!=null){
-            while(cursor.moveToNext()){
-                String name = cursor.getString(cursor.getColumnIndex(
-                        MediaStore.Images.Media.DISPLAY_NAME));
-                String path = cursor.getString(cursor.getColumnIndex(
-                        MediaStore.Images.Media.DATA));
-                imgList.add(new ImageInfo(name,path));
-            }
+    @Override
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.image_wall_btn:
+                Intent intent = new Intent(this,ImageWallTestActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
         }
     }
+
 
     private void setSalesTable(){
         requestSalesInfo();

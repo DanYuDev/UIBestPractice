@@ -9,4 +9,12 @@
         android:scaleType="fitXY"
         android:layout_margin="1dp"
         android:id="@+id/square_iv" />
+    <ImageView
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:id="@+id/check_iv"
+        android:src = "@drawable/ic_uncheck"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="4dp"/>
 </RelativeLayout>
