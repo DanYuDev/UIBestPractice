@@ -10,6 +10,13 @@
         android:layout_height="match_parent"
         android:id="@+id/test_recycler">
     </android.support.v7.widget.RecyclerView>
+    <!--这是个隐形的 ImageView ，但是当你点击 cyclerView 里面的图片的时候-->
+    <!--以这个 imageView 为基础实现的动画则起到效果 ，确实是个笨方法，没办法啊，我笨 = = -->
+    <ImageView
+        android:id="@+id/pre_img_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
     <TextView
         android:id="@+id/selected_count_tv"
         android:layout_width="50dp"

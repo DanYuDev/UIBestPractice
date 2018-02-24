@@ -6,7 +6,7 @@
     <com.example.coderlt.uibestpractice.View.SquareImage
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
+        android:scaleType="centerInside"
         android:layout_margin="1dp"
         android:id="@+id/square_iv" />
     <ImageView

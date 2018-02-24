@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,11 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImageWallTestActivity extends AppCompatActivity {
-    ImageWallAdapter adapter = null;
+    private static final String TAG = "ImageWallTestActivity";
+    private ImageWallAdapter adapter = null;
     private RecyclerView cycler;
     private List<ImageInfo> imageInfos = new ArrayList<>();
     private int selectedCount = 0;
     private TextView countTv;
+    private int statusBarHeight =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +51,12 @@ public class ImageWallTestActivity extends AppCompatActivity {
             }
 
             @Override
-            public void preview(String imagePath){
+            public void preview(ImageView imageView,String imagePath){
                 Utils.showToast("Preview image."+imagePath);
-
+                int[] location = new int[2];
+                imageView.getLocationOnScreen(location);
+                Log.d(TAG,"origin imageView x and y : "+location[0]+" ,"+location[1]);
                 // 通过 shared element transition 进去 ImageViewPager.
-
             }
         });
         cycler.setLayoutManager(layoutManager);

@@ -100,7 +100,7 @@ public class ImageWallAdapter extends RecyclerView.Adapter <ImageWallAdapter.Vie
             @Override
             public void onClick(View v){
                 if(listener!=null)
-                listener.preview(imagePath);
+                listener.preview(imageView,imagePath);
             }
         });
     }
@@ -117,7 +117,7 @@ public class ImageWallAdapter extends RecyclerView.Adapter <ImageWallAdapter.Vie
     public interface OnImageSelectedListener{
         void selected(ImageView v);
         void unSelected(ImageView v);
-        void preview(String path);
+        void preview(ImageView imageView,String path);
     }
 
     public void setOnImageSelectedListener(OnImageSelectedListener listener){
