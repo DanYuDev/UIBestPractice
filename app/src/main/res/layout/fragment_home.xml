@@ -63,10 +63,11 @@
             app:text_unselected_color="@color/mid_green"
             app:src_unselected="@drawable/money_icon"/>
         <com.example.coderlt.uibestpractice.View.MyImgButton
+            android:id="@+id/personal_bill"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_centerInParent="true"
-            app:text="店铺支出"
+            app:text="私人账单"
             app:text_unselected_color="@color/main_green"
             app:src_unselected="@drawable/money_out"/>
         <com.example.coderlt.uibestpractice.View.MyImgButton
@@ -77,7 +78,7 @@
             android:layout_marginRight="20dp"
             android:layout_centerVertical="true"
             app:src_unselected="@drawable/sales"
-            app:text="当日收入"
+            app:text="店铺账单"
             app:text_unselected_color="@color/mid_green"/>
     </RelativeLayout>
     <GridView

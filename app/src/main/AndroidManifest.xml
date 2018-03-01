@@ -35,7 +35,9 @@
         </activity>
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.SalesDetailActivity" />
-        <activity android:name=".activity.ImageWallTestActivity"></activity>
+        <activity android:name=".activity.ImageWallTestActivity" />
+        <activity android:name=".activity.PersonalBillActivity" />
+        <activity android:name=".activity.EditBillActivity"></activity>
     </application>
 
 </manifest>

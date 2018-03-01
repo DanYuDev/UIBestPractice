@@ -23,7 +23,7 @@ public class ProgressWheel extends View {
     private Bitmap contentBitmap;
     private Bitmap scaledBitmap;
     private RectF rectF;
-    private Paint mPaint;
+    private Paint mPaint,pointPaint;
     private int progress;
 
     public ProgressWheel (Context context){
@@ -45,7 +45,13 @@ public class ProgressWheel extends View {
     }
 
     public void init(){
-        mPaint=new Paint();
+        mPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
+        pointPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setColor(Color.WHITE);
+        //mPaint.setStrokeWidth(5);
+        pointPaint.setColor(Color.WHITE);
+        pointPaint.setStyle(Paint.Style.FILL);
         progress=0;
         contentBitmap=BitmapFactory.decodeResource(getResources(), R.drawable.ic_progress_taiji);
         //scaledBitmap.createScaledBitmap(contentBitmap,mWidth/2)
@@ -57,12 +63,14 @@ public class ProgressWheel extends View {
         //mPaint.setColor(Color.RED);
         //mPaint.setStyle(Paint.Style.STROKE);
         //mPaint.setStrokeWidth(2);
-        mPaint.setAntiAlias(true);
+
         //mPaint.setStyle(Paint.Style.STROKE);
         //canvas.drawCircle(mWidth/2,mHeight/2,60,mPaint);
         canvas.translate(mWidth/2,mHeight/2);
         canvas.rotate(5*progress++);
-        canvas.drawBitmap(scaledBitmap,-mWidth/2,-mHeight/2,mPaint);
+        //canvas.drawBitmap(scaledBitmap,-mWidth/2,-mHeight/2,mPaint);
+        canvas.drawCircle(0,0,mWidth/2-20,mPaint);
+        canvas.drawCircle(mWidth/2-20,0,6,pointPaint);
 
         postInvalidateDelayed(20);
     }

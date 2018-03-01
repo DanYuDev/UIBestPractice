@@ -16,6 +16,7 @@ import android.widget.ListView;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.View.MyImgButton;
 import com.example.coderlt.uibestpractice.activity.ImageWallTestActivity;
+import com.example.coderlt.uibestpractice.activity.PersonalBillActivity;
 import com.example.coderlt.uibestpractice.activity.SalesDetailActivity;
 import com.example.coderlt.uibestpractice.adapter.ScheduleAdapter;
 import com.example.coderlt.uibestpractice.adapter.ScheduleArrayAdapter;
@@ -31,7 +32,7 @@ import java.util.List;
 public class HomeFragment extends Fragment implements View.OnClickListener{
     private View view;
     private Context mContext;
-    private MyImgButton salesButton;
+    private MyImgButton salesButton,personalBillBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,8 +48,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private void initViews(){
         salesButton = view.findViewById(R.id.sales_img_btn);
+        personalBillBtn = view.findViewById(R.id.personal_bill);
 
         salesButton.setOnClickListener(this);
+        personalBillBtn.setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +59,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         switch (v.getId()){
             case R.id.sales_img_btn:
                 startActivity(new Intent(mContext, SalesDetailActivity.class));
+                break;
+            case R.id.personal_bill:
+                startActivity(new Intent(mContext,PersonalBillActivity.class));
                 break;
             default:
                 break;
