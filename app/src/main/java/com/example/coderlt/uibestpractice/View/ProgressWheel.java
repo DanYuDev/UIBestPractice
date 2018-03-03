@@ -49,12 +49,11 @@ public class ProgressWheel extends View {
         pointPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(Color.WHITE);
-        //mPaint.setStrokeWidth(5);
-        pointPaint.setColor(Color.WHITE);
+        mPaint.setStrokeWidth(6);
+        pointPaint.setColor(Color.RED);
         pointPaint.setStyle(Paint.Style.FILL);
         progress=0;
-        contentBitmap=BitmapFactory.decodeResource(getResources(), R.drawable.ic_progress_taiji);
-        //scaledBitmap.createScaledBitmap(contentBitmap,mWidth/2)
+        contentBitmap=BitmapFactory.decodeResource(getResources(), R.drawable.bitmap_loading);
     }
 
     //打算实现一个太极图 旋转 进度条
@@ -70,7 +69,7 @@ public class ProgressWheel extends View {
         canvas.rotate(5*progress++);
         //canvas.drawBitmap(scaledBitmap,-mWidth/2,-mHeight/2,mPaint);
         canvas.drawCircle(0,0,mWidth/2-20,mPaint);
-        canvas.drawCircle(mWidth/2-20,0,6,pointPaint);
+        canvas.drawCircle(mWidth/2-20,0,10,pointPaint);
 
         postInvalidateDelayed(20);
     }

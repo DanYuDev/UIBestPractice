@@ -12,12 +12,21 @@ android {
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    packagingOptions{
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -38,5 +47,27 @@ dependencies {
     compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    implementation files('libs/fastjson-1.2.9.jar')
+
+    //compile ('com.android.support:support-v4:21.0.3')
+
+    // LeanCloud 基础包
+    implementation ('cn.leancloud.android:avoscloud-sdk:v4.6.4')
+
+    // 推送与实时聊天需要的包
+    implementation ('cn.leancloud.android:avoscloud-push:v4.6.4@aar'){transitive = true}
+
+    // LeanCloud 统计包
+    implementation ('cn.leancloud.android:avoscloud-statistics:v4.6.4')
+
+    // LeanCloud 用户反馈包
+    implementation ('cn.leancloud.android:avoscloud-feedback:v4.6.4@aar')
+
+    // avoscloud-sns：LeanCloud 第三方登录包
+    implementation ('cn.leancloud.android:avoscloud-sns:v4.6.4@aar')
+    implementation ('cn.leancloud.android:qq-sdk:1.6.1-leancloud')
+    // 新浪微博 SDK
+    //implementation('com.sina.weibo.sdk:core:4.1.4:openDefaultRelease@aar')
+
+    // LeanCloud 应用内搜索包
+    implementation ('cn.leancloud.android:avoscloud-search:v4.6.4@aar')
 }

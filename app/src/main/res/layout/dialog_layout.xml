@@ -4,22 +4,15 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <RelativeLayout
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:id="@+id/dialog_layout"
         android:orientation="vertical"
         android:background="@drawable/corner_dialog">
         <com.example.coderlt.uibestpractice.View.ProgressWheel
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/progress_wheel"
             android:layout_centerInParent="true"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/progress_wheel"
-            android:layout_marginTop="5dp"
-            android:text="正在录音中"
-            android:gravity="center"/>
     </RelativeLayout>
 </LinearLayout>

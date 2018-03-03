@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.avos.avoscloud.AVOSCloud;
 import com.example.coderlt.uibestpractice.bean.User;
 import com.example.coderlt.uibestpractice.utils.Constant;
 
@@ -26,6 +27,11 @@ public class MyApplication extends Application {
         super.onCreate();
         mContext=getApplicationContext();
         sharedPreferences= getSharedPreferences(Constant.USER_PREF_NAME,MODE_PRIVATE);
+        // 初始化参数依次为 this, AppId, AppKey
+        AVOSCloud.initialize(this,
+                "mlCcRI3LmLzGsL5KDfGufDrY-gzGzoHsz",
+                "FB8SDGNEBNlniehHC0eeBCes");
+        AVOSCloud.setDebugLogEnabled(true);
     }
 
     public static Context getContext(){
