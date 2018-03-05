@@ -1,5 +1,6 @@
 package com.example.coderlt.uibestpractice.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,9 @@ import android.view.WindowManager;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.SaveCallback;
+import com.avos.avoscloud.im.v2.AVIMClient;
+import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.View.BottomNavigationView;
 import com.example.coderlt.uibestpractice.View.MyImgButton;
@@ -22,9 +26,16 @@ import com.example.coderlt.uibestpractice.fragments.ContactsFragment;
 import com.example.coderlt.uibestpractice.fragments.DashboardFragment;
 import com.example.coderlt.uibestpractice.fragments.HomeFragment;
 import com.example.coderlt.uibestpractice.fragments.UserFragment;
+import com.example.coderlt.uibestpractice.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.leancloud.chatkit.LCChatKit;
+import cn.leancloud.chatkit.activity.LCIMConversationActivity;
+import cn.leancloud.chatkit.activity.LCIMConversationListFragment;
+import cn.leancloud.chatkit.utils.LCIMConstants;
+import okhttp3.internal.Util;
 
 public class NavigationActivity extends AppCompatActivity {
     private MyImgButton navigateHome,navigateDashboard,navigateUser,navigateContacts;
@@ -121,6 +132,7 @@ public class NavigationActivity extends AppCompatActivity {
         HomeFragment fh=new HomeFragment();
         DashboardFragment fd=new DashboardFragment();
         ContactsFragment fc=new ContactsFragment();
+        //LCIMConversationListFragment fc = new LCIMConversationListFragment();
         UserFragment fu=new UserFragment();
 
         fragmentList=new ArrayList<Fragment>();
