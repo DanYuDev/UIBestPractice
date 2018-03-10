@@ -1,6 +1,5 @@
 package com.example.coderlt.uibestpractice.activity;
 
-import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.SaveCallback;
@@ -26,16 +24,11 @@ import com.example.coderlt.uibestpractice.fragments.ContactsFragment;
 import com.example.coderlt.uibestpractice.fragments.DashboardFragment;
 import com.example.coderlt.uibestpractice.fragments.HomeFragment;
 import com.example.coderlt.uibestpractice.fragments.UserFragment;
+import com.example.coderlt.uibestpractice.utils.Constant;
 import com.example.coderlt.uibestpractice.utils.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import cn.leancloud.chatkit.LCChatKit;
-import cn.leancloud.chatkit.activity.LCIMConversationActivity;
-import cn.leancloud.chatkit.activity.LCIMConversationListFragment;
-import cn.leancloud.chatkit.utils.LCIMConstants;
-import okhttp3.internal.Util;
 
 public class NavigationActivity extends AppCompatActivity {
     private MyImgButton navigateHome,navigateDashboard,navigateUser,navigateContacts;
@@ -46,6 +39,7 @@ public class NavigationActivity extends AppCompatActivity {
     private MyFragmentPagerAdapter myFragmentPagerAdapter;
     private BottomNavigationView bottomNavigationView;
     private static final float MIN_SCALE=0.7f;
+    public String clientId ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +49,14 @@ public class NavigationActivity extends AppCompatActivity {
                 Window window = getWindow();
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(getResources().getColor(R.color.main_blue));
-                //底部导航栏
-                //window.setNavigationBarColor(activity.getResources().getColor(colorResId));
-                //window.setBackgroundDrawableResource(R.drawable.shadow_gradient);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         setContentView(R.layout.activity_navigation);
-
+        clientId = getIntent().getStringExtra(Constant.USER.USER_ID);
         initViews();
+        contactsLogin();
 
         // 测试 SDK 是否正常工作的代码
         AVObject testObject = new AVObject("TestObject");
@@ -75,6 +67,19 @@ public class NavigationActivity extends AppCompatActivity {
             public void done(AVException e) {
                 if(e == null){
                     Log.d("saved","success!");
+                }
+            }
+        });
+    }
+
+    private void contactsLogin(){
+        LCChatKit.getInstance().open(clientId, new AVIMClientCallback() {
+            @Override
+            public void done(AVIMClient avimClient, AVIMException e) {
+                if (null == e) {
+                    Utils.showToast(clientId+" logined.");
+                } else {
+                    Utils.showToast(clientId+" logined failed.\n"+e.toString());
                 }
             }
         });

@@ -1,6 +1,9 @@
 package com.example.coderlt.uibestpractice.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -17,6 +20,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -26,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.coderlt.uibestpractice.MyApplication;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.utils.BlurBitmap;
 import com.example.coderlt.uibestpractice.utils.Constant;
@@ -205,7 +210,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 overridePendingTransition(R.anim.anim_enter_1,R.anim.anim_exit_1);
                 break;
             case R.id.login_wechat:
-                startActivity(new Intent(this,NavigationActivity.class));
+                final EditText wechatTv = new EditText(this);
+                wechatTv.setHint("请输入wechat_id");
+                AlertDialog alertDialog =new  AlertDialog.Builder(this)
+                        .setView(wechatTv)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(LoginActivity.this,NavigationActivity.class);
+                                String wechatId = wechatTv.getText().toString().trim();
+                                MyApplication.clientId = wechatId;
+                                intent.putExtra(Constant.USER.USER_ID,wechatId);
+                                Log.d(TAG,"WeChat_ID: "+wechatId);
+                                startActivity(intent);
+                            }
+                        })
+                        .show();
                 overridePendingTransition(R.anim.anim_enter_1,R.anim.anim_exit_1);
                 break;
             default:

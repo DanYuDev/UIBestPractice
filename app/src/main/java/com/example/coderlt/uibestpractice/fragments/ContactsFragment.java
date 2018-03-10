@@ -10,15 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.coderlt.uibestpractice.R;
+import com.example.coderlt.uibestpractice.activity.NavigationActivity;
 import com.example.coderlt.uibestpractice.utils.Utils;
 
 import cn.leancloud.chatkit.activity.LCIMConversationActivity;
 import cn.leancloud.chatkit.activity.LCIMConversationListFragment;
-import cn.leancloud.chatkit.event.LCIMIMTypeMessageEvent;
 import cn.leancloud.chatkit.utils.LCIMConstants;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by coderlt on 2018/1/7.
@@ -36,6 +36,7 @@ public class ContactsFragment extends Fragment {
     private FrameLayout contentFrame;
     private FragmentManager fm;
     private Fragment conversationListFragment,contactListFragment;
+    private String clientId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_contacts,container,false);
@@ -75,13 +76,16 @@ public class ContactsFragment extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("聊天"));
         tabLayout.addTab(tabLayout.newTab().setText("通讯录"));
         tabLayout.getTabAt(0).select();
+        TextView titleTv = view.findViewById(R.id.title_tv);
+        clientId = ((NavigationActivity)(getActivity())).clientId ;
+        titleTv.setText(clientId);
         ImageView more = view.findViewById(R.id.more_iv);
         more.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(getContext(), LCIMConversationActivity.class);
                 // 传入对方的 Id 即可
-                intent.putExtra(LCIMConstants.PEER_ID, "Bob");
+                intent.putExtra(LCIMConstants.PEER_ID, "William");
                 getContext().startActivity(intent);
             }
         });

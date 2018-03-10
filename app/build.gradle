@@ -37,7 +37,7 @@ dependencies {
     implementation 'com.android.support:support-v4:26.1.0'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:support-vector-drawable:26.1.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
     implementation 'com.github.chrisbanes:PhotoView:2.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
@@ -65,11 +65,12 @@ dependencies {
     // avoscloud-sns：LeanCloud 第三方登录包
     implementation ('cn.leancloud.android:avoscloud-sns:v4.6.4@aar')
     implementation ('cn.leancloud.android:qq-sdk:1.6.1-leancloud')
-    // 新浪微博 SDK
+    // 新浪微博 SDK ,目前只提供 jar 依赖的形式
     //implementation('com.sina.weibo.sdk:core:4.1.4:openDefaultRelease@aar')
 
     // LeanCloud 应用内搜索包
     implementation ('cn.leancloud.android:avoscloud-search:v4.6.4@aar')
-    // LeanCoud 封装的 UI 包
-    implementation('cn.leancloud.android:chatkit:1.0.6')
+    // LeanCoud 封装的 UI 包 ChatKit
+    //implementation('cn.leancloud.android:chatkit:1.0.6')
+    compile project(":leancloudchatkit")
 }
