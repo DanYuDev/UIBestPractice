@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private OkHttpClient client;
     private SharedPreferences preferences;
     private String responseText;
+    private TextView lcTv ;
 
     private final String TAG=getClass().getName();
     private static final int LOGIN_FAILED=0;
@@ -101,12 +102,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Utils.showToast("用户名或密码错误");
                     break;
                 case LOGIN_SUCCESS:
-                    Toast.makeText(context,"Login Success",Toast.LENGTH_SHORT)
-                            .show();
+                    Utils.showToast("Login success.");
                     //((LoginActivity)context).editSharedpreference();
-                    context.startActivity(new Intent(context,NavigationActivity.class));
-                    ((LoginActivity)context).overridePendingTransition(R.anim.anim_enter_2,
-                            R.anim.anim_exit_2);
+                    wr.get().leanCloudLogin();
+                    //context.startActivity(new Intent(context,NavigationActivity.class));
+                    //((LoginActivity)context).overridePendingTransition(R.anim.anim_enter_2,
+                    //        R.anim.anim_exit_2);
                     break;
                 default:
                     break;
@@ -124,10 +125,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Window window = getWindow();
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(getResources().getColor(R.color.main_blue));
-                //底部导航栏
-                //window.setNavigationBarColor(activity.getResources().getColor(colorResId));
-                //window.setBackgroundDrawableResource(R.drawable.shadow_gradient);
+                window.setStatusBarColor(getResources().getColor(android.R.color.darker_gray));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -210,27 +208,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 overridePendingTransition(R.anim.anim_enter_1,R.anim.anim_exit_1);
                 break;
             case R.id.login_wechat:
-                final EditText wechatTv = new EditText(this);
-                wechatTv.setHint("请输入wechat_id");
-                AlertDialog alertDialog =new  AlertDialog.Builder(this)
-                        .setView(wechatTv)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(LoginActivity.this,NavigationActivity.class);
-                                String wechatId = wechatTv.getText().toString().trim();
-                                MyApplication.clientId = wechatId;
-                                intent.putExtra(Constant.USER.USER_ID,wechatId);
-                                Log.d(TAG,"WeChat_ID: "+wechatId);
-                                startActivity(intent);
-                            }
-                        })
-                        .show();
+                leanCloudLogin();
                 overridePendingTransition(R.anim.anim_enter_1,R.anim.anim_exit_1);
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 临时的增加 LeanCloud_ID.
+     */
+    private void leanCloudLogin(){
+        lcTv = new EditText(this);
+        lcTv.setHint("请输入wechat_id");
+        AlertDialog alertDialog = new  AlertDialog.Builder(this)
+                .setView(lcTv)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(LoginActivity.this,NavigationActivity.class);
+                        String wechatId = lcTv.getText().toString().trim();
+                        MyApplication.clientId = wechatId;
+                        intent.putExtra(Constant.USER.USER_ID,wechatId);
+                        Log.d(TAG,"WeChat_ID: "+wechatId);
+                        startActivity(intent);
+                    }
+                })
+                .show();
     }
 
     private void loginByVerification(){
@@ -277,24 +282,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     mHandler.sendMessage(msg);
                 }else{
                     msg.what=LOGIN_SUCCESS;
-                    mHandler.sendMessage(msg);
                     JSONObject object=JSONObject.parseObject(responseText);
                     editSharedpreference(object);
+                    mHandler.sendMessage(msg);
                 }
-
             }
         });
     }
 
-
     private void editSharedpreference(JSONObject object){
         preferences=getSharedPreferences(Constant.USER_PREF_NAME,MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit()
-                .putString(Constant.USER.USER_ID,object.getString("user_id"))
-                .putString(Constant.USER.USER_ACCOUNT,object.getString("user_phone"))
-                .putString(Constant.USER.USER_CREDIT,object.getString("user_credit"))
-                .putString(Constant.USER.USER_NAME,object.getString("user_name"))
-                .putString(Constant.USER.USER_PHONE,object.getString("user_phone"));
+                .putString(Constant.USER.USER_ID,object.getString("admin_id"))
+                .putString(Constant.USER.USER_ACCOUNT,object.getString("admin_number"))
+                .putString(Constant.USER.USER_NAME,object.getString("admin_name"))
+                .putString(Constant.USER.USER_PHONE,object.getString("admin_number"));
         editor.apply();
     }
 

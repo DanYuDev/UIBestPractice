@@ -12,11 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_layout"
-        app:tabBackground="@color/main_blue"
-        app:tabIndicatorColor="@android:color/white"
-        app:tabIndicatorHeight="0dp"
-        app:tabTextColor="#C4C4C4"
-        app:tabSelectedTextColor="@android:color/white"
+        app:tabBackground="@color/tab_bg_gray"
+        app:tabIndicatorColor="@color/main_blue"
+        app:tabIndicatorHeight="2dp"
+        app:tabSelectedTextColor="@color/main_blue"
         />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/specific_cycler"

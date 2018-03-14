@@ -29,13 +29,15 @@ public class AdvActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adv);
 
         preferences=getSharedPreferences(Constant.USER_PREF_NAME,MODE_PRIVATE);
+//      TODO 暂时注释是为了测试
+//        if(preferences.getString(Constant.USER.USER_PHONE,"-1").equals("-1")){
+//            //startActivity(new Intent(this,NavigationActivity.class));
+//            new Thread(loginRunnable).start();
+//        }else{
+//            startActivity(new Intent(this,NavigationActivity.class));
+//        }
 
-        if(preferences.getString(Constant.USER.USER_PHONE,"-1").equals("-1")){
-            //startActivity(new Intent(this,NavigationActivity.class));
-            new Thread(loginRunnable).start();
-        }else{
-            startActivity(new Intent(this,NavigationActivity.class));
-        }
+        new Thread(loginRunnable).start();
         overridePendingTransition(R.anim.anim_enter_2,R.anim.anim_exit_2);
     }
 }

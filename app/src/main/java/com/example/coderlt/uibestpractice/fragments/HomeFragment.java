@@ -12,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.View.MyImgButton;
 import com.example.coderlt.uibestpractice.activity.ImageWallTestActivity;
 import com.example.coderlt.uibestpractice.activity.PersonalBillActivity;
 import com.example.coderlt.uibestpractice.activity.SalesDetailActivity;
+import com.example.coderlt.uibestpractice.activity.ShopActivity;
 import com.example.coderlt.uibestpractice.adapter.ScheduleAdapter;
 import com.example.coderlt.uibestpractice.adapter.ScheduleArrayAdapter;
 import com.example.coderlt.uibestpractice.bean.ScheduleBean;
@@ -33,6 +35,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private View view;
     private Context mContext;
     private MyImgButton salesButton,personalBillBtn;
+    private RelativeLayout shopLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,9 +52,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private void initViews(){
         salesButton = view.findViewById(R.id.sales_img_btn);
         personalBillBtn = view.findViewById(R.id.personal_bill);
+        shopLayout = view.findViewById(R.id.shop_title);
 
         salesButton.setOnClickListener(this);
         personalBillBtn.setOnClickListener(this);
+        shopLayout.setOnClickListener(this);
     }
 
     @Override
@@ -62,6 +67,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.personal_bill:
                 startActivity(new Intent(mContext,PersonalBillActivity.class));
+                break;
+            case R.id.shop_title:
+                startActivity(new Intent(mContext, ShopActivity.class));
                 break;
             default:
                 break;

@@ -1,0 +1,122 @@
+package com.example.coderlt.uibestpractice.activity;
+
+import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.bumptech.glide.Glide;
+import com.example.coderlt.uibestpractice.R;
+import com.example.coderlt.uibestpractice.utils.Constant;
+import com.example.coderlt.uibestpractice.utils.Utils;
+import com.kcode.autoscrollviewpager.view.AutoScrollViewPager;
+import com.kcode.autoscrollviewpager.view.BaseViewPagerAdapter;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+public class ShopActivity extends AppCompatActivity implements View.OnClickListener{
+    private final String TAG = "ShopActivity";
+    private TextView titleTv;
+    private View  titleLayout;
+    private OkHttpClient okHttpClient;
+    private final MediaType MEDIA_TYPE_JSON = MediaType.parse("json/application;charset=utf-8");
+    private Map para;
+    private String paraJson;
+    private AutoScrollViewPager mViewPager;
+
+    private String[] paths =
+            {"http://n4-q.mafengwo.net/s5/M00/DC/7E/wKgB3FGLd6yAOv6fAAFa2fIseJI42.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100",
+            "http://www.ganzixinwen.com/uploads/file/2016/0918/20160918045431211.gif",
+            "https://bbs-fd.zol-img.com.cn/t_s1200x5000/g4/M09/06/0E/Cg-4WlIuZhOIZ-23ABLQ4R85hhgAALaywKA1AYAEtD5099.jpg",
+            //"https://ss3.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D200/sign=1fad2b46952397ddc9799f046983b216/dc54564e9258d109c94bbb13d558ccbf6d814de2.jpg",
+            //"https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D200/sign=ff0999f6d4160924c325a51be406359b/86d6277f9e2f070861ccd4a0ed24b899a801f241.jpg"
+            };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_shop);
+        initViews();
+        requestShopData("123");
+    }
+
+    private void initViews(){
+        titleTv = findViewById(R.id.title_tv);
+        titleLayout = findViewById(R.id.title_layout);
+        mViewPager = (AutoScrollViewPager) findViewById(R.id.shop_banner);
+
+        titleLayout.setBackgroundColor(Color.parseColor("#88888888"));
+        BaseViewPagerAdapter<String> adapter = new BaseViewPagerAdapter<String>(this,listener) {
+            @Override
+            public void loadImage(ImageView view, int position, String url) {
+                Glide.with(ShopActivity.this).load(url).into(view);
+            }
+
+            @Override
+            public void setSubTitle(TextView textView, int position, String s) {
+                //textView.setText(s);
+            }
+        };
+        mViewPager.setAdapter(adapter);
+
+        adapter.add(Arrays.asList(paths));
+    }
+
+    private BaseViewPagerAdapter.OnAutoViewPagerItemClickListener listener =
+            new BaseViewPagerAdapter.OnAutoViewPagerItemClickListener<String>() {
+        @Override
+        public void onItemClick(int position, String url) {
+            Utils.showToast(url);
+        }
+    };
+
+    @Override
+    public void onClick(View v){
+    }
+
+    /**
+     * 根据店铺ID请求店铺信息
+     */
+    private void requestShopData(String shopId){
+        para = new HashMap<String,String>();
+        para.put("Name","Yudan");
+        para.put("Age","27");
+        para.put("degree","collegea");
+        paraJson = JSONObject.toJSONString(para);
+        Log.d(TAG,"Json String : "+paraJson);
+        okHttpClient = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(Constant.SHOP_URL)
+                .post(RequestBody.create(MEDIA_TYPE_JSON,paraJson.toString()))
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Utils.showToast("Cannot connect the serve.");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String responseText = response.body().string();
+                //titleTv.setText(responseText);
+                Log.d(TAG,responseText);
+            }
+        });
+    }
+}

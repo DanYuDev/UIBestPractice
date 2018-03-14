@@ -15,13 +15,10 @@ import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
-import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
 import com.example.coderlt.uibestpractice.CustomUserProvider;
 import com.example.coderlt.uibestpractice.MyApplication;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.adapter.ContactsListAdapter;
-import com.example.coderlt.uibestpractice.utils.Utils;
-
 import java.util.Arrays;
 import java.util.List;
 import cn.leancloud.chatkit.LCChatKitUser;
@@ -39,6 +36,7 @@ public class ContactListFragment extends Fragment {
     private ContactsListAdapter adapter;
     private List<LCChatKitUser> users;
     private AVIMClient client;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_contacts_list,container,false);

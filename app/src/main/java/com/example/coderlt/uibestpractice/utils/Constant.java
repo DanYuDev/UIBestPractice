@@ -12,11 +12,12 @@ public class Constant {
     public static final int LOGIN_BY_VERIFICATION=0x111;
     public static final int LOGIN_BY_PASSWORD=0x222;
 
-    public static final String LOGIN_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/admin/login.action";
-    public static final String REG_URL= "http://192.168.125.81:8080/HangPaiSoftCamp/addMerchant.action";
+    public static final String LOGIN_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/login/admin";
+    public static final String REG_URL= "http://192.168.125.81:8080/HangPaiSoftCamp/admin/middle/add";
     public static final String CHECK_PHONE_URL = "http://localhost:8080/HangPaiSoftCamp/checkPhone.action";
     public static final String CONFIG_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/selectConfiguration.action";
     public static final String SALES_URL = "https://www.baidu.co";
+    public static final String SHOP_URL = "https://www.baidu.com";
 
     public static MediaType MEDIA_TYPE_JSON
             = MediaType.parse("application/json; charset=utf-8");

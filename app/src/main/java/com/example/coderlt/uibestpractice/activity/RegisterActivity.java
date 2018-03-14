@@ -67,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Utils.showToast("错误的用户名或密码");
                     break;
                 case REG_SUCCESS:
+                    Utils.showToast("login success");
                     break;
                 case REG_DISCONNET:
                     Utils.showToast("无法连接到服务器，请检查网络状态！");
@@ -124,6 +125,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * request：{"admin_number","admin_pass","admin_name","admin_merchant_id"}
+     */
     private void regBoss(){
         final String phone;
         String password;
@@ -139,10 +143,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 .connectTimeout(3000, TimeUnit.MILLISECONDS)
                 .build();
         Map<String,Object> map=new HashMap<>();
-        map.put("merchant_name",nickname);
-        map.put("merchant_phone",phone);
-        map.put("merchant_address",address);
-        map.put("merchant_password",password);
+        map.put("admin_name",nickname);
+        map.put("admin_number",phone);
+        map.put("admin_address",address);
+        map.put("admin_pass",password);
 
         final String requestBody= JSONObject.toJSONString(map);
 

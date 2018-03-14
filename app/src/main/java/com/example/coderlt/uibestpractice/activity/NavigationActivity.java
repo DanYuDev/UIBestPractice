@@ -31,6 +31,7 @@ import java.util.List;
 import cn.leancloud.chatkit.LCChatKit;
 
 public class NavigationActivity extends AppCompatActivity {
+    private static final String TAG = "NavigationActivity";
     private MyImgButton navigateHome,navigateDashboard,navigateUser,navigateContacts;
     private List<MyImgButton> btnList;
     private ViewPager viewPager;
@@ -55,6 +56,7 @@ public class NavigationActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_navigation);
         clientId = getIntent().getStringExtra(Constant.USER.USER_ID);
+        Log.d(TAG,"clientId is : "+clientId);
         initViews();
         contactsLogin();
 
@@ -203,18 +205,6 @@ public class NavigationActivity extends AppCompatActivity {
                     // This page is way off-screen to the right.
                     view.setAlpha(0);
                 }
-
-                /*
-                view.setTranslationX(view.getWidth() * -position);
-
-                if(position <= -1.0F || position >= 1.0F) {
-                    view.setAlpha(0.0F);
-                } else if( position == 0.0F ) {
-                    view.setAlpha(1.0F);
-                } else {
-                    // position is between -1.0F & 0.0F OR 0.0F & 1.0F
-                    view.setAlpha(1.0F - Math.abs(position));
-                }*/
             }
         });
         //viewPager.setPageTransformer(true,new ZoomInTransform());
