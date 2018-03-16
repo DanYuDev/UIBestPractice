@@ -1,5 +1,8 @@
 package com.example.coderlt.uibestpractice.utils;
 
+import com.example.coderlt.uibestpractice.MyApplication;
+import com.example.coderlt.uibestpractice.R;
+
 import okhttp3.MediaType;
 
 /**
@@ -15,7 +18,7 @@ public class Constant {
     public static final String LOGIN_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/login/admin";
     public static final String REG_URL= "http://192.168.125.81:8080/HangPaiSoftCamp/admin/middle/add";
     public static final String CHECK_PHONE_URL = "http://localhost:8080/HangPaiSoftCamp/checkPhone.action";
-    public static final String CONFIG_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/selectConfiguration.action";
+    public static final String CONFIG_URL = "http://192.168.125.81:8080/HangPaiSoftCamp//configuration/select";
     public static final String SALES_URL = "https://www.baidu.co";
     public static final String SHOP_URL = "https://www.baidu.com";
 
@@ -23,7 +26,6 @@ public class Constant {
             = MediaType.parse("application/json; charset=utf-8");
 
     public static class USER {
-
         public static final String USER_NAME = "user_name";  //昵称
         public static final String USER_ID = "user_id";    //主键
         public static final String USER_PHONE = "user_phone"; //手机号，目前是唯一注册途径
@@ -32,4 +34,9 @@ public class Constant {
         public static final String USER_AUTH="user_auth";      //登陆权限，对应
         public static final String USER_ADDRESS="user_address";
     }
+
+    // emulate data
+
+    public static final String organizationJSON = MyApplication.getContext().getResources()
+                .getString(R.string.organization_json);
 }

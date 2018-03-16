@@ -7,4 +7,5 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="organization_json">{\"status\":\"OK\",\"branchs\":2,\"branch\":[{\"sectionName\":\"网络部\",\"list\":[{\"name\":\"余丹\",\"age\":27,\"jobGrade\":\"techLeader\",\"avatar\":\"https://xxxx\"},{\"name\":\"万文洋\",\"age\":24,\"jobGrade\":\"techLeader\",\"avatar\":\"https://xxxx\"},{\"name\":\"程千淑\",\"age\":22,\"jobGrade\":\"techLeader\",\"avatar\":\"https://xxxx\"}]},{\"sectionName\":\"事业发展部\",\"list\":[{\"name\":\"张硕\",\"age\":37,\"jobGrade\":\"techLeader\",\"avatar\":\"https://xxxx\"},{\"name\":\"田瑞\",\"age\":31,\"jobGrade\":\"techLeader\",\"avatar\":\"https://xxxx\"}]}],\"digest\":[\"网络部\",\"事业发展部\"]}</string>
 </resources>

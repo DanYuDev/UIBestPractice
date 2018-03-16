@@ -276,14 +276,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 responseText=response.body().string();
                 Log.d(TAG,"ResponseText :"+responseText);
-                if(responseText.trim().equals("error")){
-                    msg.what=LOGIN_FAILED;
-                    msg.arg1=PASSWORD_ERROR;
-                    mHandler.sendMessage(msg);
-                }else{
+                if(responseText.trim().equals("success")){
                     msg.what=LOGIN_SUCCESS;
                     JSONObject object=JSONObject.parseObject(responseText);
                     editSharedpreference(object);
+                    mHandler.sendMessage(msg);
+                }else{
+                    msg.what=LOGIN_FAILED;
+                    msg.arg1=PASSWORD_ERROR;
                     mHandler.sendMessage(msg);
                 }
             }

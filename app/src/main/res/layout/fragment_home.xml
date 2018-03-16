@@ -39,14 +39,26 @@
             android:id="@+id/shop_manager"
             android:text="店长：方勤"
             android:textColor="@android:color/white"/>
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height= "40dp"
+        <com.example.coderlt.uibestpractice.View.MyImgButton
+            android:id="@+id/switch_btn"
+            android:layout_width="60dp"
+            android:layout_height= "60dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:src="@drawable/arrow_right"
-            android:scaleType="fitXY"/>
+            app:src_unselected="@drawable/ic_switch"
+            app:text="切换门店"
+            app:text_unselected_color="@android:color/white"/>
+        <com.example.coderlt.uibestpractice.View.MyImgButton
+            android:id="@+id/new_shop_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_toLeftOf="@id/switch_btn"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            app:src_unselected="@drawable/ic_new_shop"
+            app:text="创建门店"
+            app:text_unselected_color="@android:color/white"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/business_menu"
