@@ -60,9 +60,10 @@
 
 
         <!-- 反馈组件（需要加入以下声明）START -->
-        <activity android:name="com.avos.avoscloud.feedback.ThreadActivity"></activity>
+        <activity android:name="com.avos.avoscloud.feedback.ThreadActivity" />
         <!-- 反馈组件 END -->
-        <activity android:name=".activity.ShopActivity"></activity>
+        <activity android:name=".activity.ShopActivity" />
+        <activity android:name=".activity.SectionActivity"></activity>
     </application>
 
 </manifest>

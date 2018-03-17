@@ -2,6 +2,7 @@ package com.example.coderlt.uibestpractice.utils;
 
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.coderlt.uibestpractice.bean.Employee;
@@ -70,7 +71,7 @@ public class JsonUtils {
     public static void DealSectionsInfo(String responseText, Organization organization){
         Log.d(TAG,responseText);
         try{
-            JSONObject organizationObject = JSONObject.parseObject(responseText);
+            JSONObject organizationObject = JSON.parseObject(responseText);
             organization.setNum(organizationObject.getInteger("branchs"));
             organization.setStatus(organizationObject.getString("status"));
             JSONArray sectionArray = organizationObject.getJSONArray("branch");
@@ -87,7 +88,7 @@ public class JsonUtils {
                     employee.setName(employeeObject.getString("name"));
                     employee.setAge(employeeObject.getIntValue("age"));
                     employee.setJobGrade(employeeObject.getString("jobGrade"));
-                    employee.setAvatarUrl(employeeObject.getString("avatarUrl"));
+                    employee.setAvatarUrl(employeeObject.getString("avatar"));
                     employees.add(employee);
                 }
                 section.setEmployees(employees);

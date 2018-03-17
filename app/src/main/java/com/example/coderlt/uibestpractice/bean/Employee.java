@@ -1,10 +1,12 @@
 package com.example.coderlt.uibestpractice.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by coderlt on 2018/3/15.
  */
 
-public class Employee {
+public class Employee implements Serializable{
     private String name;
     private String jobGrade;
     private int age;

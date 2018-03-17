@@ -1,5 +1,6 @@
 package com.example.coderlt.uibestpractice.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.adapter.OrganizationAdapter;
 import com.example.coderlt.uibestpractice.bean.Organization;
+import com.example.coderlt.uibestpractice.bean.Section;
 import com.example.coderlt.uibestpractice.utils.Constant;
 import com.example.coderlt.uibestpractice.utils.JsonUtils;
 import com.example.coderlt.uibestpractice.utils.Utils;
@@ -24,6 +26,7 @@ import com.kcode.autoscrollviewpager.view.BaseViewPagerAdapter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -46,6 +49,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     private Organization organization;
     private ListView organizationCycler;
     private OrganizationAdapter adapter;
+    private List<Section> sections;
 
     private String[] paths =
             {
@@ -73,7 +77,18 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         JsonUtils.DealSectionsInfo(getResources().getString(R.string.organization_json),organization);
         Log.d(TAG,organization.toString());
         organizationCycler = findViewById(R.id.organization_listview);
-        adapter = new OrganizationAdapter(this,R.layout.section_item,organization.getSectionList());
+        sections = organization.getSectionList();
+        adapter = new OrganizationAdapter(this,R.layout.section_item,sections);
+        adapter.setOnItemClickedListener(new OrganizationAdapter.OnItemClickedListener() {
+            @Override
+            public void onItemClicked(int position) {
+                Intent intent = new Intent(ShopActivity.this,SectionActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("section",sections.get(position));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         organizationCycler.setAdapter(adapter);
     }
 

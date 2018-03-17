@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.bean.Section;
-import com.example.coderlt.uibestpractice.utils.Constant;
-
 import java.util.List;
 
 /**
@@ -23,6 +21,7 @@ public class OrganizationAdapter extends ArrayAdapter {
     private Context mContext;
     private List<Section> sections;
     private int resId;
+    private OnItemClickedListener listener;
 
     public OrganizationAdapter(Context context, int resId, List<Section> sections){
         /**
@@ -38,7 +37,7 @@ public class OrganizationAdapter extends ArrayAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(final int position, View convertView, ViewGroup parent){
         View v;
         if(convertView == null){
             convertView = LayoutInflater.from(mContext).inflate(resId,parent,false);
@@ -47,6 +46,22 @@ public class OrganizationAdapter extends ArrayAdapter {
         TextView sectionTv = v.findViewById(R.id.section_tv);
         sectionTv.setText(sections.get(position).getSectionName());
         Log.d(TAG,"section name :"+sectionTv.getText().toString());
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener!=null)
+                    listener.onItemClicked(position);
+                else return;
+            }
+        });
         return v;
+    }
+
+    public void setOnItemClickedListener(OnItemClickedListener listener){
+        this.listener = listener;
+    }
+
+    public interface OnItemClickedListener{
+        void onItemClicked(int position);
     }
 }
