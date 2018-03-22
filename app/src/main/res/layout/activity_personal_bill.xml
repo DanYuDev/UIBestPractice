@@ -5,70 +5,141 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.coderlt.uibestpractice.activity.PersonalBillActivity">
-    <include layout="@layout/title_layout"
-        android:id="@+id/title_layout"/>
-    <LinearLayout
+    <include layout="@layout/title_layout"/>
+    <RelativeLayout
+        android:id="@+id/personal_bill_head"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:layout_below="@id/title_layout">
+        android:layout_height="80dp"
+        android:layout_below="@id/title_layout"
+        android:background="@color/main_blue">
+        <TextView
+            android:id="@+id/year_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="#D5D5D5"
+            android:text="2017年"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/month_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:textSize="24sp"
+            android:includeFontPadding="false"
+            android:paddingBottom="0dp"
+            android:text="03"
+            android:textColor="@android:color/white"/>
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/month_tv"
+            android:text="月"
+            android:textColor="@android:color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="13dp"/>
+        <ImageView
+            android:id="@+id/month_select_iv"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_toRightOf="@id/tv"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="13dp"
+            android:src="@drawable/ic_select_white"/>
+        <View
+            android:id="@+id/seperator_view"
+            android:layout_width="1px"
+            android:layout_height="60dp"
+            android:background="@android:color/white"
+            android:layout_toRightOf="@id/month_select_iv"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"/>
+
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:text="日期"
-                android:gravity="center"
-                android:textColor="@color/main_green"/>
+            android:orientation="horizontal"
+            android:layout_toRightOf="@id/seperator_view">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/out_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="支出(元)"
+                    android:layout_marginTop="10dp"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    android:textColor="#D5D5D5"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="12345.7"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="13dp"
+                    android:textSize="18sp"
+                    android:gravity="center"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/in_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="收入(元)"
+                    android:layout_marginTop="10dp"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    android:textColor="#D5D5D5"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:text="12345.7"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="13dp"
+                    android:textSize="18sp"
+                    android:gravity="center"/>
+            </RelativeLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:text="收入"
-                android:textColor="@color/main_green"
-                android:gravity="center"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:text="支出"
-                android:textColor="@color/main_green"
-                android:gravity="center"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:text="结余"
-                android:textColor="@color/main_green"
-                android:gravity="center"/>
-        </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/personal_bill_tab"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:layout_below="@id/personal_bill_head"
+        android:background="@drawable/tab_corner_bg"
+        app:tabSelectedTextColor="@color/main_blue"
+        app:tabIndicatorColor="@color/main_green"
+        app:tabTextColor="@color/text_light_black">
+    </android.support.design.widget.TabLayout>
+    <RelativeLayout
+        android:id="@+id/fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/personal_bill_tab"
+        android:background="@drawable/tab_corner_bg">
+    </RelativeLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/write_bill_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
         android:src="@drawable/ic_write"
-        app:backgroundTint="@android:color/holo_red_light"
-        />
+        android:elevation="10dp"
+        app:backgroundTint="@android:color/holo_red_light" />
 </RelativeLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="home"
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home_unselected" />
+    <item
+        android:title="contacts"
+        android:id="@+id/contacts"
+        android:icon="@drawable/ic_contacts_unselected"/>
+    <item
+        android:title="order"
+        android:id="@+id/order"
+        android:icon="@drawable/ic_home_unselected"/>
+    <item
+        android:title="user"
+        android:id="@+id/user"
+        android:icon="@drawable/ic_home_unselected" />
+</menu>

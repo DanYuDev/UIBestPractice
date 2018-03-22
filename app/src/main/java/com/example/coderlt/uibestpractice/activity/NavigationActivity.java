@@ -58,8 +58,6 @@ public class NavigationActivity extends AppCompatActivity {
         clientId = getIntent().getStringExtra(Constant.USER.USER_ID);
         Log.d(TAG,"clientId is : "+clientId);
         initViews();
-        contactsLogin();
-
         // 测试 SDK 是否正常工作的代码
         AVObject testObject = new AVObject("TestObject");
         testObject.put("words","Hello World!");
@@ -69,19 +67,6 @@ public class NavigationActivity extends AppCompatActivity {
             public void done(AVException e) {
                 if(e == null){
                     Log.d("saved","success!");
-                }
-            }
-        });
-    }
-
-    private void contactsLogin(){
-        LCChatKit.getInstance().open(clientId, new AVIMClientCallback() {
-            @Override
-            public void done(AVIMClient avimClient, AVIMException e) {
-                if (null == e) {
-                    Utils.showToast(clientId+" logined.");
-                } else {
-                    Utils.showToast(clientId+" logined failed.\n"+e.toString());
                 }
             }
         });

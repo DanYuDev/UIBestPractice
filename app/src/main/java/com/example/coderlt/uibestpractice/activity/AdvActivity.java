@@ -15,7 +15,7 @@ public class AdvActivity extends AppCompatActivity {
         @Override
         public void run() {
             try {
-                Thread.sleep(100);
+                Thread.sleep(500);
             }catch (InterruptedException ex){
                 ex.printStackTrace();
             }
@@ -29,6 +29,7 @@ public class AdvActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adv);
 
         preferences=getSharedPreferences(Constant.USER_PREF_NAME,MODE_PRIVATE);
+
 //      TODO 暂时注释是为了测试
 //        if(preferences.getString(Constant.USER.USER_PHONE,"-1").equals("-1")){
 //            //startActivity(new Intent(this,NavigationActivity.class));

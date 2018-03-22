@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.coderlt.uibestpractice.MyApplication;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.activity.NavigationActivity;
 import com.example.coderlt.uibestpractice.utils.Utils;
@@ -77,7 +78,8 @@ public class ContactsFragment extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("通讯录"));
         tabLayout.getTabAt(0).select();
         TextView titleTv = view.findViewById(R.id.title_tv);
-        clientId = ((NavigationActivity)(getActivity())).clientId ;
+        //clientId = ((NavigationActivity)(getActivity())).clientId ;
+        clientId = MyApplication.clientId;
         titleTv.setText(clientId);
         ImageView more = view.findViewById(R.id.more_iv);
         more.setOnClickListener(new View.OnClickListener(){

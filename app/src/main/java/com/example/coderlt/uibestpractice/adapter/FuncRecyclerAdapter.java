@@ -16,6 +16,7 @@ import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.activity.NavigationActivity;
 import com.example.coderlt.uibestpractice.bean.Option;
 import com.example.coderlt.uibestpractice.utils.Constant;
+import com.example.coderlt.uibestpractice.utils.Utils;
 
 import java.util.List;
 
@@ -28,22 +29,27 @@ public class FuncRecyclerAdapter extends RecyclerView.Adapter<FuncRecyclerAdapte
     private int resId;
     private List<Option> options;
     private Context mContext;
+    private OnItemClickedListener listener;
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView iv;
         public TextView tv;
+        public View v;
 
         public ViewHolder(View v){
             super(v);
+            this.v = v;
             iv=v.findViewById(R.id.func_iv);
             tv=v.findViewById(R.id.func_tv);
         }
     }
 
-    public FuncRecyclerAdapter(List<Option> optionList, int resId,Context context){
+    public FuncRecyclerAdapter(List<Option> optionList, int resId,Context context,OnItemClickedListener listener){
         Log.d(TAG,"on adapter constructor ");
         options=optionList;
         this.resId=resId;
         mContext=context;
+        this.listener = listener;
     }
 
     @Override
@@ -56,18 +62,30 @@ public class FuncRecyclerAdapter extends RecyclerView.Adapter<FuncRecyclerAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position)
+    public void onBindViewHolder(ViewHolder holder, final int position)
     {
         Option option= options.get(position);
         Log.d(TAG,"on bind VH ");
         holder.tv.setText(option.getName());
         Glide.with(mContext).load(option.getImgUrl()).into(holder.iv);
+        holder.v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener!=null){
+                    listener.onItemClicked(position);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount()
     {
         return options.size();
+    }
+
+    public interface OnItemClickedListener{
+        void onItemClicked(int position);
     }
 
 }

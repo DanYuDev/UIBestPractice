@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="10dp"
-    android:padding="10dp"
+    android:layout_height="100dp"
+    android:padding="5dp"
     android:elevation="3dp">
     <ImageView
         android:id="@+id/identification_photo"
         android:layout_width="60dp"
         android:layout_height="90dp"
         android:scaleType="centerCrop"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:layout_centerVertical="true" />
     <TextView
         android:id="@+id/employee_name_tv"
@@ -21,7 +18,7 @@
         android:textSize="15sp"
         android:text="姓名：余丹"
         android:layout_toRightOf="@id/identification_photo"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="6dp"/>
     <TextView
         android:id="@+id/employee_grade_tv"
         android:layout_width="wrap_content"
@@ -30,7 +27,7 @@
         android:text="职位：技术负责人"
         android:layout_toRightOf="@id/identification_photo"
         android:layout_below="@id/employee_name_tv"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="6dp"/>
     <TextView
         android:id="@+id/employee_age_tv"
         android:layout_width="wrap_content"
@@ -39,19 +36,19 @@
         android:text="年龄：27"
         android:layout_toRightOf="@id/identification_photo"
         android:layout_below="@id/employee_grade_tv"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="6dp"/>
     <ImageView
         android:id="@+id/chat_iv"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:src="@drawable/ic_chat"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"/>
     <ImageView
         android:id="@+id/call_iv"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:src="@drawable/ic_call"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@id/chat_iv"

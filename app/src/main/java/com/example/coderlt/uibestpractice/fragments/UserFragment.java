@@ -20,6 +20,7 @@ import android.webkit.WebViewClient;
 
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.View.RentalsSunHeaderView;
+import com.example.coderlt.uibestpractice.activity.InvitationActivity;
 import com.example.coderlt.uibestpractice.activity.NavigationActivity;
 import com.example.coderlt.uibestpractice.activity.RegisterActivity;
 import com.example.coderlt.uibestpractice.adapter.FuncRecyclerAdapter;
@@ -106,7 +107,22 @@ public class UserFragment extends Fragment {
         }
         //-------------------------------------------------------------------------
 
-        funcAdapter=new FuncRecyclerAdapter(options,R.layout.func_item,getActivity());
+        funcAdapter=new FuncRecyclerAdapter(options, R.layout.func_item, getActivity(),
+                new FuncRecyclerAdapter.OnItemClickedListener() {
+            @Override
+            public void onItemClicked(int position) {
+                Utils.showToast(position+"th Item been clicked!");
+                // 我觉得这里用 url 进入更好，就不用写 case 了
+                switch(options.get(position).getName().trim()){
+                    case "invitationCode":
+                        Intent intent = new Intent(mContext, InvitationActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
         GridLayoutManager layoutManager=new GridLayoutManager(getActivity(),3);
         funcRecycler.setLayoutManager(layoutManager);
         funcRecycler.setAdapter(funcAdapter);

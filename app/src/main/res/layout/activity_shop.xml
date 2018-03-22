@@ -90,9 +90,5 @@
     </ScrollView>
 
     <include
-        layout="@layout/title_layout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#88888888"
-        android:elevation="3dp"/>
+        layout="@layout/title_layout_shadow" />
 </RelativeLayout>

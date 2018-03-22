@@ -30,6 +30,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+import com.avos.avoscloud.im.v2.AVIMClient;
+import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.example.coderlt.uibestpractice.MyApplication;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.utils.BlurBitmap;
@@ -42,6 +45,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import cn.leancloud.chatkit.LCChatKit;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -49,7 +53,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.internal.Util;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private RelativeLayout loginLayout;
@@ -227,15 +230,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(LoginActivity.this,NavigationActivity.class);
+                        Intent intent = new Intent(LoginActivity.this,EntryActivity.class);
                         String wechatId = lcTv.getText().toString().trim();
                         MyApplication.clientId = wechatId;
+                        loginChatKit(wechatId);
                         intent.putExtra(Constant.USER.USER_ID,wechatId);
                         Log.d(TAG,"WeChat_ID: "+wechatId);
                         startActivity(intent);
                     }
                 })
                 .show();
+    }
+
+    private void loginChatKit(final String clientId){
+        LCChatKit.getInstance().open(clientId, new AVIMClientCallback() {
+            @Override
+            public void done(AVIMClient avimClient, AVIMException e) {
+                if (null == e) {
+                    Utils.showToast(clientId+" logined.");
+                } else {
+                    Utils.showToast(clientId+" logined failed.\n"+e.toString());
+                }
+            }
+        });
     }
 
     private void loginByVerification(){
@@ -276,7 +293,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 responseText=response.body().string();
                 Log.d(TAG,"ResponseText :"+responseText);
-                if(responseText.trim().equals("success")){
+                if(responseText.trim().contains("\"status:\":success")){
                     msg.what=LOGIN_SUCCESS;
                     JSONObject object=JSONObject.parseObject(responseText);
                     editSharedpreference(object);

@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.coderlt.uibestpractice.activity.SectionActivity"
     android:background="@drawable/water_mark">
-    <include layout="@layout/title_layout"/>
+    <include
+        layout="@layout/title_layout_shadow"/>
     <ListView
-        android:layout_below="@id/title_layout"
+        android:layout_below="@id/title_layout_shadow"
         android:id="@+id/employee_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

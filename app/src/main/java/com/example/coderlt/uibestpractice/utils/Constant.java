@@ -16,9 +16,9 @@ public class Constant {
     public static final int LOGIN_BY_PASSWORD=0x222;
 
     public static final String LOGIN_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/login/admin";
-    public static final String REG_URL= "http://192.168.125.81:8080/HangPaiSoftCamp/admin/middle/add";
+    public static final String REG_URL= "http://192.168.125.99:8080/HangPaiSoftCamp/admin/middle/add";
     public static final String CHECK_PHONE_URL = "http://localhost:8080/HangPaiSoftCamp/checkPhone.action";
-    public static final String CONFIG_URL = "http://192.168.125.81:8080/HangPaiSoftCamp//configuration/select";
+    public static final String CONFIG_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/configuration/select";
     public static final String SALES_URL = "https://www.baidu.co";
     public static final String SHOP_URL = "https://www.baidu.com";
 

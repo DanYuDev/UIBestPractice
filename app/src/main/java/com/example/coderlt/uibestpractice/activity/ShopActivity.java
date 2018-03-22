@@ -94,7 +94,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initViews(){
         titleTv = findViewById(R.id.title_tv);
-        titleLayout = findViewById(R.id.title_layout);
+        titleLayout = findViewById(R.id.title_layout_shadow);
         mViewPager = (AutoScrollViewPager) findViewById(R.id.shop_banner);
 
         titleLayout.setBackgroundColor(Color.parseColor("#88888888"));
