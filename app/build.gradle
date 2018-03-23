@@ -68,4 +68,5 @@ dependencies {
     // https://github.com/fccaikai/AutoScrollViewPager
     compile 'com.github.fccaikai:AutoScrollViewPager:1.0.1'
     implementation files('libs/core-3.2.1.jar')
+    compile 'com.contrarywind:Android-PickerView:4.0.1'
 }

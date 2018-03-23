@@ -9,10 +9,23 @@ import java.util.Date;
 
 public class Bill {
     /**
+     * url for the icon
+     */
+    private int iconId;
+    /**
      * name就是这笔账款的用途，有一个和图标匹配的默认值
      * 用户填写的备注可以覆盖默认值
      */
     private String name;
+
+    public int getIconId() {
+        return iconId;
+    }
+
+    public void setIconId(int id) {
+        this.iconId = id;
+    }
+
     /**
      * 时间戳，用于归档和查询
      * listView的分隔等
@@ -49,8 +62,8 @@ public class Bill {
     /**
      * 两种 ViewType
      */
-    private static final int TYPE_BILL=0;
-    private static final int TYPE_TIME=1;
+    public static final int TYPE_BILL=0;
+    public static final int TYPE_TIME=1;
 
 
     public String getName() {

@@ -91,7 +91,7 @@
         android:gravity="start|center"
         />
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/detail_recycler"
+        android:id="@+id/func_recycler"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

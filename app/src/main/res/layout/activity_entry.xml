@@ -39,7 +39,7 @@
             android:textColor="@color/colorPrimary"
             android:hint="选择您的身份"
             android:editable="false"
-            android:drawableRight="@drawable/edit_down"/>
+            android:drawableRight="@drawable/arrow_rotate_drawable"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="0dp"

@@ -31,7 +31,7 @@
             android:textSize="24sp"
             android:includeFontPadding="false"
             android:paddingBottom="0dp"
-            android:text="03"
+            android:text="04"
             android:textColor="@android:color/white"/>
         <TextView
             android:id="@+id/tv"
@@ -129,8 +129,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_below="@id/personal_bill_tab"
-        android:background="@drawable/tab_corner_bg">
+        android:layout_below="@id/personal_bill_tab">
     </RelativeLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/write_bill_fab"
@@ -140,6 +139,6 @@
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
         android:src="@drawable/ic_write"
-        android:elevation="10dp"
+        android:elevation="6dp"
         app:backgroundTint="@android:color/holo_red_light" />
 </RelativeLayout>
