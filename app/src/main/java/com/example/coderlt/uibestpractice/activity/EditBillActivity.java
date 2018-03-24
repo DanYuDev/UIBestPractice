@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.coderlt.uibestpractice.R;
+import com.example.coderlt.uibestpractice.View.NumericalKeyboard;
 import com.example.coderlt.uibestpractice.adapter.SpecificCyclerAdapter;
 import com.example.coderlt.uibestpractice.bean.SpecificGroup;
 
@@ -24,6 +25,7 @@ public class EditBillActivity extends AppCompatActivity {
     private List<SpecificGroup> balanceList = new ArrayList<>();
     private RecyclerView specificCycler;
     private SpecificCyclerAdapter adapter;
+    private NumericalKeyboard keyboard;
     private SpecificGroup[] specificDisbursementGroups =
             {       new SpecificGroup("衣服",R.drawable.ic_specific_clothe),
                     new SpecificGroup("课程",R.drawable.ic_specific_course),
@@ -53,6 +55,7 @@ public class EditBillActivity extends AppCompatActivity {
         titleText = findViewById(R.id.title_tv);
         outInTabLayout = findViewById(R.id.out_in_tablayout);
         specificCycler = findViewById(R.id.specific_cycler);
+        keyboard = findViewById(R.id.numerical_keyboard);
 
         outInTabLayout.addTab(outInTabLayout.newTab());
         outInTabLayout.addTab(outInTabLayout.newTab());
