@@ -35,6 +35,17 @@ public class Constant {
         public static final String USER_ADDRESS="user_address";
     }
 
+    public static class BILL{
+        // 和数据库的名称保持一致
+        public static final String NAME = "bill_name";
+        public static final String ICON = "bill_icon";
+        public static final String NOTETEXT = "bill_noteText";
+        public static final String NOTEPATH = "bill_noteUrl";
+        public static final String TYPE = "bill_type";
+        public static final String MONEY = "bill_money";
+        public static final String DATE = "bill_date";
+    }
+
     // emulate data
 
     public static final String organizationJSON = MyApplication.getContext().getResources()

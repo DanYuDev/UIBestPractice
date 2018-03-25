@@ -1,6 +1,7 @@
 package com.example.coderlt.uibestpractice.View;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -25,7 +26,7 @@ import java.util.List;
 public class NumericalKeyboard extends RelativeLayout {
     private Context mContext;
     private RecyclerView recyclerView;
-    private String[] dataList={"1","2","3","4","5","6","7","8","9",".","0","✖"};
+    private String[] dataList={"1","2","3","4","5","6","7","8","9",".","0","确定"};
     private OnItemClickedListener listener;
 
     public interface OnItemClickedListener{
@@ -85,23 +86,26 @@ public class NumericalKeyboard extends RelativeLayout {
         @Override
         public void onBindViewHolder(ViewHolder holder, final int position){
             TextView tv = holder.tv;
+            Resources resources = getResources();
             if(position<9){
                 tv.setText(String.valueOf(position+1));
             }else if(position == 9){
                 tv.setText(".");
                 tv.setTextSize(30);
+                tv.setTextColor(resources.getColor(android.R.color.white));
+                tv.setBackgroundColor(resources.getColor(R.color.mid_blue));
             }else if(position == 10){
                 tv.setText("0");
             }else{
-                tv.setText("❌");
+                tv.setBackgroundColor(resources.getColor(R.color.mid_blue));
+                tv.setTextColor(resources.getColor(android.R.color.white));
+                tv.setText("确定");
             }
             tv.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(listener!=null)
                         listener.onItemClicked(dataList[position]);
-                    else
-                        Utils.showToast("Should set listener.");
                 }
             });
         }

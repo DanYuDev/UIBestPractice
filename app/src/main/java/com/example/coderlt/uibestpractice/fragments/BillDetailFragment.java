@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.adapter.BillDetailAdapter;
 import com.example.coderlt.uibestpractice.bean.Bill;
+import com.example.coderlt.uibestpractice.bean.SpecificGroup;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,16 +68,19 @@ public class BillDetailFragment extends Fragment {
                 Bill bill = new Bill();
                 bill.setDate(time.getTime());
 
+                // 设置 头部信息 图标名称账单属性（支出还是收入）等
+                SpecificGroup specificGroup  =new SpecificGroup();
+                specificGroup.setIconId(icons[(int)Math.floor(Math.random()*5)]);
+                specificGroup.setName(names[(int)Math.floor(Math.random()*7)]);
+                specificGroup.setMoneyType(SpecificGroup.TYPE_OUT);
+                bill.setSpecificGroup(specificGroup);
+
                 // * 设置其它信息
-                bill.setIconId(icons[(int)Math.floor(Math.random()*5)]);
-                bill.setAmount(88.88f);
                 bill.setViewType(Bill.TYPE_BILL);
-                bill.setName(names[(int)Math.floor(Math.random()*7)]);
-                bill.setPay(true);
-                if(bill.isPay()){
+                if(bill.getSpecificGroup().getMoneyType() == SpecificGroup.TYPE_OUT){
                     outSum+=bill.getAmount();
                 }else{
-                    inSum+=bill.getIconId();
+                    inSum+=bill.getAmount();
                 }
                 bills.add(bill);
             }

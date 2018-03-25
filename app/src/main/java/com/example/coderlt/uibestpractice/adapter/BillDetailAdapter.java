@@ -43,8 +43,8 @@ public class BillDetailAdapter extends ArrayAdapter {
                 TextView billName = convertView.findViewById(R.id.bill_detail_tv);
                 TextView billAmount = convertView.findViewById(R.id.bill_amount_tv);
 
-                Glide.with(mContext).load(bill.getIconId()).into(billIv);
-                billName.setText(bill.getName());
+                Glide.with(mContext).load(bill.getSpecificGroup().getIconId()).into(billIv);
+                billName.setText(bill.getSpecificGroup().getName());
                 billAmount.setText(bill.getAmount()+"");
             }else{
                 convertView = LayoutInflater.from(mContext)

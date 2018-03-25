@@ -14,9 +14,7 @@
         app:tabBackground="@color/tab_bg_gray"
         app:tabIndicatorColor="@color/main_blue"
         app:tabIndicatorHeight="2dp"
-        app:tabSelectedTextColor="@color/main_blue"
-        />
-
+        app:tabSelectedTextColor="@color/main_blue" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/specific_cycler"
         android:layout_width="match_parent"
@@ -47,28 +45,47 @@
         android:layout_above="@id/numerical_keyboard"
         android:background="#F7F7F7">
         <ImageView
+            android:id="@+id/camera_iv"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="10dp"
             android:src="@drawable/ic_camera_blue"/>
         <ImageView
+            android:id="@+id/note_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/camera_iv"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:id="@+id/cancel_iv"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_toRightOf="@id/note_iv"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="-15dp"
+            android:src = "@drawable/ic_cancel"
+            android:visibility="invisible"/>
+        <ImageView
             android:id="@+id/delete_iv"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:src="@drawable/ic_delete" />
         <TextView
+            android:id="@+id/caculate_tv"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="0"
             android:textColor="@color/main_blue"
             android:textSize="26sp"
-            android:gravity="center"
+            android:gravity="center_vertical|right"
             android:layout_toLeftOf="@id/delete_iv"
+            android:layout_toRightOf="@id/note_iv"
             android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"/>
     </RelativeLayout>
     <com.example.coderlt.uibestpractice.View.NumericalKeyboard
         android:id="@+id/numerical_keyboard"
