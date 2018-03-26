@@ -40,6 +40,7 @@ import okhttp3.Response;
 public class ShopActivity extends AppCompatActivity implements View.OnClickListener{
     private final String TAG = "ShopActivity";
     private TextView titleTv;
+    private ImageView titleRight;
     private View  titleLayout;
     private OkHttpClient okHttpClient;
     private final MediaType MEDIA_TYPE_JSON = MediaType.parse("json/application;charset=utf-8");
@@ -96,8 +97,11 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
         titleTv = findViewById(R.id.title_tv);
         titleLayout = findViewById(R.id.title_layout_shadow);
         mViewPager = (AutoScrollViewPager) findViewById(R.id.shop_banner);
+        titleRight = findViewById(R.id.title_right);
 
-        titleLayout.setBackgroundColor(Color.parseColor("#88888888"));
+        titleLayout.setBackgroundColor(Color.parseColor("#881E8BE8"));
+        titleRight.setImageResource(R.drawable.ic_add_friend);
+
         BaseViewPagerAdapter<String> adapter = new BaseViewPagerAdapter<String>(this,listener) {
             @Override
             public void loadImage(ImageView view, int position, String url) {

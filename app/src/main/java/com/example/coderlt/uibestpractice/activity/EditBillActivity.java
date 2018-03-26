@@ -84,7 +84,7 @@ public class EditBillActivity extends AppCompatActivity implements View.OnClickL
                 cancelIv.setVisibility(View.VISIBLE);
                 break;
             case R.id.delete_iv:
-
+                Utils.showToast("delete num");
                 break;
             case R.id.cancel_iv:
                 noteIv.setVisibility(View.INVISIBLE);

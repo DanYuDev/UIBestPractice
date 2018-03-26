@@ -81,7 +81,7 @@ public class ContactsFragment extends Fragment {
         //clientId = ((NavigationActivity)(getActivity())).clientId ;
         clientId = MyApplication.clientId;
         titleTv.setText(clientId);
-        ImageView more = view.findViewById(R.id.more_iv);
+        ImageView more = view.findViewById(R.id.title_right);
         more.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

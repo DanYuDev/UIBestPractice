@@ -93,11 +93,11 @@ public class NumericalKeyboard extends RelativeLayout {
                 tv.setText(".");
                 tv.setTextSize(30);
                 tv.setTextColor(resources.getColor(android.R.color.white));
-                tv.setBackgroundColor(resources.getColor(R.color.mid_blue));
+                tv.setBackgroundColor(resources.getColor(android.R.color.darker_gray));
             }else if(position == 10){
                 tv.setText("0");
             }else{
-                tv.setBackgroundColor(resources.getColor(R.color.mid_blue));
+                tv.setBackgroundColor(resources.getColor(android.R.color.darker_gray));
                 tv.setTextColor(resources.getColor(android.R.color.white));
                 tv.setText("确定");
             }

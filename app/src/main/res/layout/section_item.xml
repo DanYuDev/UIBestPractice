@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="50dp"
     android:id="@+id/section_layout">
+    <ImageView
+        android:id="@+id/section_iv"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/ic_logo_blue"/>
     <TextView
         android:id="@+id/section_tv"
+        android:layout_toRightOf="@id/section_iv"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginLeft="15dp"
+        android:layout_centerVertical="true"
         android:gravity="center"
         android:text="杭派研发部"
-        android:textSize="18sp"/>
+        android:textSize="16sp"/>
     <ImageView
-        android:layout_width="27dp"
-        android:layout_height="27dp"
+        android:id="@+id/arrow_right_iv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/arrow_right_black"
-        android:layout_marginRight="15dp"/>
+        android:src="@drawable/arrow_right_gray"
+        android:layout_marginRight="20dp"/>
 </RelativeLayout>
