@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,7 +10,8 @@
     <include layout="@layout/title_layout_shadow"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_layout_shadow">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,7 +35,7 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:id="@+id/sales_table"
                 android:layout_below="@id/table_title_line"
                 android:divider="@drawable/table_vertical_divider"
@@ -55,4 +56,16 @@
                 />
         </RelativeLayout>
     </ScrollView>
-</LinearLayout>
+    <com.example.coderlt.uibestpractice.View.ExpandMenu
+        android:id="@+id/expand_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layoutAnimation="@anim/anim_layout"
+        app:itemWidth="130"
+        app:itemMargin="20"
+        app:marginBottom="50"
+        app:marginRight="50">
+    </com.example.coderlt.uibestpractice.View.ExpandMenu>
+</RelativeLayout>

@@ -3,6 +3,7 @@ package com.example.coderlt.uibestpractice.activity;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -30,8 +32,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coderlt.uibestpractice.R;
+import com.example.coderlt.uibestpractice.View.ExpandMenu;
 import com.example.coderlt.uibestpractice.View.MyDialog;
 import com.example.coderlt.uibestpractice.adapter.ImageWallAdapter;
+import com.example.coderlt.uibestpractice.bean.ExpandMenuItem;
 import com.example.coderlt.uibestpractice.bean.Goods;
 import com.example.coderlt.uibestpractice.bean.ImageInfo;
 import com.example.coderlt.uibestpractice.bean.SalesRecord;
@@ -62,6 +66,7 @@ public class SalesDetailActivity extends AppCompatActivity implements View.OnCli
     private String responseText;
     private MyDialog progressDialog;
     private Button imgWallBtn;
+    private ExpandMenu expandMenu;
 
     static class MyHandler extends Handler{
         private WeakReference<SalesDetailActivity> wr;
@@ -100,8 +105,22 @@ public class SalesDetailActivity extends AppCompatActivity implements View.OnCli
     private void initViews(){
         salesTable = findViewById(R.id.sales_table);
         imgWallBtn = findViewById(R.id.image_wall_btn);
+        expandMenu = findViewById(R.id.expand_menu);
 
         imgWallBtn.setOnClickListener(this);
+
+        List<ExpandMenuItem> menus = new ArrayList<>();
+        for(int i=0;i<4;i++){
+            ExpandMenuItem item = new ExpandMenuItem("邮件",R.drawable.ic_email);
+            menus.add(item);
+        }
+        expandMenu.setMenus(menus,R.drawable.ic_floating_menu);
+        expandMenu.setOnItemClickListener(new ExpandMenu.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Utils.showToast("The "+position+"th position been clicked.");
+            }
+        });
     }
 
     @Override
@@ -126,6 +145,7 @@ public class SalesDetailActivity extends AppCompatActivity implements View.OnCli
         TableRow row;
         TextView tv;
         SalesRecord record = null;
+        Resources res = getResources();
 
         // add table heade
         // -----------------
@@ -135,21 +155,31 @@ public class SalesDetailActivity extends AppCompatActivity implements View.OnCli
                 record = salesList.get(i-1);
 
             TableRow.LayoutParams lp =
-                    new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT,1);
+                    new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT,3);
+            TableRow.LayoutParams lp0 =
+                    new TableRow.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT,2);
             row = new TableRow(this);
             row.setDividerDrawable(getResources().getDrawable(R.drawable.table_horizental_divider));
             row.setShowDividers(LinearLayout.SHOW_DIVIDER_BEGINNING |
                                 LinearLayout.SHOW_DIVIDER_MIDDLE |
                                 LinearLayout.SHOW_DIVIDER_END);
 
-            for(int j= 0;j<3;j++ ){
+            for(int j= 0;j<4;j++ ){
                 tv = new TextView(this);
                 tv.setTextColor(Color.parseColor("#666666"));
                 tv.setTextSize(16);
                 tv.setPadding(20,10,20,10);
-                row.addView(tv,lp);
                 switch (j){
                     case 0:
+                        if(i==0){
+                            tv.setText("选项");
+                            tv.setBackgroundColor(res.getColor(R.color.main_blue));
+                            tv.setTextColor(res.getColor(android.R.color.white));
+                        }else{
+                            tv.setText(i+"");
+                        }
+                        break;
+                    case 1:
                         if(i==0){
                             tv.setText("商品名");
                             tv.setTextColor(Color.WHITE);
@@ -158,7 +188,7 @@ public class SalesDetailActivity extends AppCompatActivity implements View.OnCli
                             tv.setText(record.getGoods().getName());
                         }
                         break;
-                    case 1:
+                    case 2:
                         if(i==0){
                             tv.setText("单价");
                             tv.setTextColor(Color.WHITE);
@@ -167,7 +197,7 @@ public class SalesDetailActivity extends AppCompatActivity implements View.OnCli
                             tv.setText(record.getGoods().getPrice()+"");
                         }
                         break;
-                    case 2:
+                    case 3:
                         if(i==0){
                             tv.setText("数量");
                             tv.setTextColor(Color.WHITE);
@@ -178,6 +208,10 @@ public class SalesDetailActivity extends AppCompatActivity implements View.OnCli
                         break;
 
                 }
+                if(j!=0)
+                    row.addView(tv,lp);
+                else
+                    row.addView(tv,lp0);
             }
 
             TableLayout.LayoutParams tlp = new TableLayout.LayoutParams(
@@ -190,6 +224,22 @@ public class SalesDetailActivity extends AppCompatActivity implements View.OnCli
 
     private void useDefaultSalesList(){
         Log.d(TAG,"Use default sales list");
+        salesList.add(new SalesRecord(new Goods("苏静丸",120),5));
+        salesList.add(new SalesRecord(new Goods("刮痧丸",120),5));
+        salesList.add(new SalesRecord(new Goods("龙精油",120),5));
+        salesList.add(new SalesRecord(new Goods("冰可乐",120),5));
+        salesList.add(new SalesRecord(new Goods("苏静丸",120),5));
+        salesList.add(new SalesRecord(new Goods("刮痧丸",120),5));
+        salesList.add(new SalesRecord(new Goods("龙精油",120),5));
+        salesList.add(new SalesRecord(new Goods("冰可乐",120),5));
+        salesList.add(new SalesRecord(new Goods("苏静丸",120),5));
+        salesList.add(new SalesRecord(new Goods("刮痧丸",120),5));
+        salesList.add(new SalesRecord(new Goods("龙精油",120),5));
+        salesList.add(new SalesRecord(new Goods("冰可乐",120),5));
+        salesList.add(new SalesRecord(new Goods("苏静丸",120),5));
+        salesList.add(new SalesRecord(new Goods("刮痧丸",120),5));
+        salesList.add(new SalesRecord(new Goods("龙精油",120),5));
+        salesList.add(new SalesRecord(new Goods("冰可乐",120),5));
         salesList.add(new SalesRecord(new Goods("苏静丸",120),5));
         salesList.add(new SalesRecord(new Goods("刮痧丸",120),5));
         salesList.add(new SalesRecord(new Goods("龙精油",120),5));
