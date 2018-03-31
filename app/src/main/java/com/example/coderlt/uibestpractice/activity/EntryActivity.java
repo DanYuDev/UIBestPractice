@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RotateDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -53,9 +54,9 @@ public class EntryActivity extends AppCompatActivity {
         enterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog = new ProgressDialog(EntryActivity.this);
+               /* dialog = new ProgressDialog(EntryActivity.this);
                 dialog.setTitle("身份信息上传中...");
-                dialog.show();
+                dialog.show();*/
                 Intent intent;
                 if("Technician".equals(editSpinnerText.getText().toString())){
                     intent = new Intent(EntryActivity.this,TechnicianNavigationActivity.class);
@@ -64,7 +65,7 @@ public class EntryActivity extends AppCompatActivity {
                 }
                 intent.putExtra(Constant.USER.USER_ID,getIntent().getStringExtra(Constant.USER.USER_ID));
                 startActivity(intent);
-                dialog.dismiss();
+                //dialog.dismiss();
                 //uploadIdentification();
             }
         });
@@ -87,5 +88,11 @@ public class EntryActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onPause(){
+        Log.d("TimeTest","onPause current time is :"+System.currentTimeMillis());
+        super.onPause();
     }
 }

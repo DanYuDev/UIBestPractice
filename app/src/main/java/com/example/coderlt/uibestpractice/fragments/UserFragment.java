@@ -2,7 +2,6 @@ package com.example.coderlt.uibestpractice.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,34 +9,23 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.View.RentalsSunHeaderView;
 import com.example.coderlt.uibestpractice.activity.InvitationActivity;
-import com.example.coderlt.uibestpractice.activity.NavigationActivity;
-import com.example.coderlt.uibestpractice.activity.RegisterActivity;
 import com.example.coderlt.uibestpractice.adapter.FuncRecyclerAdapter;
 import com.example.coderlt.uibestpractice.bean.Option;
 import com.example.coderlt.uibestpractice.utils.Constant;
 import com.example.coderlt.uibestpractice.utils.FileUtil;
 import com.example.coderlt.uibestpractice.utils.JsonUtils;
 import com.example.coderlt.uibestpractice.utils.Utils;
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import okhttp3.Call;
@@ -45,11 +33,9 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
 /**
  * Created by coderlt on 2018/1/7.
  */
-
 public class UserFragment extends Fragment {
     private Context mContext;
     private final String TAG=getClass().getName();
@@ -64,6 +50,7 @@ public class UserFragment extends Fragment {
     private PtrFrameLayout ptrFrameLayout;
 
     private static final int REQUEST_FUNC_SUCCESS=0;
+    private static final int REQUEST_FUNC_FAILED = 1;
 
     private class MyHandler extends Handler {
         @Override
@@ -71,6 +58,9 @@ public class UserFragment extends Fragment {
             switch (msg.what){
                 case REQUEST_FUNC_SUCCESS:
                     Log.d(TAG,"on msg received");
+                    funcAdapter.notifyDataSetChanged();
+                    break;
+                case REQUEST_FUNC_FAILED:
                     funcAdapter.notifyDataSetChanged();
                     break;
                 default:
@@ -88,7 +78,7 @@ public class UserFragment extends Fragment {
         funcRecycler=view.findViewById(R.id.func_recycler_view);
 
         //----------- check if cache options exist ---------------------------------
-        cacheFile = FileUtil.getDiskCacheDir(mContext,"options");
+        cacheFile = FileUtil.getDiskCacheDir(mContext,"userOptions");
         if(!cacheFile.exists()){
             try{
                 cacheFile.createNewFile();
@@ -127,7 +117,6 @@ public class UserFragment extends Fragment {
         funcRecycler.setLayoutManager(layoutManager);
         funcRecycler.setAdapter(funcAdapter);
 
-
         //--------------------  set refresh layout -----------------------------------
         ptrFrameLayout=view.findViewById(R.id.ptr_frame);
         RentalsSunHeaderView header=new RentalsSunHeaderView(mContext);
@@ -154,19 +143,22 @@ public class UserFragment extends Fragment {
         //--------------------------------------------------------------------------------
         return view;
     }
-
+    /**
+     * TODO 这个页面出现崩溃的原因就是 requestUserInfo 不通，而 options 已经clear了，所以再点击会发生异常
+     */
     private void requestUserInfo(){
         options.clear();
         Request request=new Request.Builder()
-                .url(Constant.CONFIG_URL)
+                .url(Constant.USER_CONFIG_URL)
                 .build();
         client=new OkHttpClient();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                Message msg = new Message();
+                msg.what = REQUEST_FUNC_FAILED;
+                mHandler.sendMessage(msg);
             }
-
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText;

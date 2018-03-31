@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEEEEE"
+    android:background="#F7F7F7"
     >
     <include layout="@layout/title_layout"
         android:id="@+id/navigation_title"/>
@@ -71,17 +71,17 @@
             android:layout_height="70dp"
             android:layout_marginLeft="20dp"
             android:layout_centerVertical="true"
-            app:text="月营业额"
-            app:text_unselected_color="@color/mid_green"
-            app:src_unselected="@drawable/money_icon"/>
+            app:text="企业规章"
+            app:text_unselected_color="@color/text_light_black"
+            app:src_unselected="@drawable/ic_rule"/>
         <com.example.coderlt.uibestpractice.View.MyImgButton
             android:id="@+id/personal_bill"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_centerInParent="true"
-            app:text="私人账单"
-            app:text_unselected_color="@color/main_green"
-            app:src_unselected="@drawable/money_out"/>
+            app:text="荣誉榜"
+            app:text_unselected_color="@color/text_light_black"
+            app:src_unselected="@drawable/ic_honour"/>
         <com.example.coderlt.uibestpractice.View.MyImgButton
             android:id="@+id/sales_img_btn"
             android:layout_width="70dp"
@@ -89,30 +89,30 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:layout_centerVertical="true"
-            app:src_unselected="@drawable/sales"
-            app:text="店铺账单"
-            app:text_unselected_color="@color/mid_green"/>
+            app:src_unselected="@drawable/ic_feedback"
+            app:text="反馈建议"
+            app:text_unselected_color="@color/text_light_black"/>
     </RelativeLayout>
-    <GridView
-        android:id="@+id/menu_grid"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/option_cycler"
         android:background="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/business_menu"
-        android:layout_marginTop="12dp">
-    </GridView>
+        android:layout_marginTop="10dp">
+    </android.support.v7.widget.RecyclerView>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@id/menu_grid"
-        android:layout_marginTop="12dp"
+        android:layout_below="@id/option_cycler"
+        android:layout_marginTop="10dp"
         android:background="@android:color/white">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
-            android:text="XXXX"/>
+            android:text="福利社"/>
         <ImageView
             android:id="@+id/arrow_right_iv"
             android:layout_width="30dp"

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="70dp">
+    android:layout_width="match_parent" android:layout_height="80dp">
     <ImageView
         android:id="@+id/func_iv"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_centerInParent="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
     <TextView
         android:id="@+id/func_tv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_below="@id/func_iv"
-        android:layout_centerHorizontal="true"/>
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"/>
 </RelativeLayout>

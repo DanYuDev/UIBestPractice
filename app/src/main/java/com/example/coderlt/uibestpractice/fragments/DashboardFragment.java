@@ -1,6 +1,7 @@
 package com.example.coderlt.uibestpractice.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -17,9 +18,13 @@ import android.widget.PopupWindow;
 import android.widget.Spinner;
 
 import com.example.coderlt.uibestpractice.R;
+import com.example.coderlt.uibestpractice.View.ExpandMenu;
 import com.example.coderlt.uibestpractice.View.LineGraphFinal;
+import com.example.coderlt.uibestpractice.activity.SalesDetailActivity;
 import com.example.coderlt.uibestpractice.adapter.TableAdapter;
+import com.example.coderlt.uibestpractice.bean.ExpandMenuItem;
 import com.example.coderlt.uibestpractice.bean.TableData;
+import com.example.coderlt.uibestpractice.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +46,13 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
     private ImageView moreIv;
     private ImageView backIv;
     private View popView;
+    private ExpandMenu expandMenu;
 
     //----------------表格组件--------------------------------
     private RecyclerView overRecycler,vipRecycler,detailRecycler;
     private List<TableData> overList,vipList,detailList;
     private TableAdapter overAdapter,vipAdapter;
     private RecyclerView.LayoutManager layoutManager;
-
 
     private View view;
     @Override
@@ -84,9 +89,23 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
     private void initViews(){
         moreIv=view.findViewById(R.id.more_iv);
         backIv=view.findViewById(R.id.title_left);
+        expandMenu=view.findViewById(R.id.expand_menu);
 
         moreIv.setOnClickListener(this);
         backIv.setOnClickListener(this);
+
+        List<ExpandMenuItem> menus = new ArrayList<>();
+        for(int i=0;i<4;i++){
+            ExpandMenuItem item = new ExpandMenuItem("进销存",R.drawable.ic_details);
+            menus.add(item);
+        }
+        expandMenu.setMenus(menus,R.drawable.ic_floating_menu);
+        expandMenu.setOnItemClickListener(new ExpandMenu.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                startActivity(new Intent(mContext, SalesDetailActivity.class));
+            }
+        });
     }
     private void setPopwnd(){
         popView=LayoutInflater.from(mContext).inflate(R.layout.pop_wnd_layout,null);
@@ -100,8 +119,6 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
         adapter=new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item,spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner=view.findViewById(R.id.spinner);
-        spinner.setAdapter(adapter);
     }
 
     private void setOverRecycler(){

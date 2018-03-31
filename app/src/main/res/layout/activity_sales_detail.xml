@@ -21,9 +21,9 @@
                 android:id="@+id/table_title_line"
                 android:layout_width="3dp"
                 android:layout_height="30dp"
-                android:background="@color/main_green"
+                android:background="@color/colorAccent"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="5dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,11 +48,12 @@
                 android:layout_height="wrap_content"
                 android:text="查看图片"
                 android:textColor="@android:color/white"
-                android:background="@android:color/holo_orange_dark"
+                android:background="@drawable/button_bg"
                 android:layout_below="@id/sales_table"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
                 />
         </RelativeLayout>
     </ScrollView>
@@ -69,9 +70,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layoutAnimation="@anim/anim_layout"
-        app:itemWidth="130"
+        app:itemWidth="100"
         app:itemMargin="20"
-        app:marginBottom="50"
-        app:marginRight="50">
+        app:marginBottom="40"
+        app:marginRight="20">
     </com.example.coderlt.uibestpractice.View.ExpandMenu>
 </RelativeLayout>

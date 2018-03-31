@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.bean.Employee;
 import com.example.coderlt.uibestpractice.bean.Section;
+import com.example.coderlt.uibestpractice.interfaces.MyOnClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -51,6 +52,7 @@ public class SectionAdapter extends ArrayAdapter {
         TextView employeeNameTv = v.findViewById(R.id.employee_name_tv);
         TextView employeeGradeTv = v.findViewById(R.id.employee_grade_tv);
         TextView employeeAgeTv = v.findViewById(R.id.employee_age_tv);
+        ImageView callIv = v.findViewById(R.id.call_iv);
 
         Employee employee = employees.get(position);
         employeeNameTv.setText("姓名: " +employee.getName());
@@ -58,6 +60,9 @@ public class SectionAdapter extends ArrayAdapter {
         employeeAgeTv.setText("年龄: "+employee.getAge()+"");
         Log.d(TAG,"Identification photo url :"+employee.getAvatarUrl());
         Glide.with(mContext).load(employee.getAvatarUrl()).centerCrop().into(employeePhotoIv);
+
+        callIv.setOnClickListener(MyOnClickListener.getInstance());
+        callIv.setTag(employee.getPhoneNumber());
         return v;
     }
 }

@@ -197,7 +197,6 @@ public class ExpandMenu extends RelativeLayout {
     /**
      * Generate a value suitable for use in {@link #setId(int)}.
      * This value will not collide with ID values generated at build time by aapt for R.id.
-     *
      * @return a generated ID value
      */
     public static int generateViewId() {

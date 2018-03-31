@@ -89,6 +89,7 @@ public class JsonUtils {
                     employee.setAge(employeeObject.getIntValue("age"));
                     employee.setJobGrade(employeeObject.getString("jobGrade"));
                     employee.setAvatarUrl(employeeObject.getString("avatar"));
+                    employee.setPhoneNumber(employeeObject.getString("phoneNum"));
                     employees.add(employee);
                 }
                 section.setEmployees(employees);

@@ -139,6 +139,44 @@ public class BillDetailFragment extends Fragment {
     }
 
     /**
+     * 加工数据库的数据
+     * 从DB中提取对应月份的数据
+     * 计算每天的收支总和，并形成时间戳节点，插入list
+     * @param month  select the data of the month
+     */
+    private void processDB(int month){
+        mDbHelper = new MyDatabaseHelper(mContext,"HpStore.db",null,4);
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        Cursor cursor = db.query("Bill",
+                null,null,null,null,null,null);
+        dbBills = new ArrayList<>();
+        if(cursor.moveToFirst()){
+            do{
+                Bill bill = new Bill();
+                SpecificGroup sp = new SpecificGroup();
+
+                sp.setName(cursor.getString(cursor.getColumnIndex(Constant.BILL.NAME)));
+                sp.setMoneyType(cursor.getInt(cursor.getColumnIndex(Constant.BILL.TYPE)));
+                sp.setIconId(cursor.getInt(cursor.getColumnIndex(Constant.BILL.ICON)));
+
+                bill.setSpecificGroup(sp);
+                bill.setAmount(cursor.getDouble(cursor.getColumnIndex(Constant.BILL.MONEY)));
+                bill.setNotePath(cursor.getString(cursor.getColumnIndex(Constant.BILL.NOTEPATH)));
+                bill.setNoteText(cursor.getString(cursor.getColumnIndex(Constant.BILL.NOTETEXT)));
+                try{
+                    // 这里主要是对字符串转换成 date 对象
+                    bill.setDate(sdf.parse(cursor.getString(cursor.getColumnIndex(Constant.BILL.DATE))));
+                }catch (ParseException ex){ ex.printStackTrace();}
+
+                Log.d(TAG,bill.toString());
+                dbBills.add(bill);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+    }
+
+    /**
      * 避免activity返回之后数据不加载，因为 onCreate 没有执行，故而数据不回家在
      * 但是 onStart 会继续执行
      */

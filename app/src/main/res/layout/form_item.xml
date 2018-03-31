@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/item_bg">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <View
+        android:id="@+id/top_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_gray"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="35dp"
         android:gravity="center"
-        android:layout_toLeftOf="@id/vertical_line"
+        android:layout_below="@id/top_line"
         android:id="@+id/item_title"
         android:textColor="#BBBBBB"
+        android:textSize="11sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:id="@+id/item_num"
+        android:layout_below="@id/item_title"
+        android:layout_toLeftOf="@id/vertical_line"
+        android:gravity="center"
+        android:textColor="@color/main_green"
         android:textSize="11sp"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
+        android:layout_below="@id/item_num"
+        android:background="@color/line_gray"/>
+    <View
+        android:layout_width="1px"
+        android:layout_height="70dp"
         android:background="@color/line_gray"
-        android:layout_below="@id/item_title"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:id="@+id/item_num"
-        android:layout_below="@id/item_title"
-        android:layout_toLeftOf="@id/vertical_line"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:textColor="@color/main_green"
-        android:textSize="11sp"/>
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
 </RelativeLayout>

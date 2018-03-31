@@ -2,12 +2,14 @@ package com.example.coderlt.uibestpractice.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.adapter.SectionAdapter;
 import com.example.coderlt.uibestpractice.bean.Employee;
 import com.example.coderlt.uibestpractice.bean.Section;
+import com.example.coderlt.uibestpractice.interfaces.MyOnClickListener;
 import com.example.coderlt.uibestpractice.utils.Utils;
 
 import java.util.List;

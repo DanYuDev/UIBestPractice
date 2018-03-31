@@ -1,5 +1,7 @@
 package com.example.coderlt.uibestpractice.activity;
 
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,12 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.SaveCallback;
-import com.avos.avoscloud.im.v2.AVIMClient;
-import com.avos.avoscloud.im.v2.AVIMException;
-import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.View.BottomNavigationView;
 import com.example.coderlt.uibestpractice.View.MyImgButton;
@@ -25,10 +21,8 @@ import com.example.coderlt.uibestpractice.fragments.DashboardFragment;
 import com.example.coderlt.uibestpractice.fragments.HomeFragment;
 import com.example.coderlt.uibestpractice.fragments.UserFragment;
 import com.example.coderlt.uibestpractice.utils.Constant;
-import com.example.coderlt.uibestpractice.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
-import cn.leancloud.chatkit.LCChatKit;
 
 public class NavigationActivity extends AppCompatActivity {
     private static final String TAG = "NavigationActivity";
@@ -44,6 +38,7 @@ public class NavigationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("TimeTest","Time 0:"+System.currentTimeMillis());
         super.onCreate(savedInstanceState);
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -55,33 +50,37 @@ public class NavigationActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         setContentView(R.layout.activity_navigation);
+        Log.d("TimeTest","Time 1:"+System.currentTimeMillis());
         clientId = getIntent().getStringExtra(Constant.USER.USER_ID);
         Log.d(TAG,"clientId is : "+clientId);
         initViews();
+        Log.d("TimeTest","Time 5 :"+System.currentTimeMillis());
         // 测试 SDK 是否正常工作的代码
-        AVObject testObject = new AVObject("TestObject");
-        testObject.put("words","Hello World!");
-        testObject.put("name","DanYuDev");
-        testObject.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(AVException e) {
-                if(e == null){
-                    Log.d("saved","success!");
-                }
-            }
-        });
+//        AVObject testObject = new AVObject("TestObject");
+//        testObject.put("words","Hello World!");
+//        testObject.put("name","DanYuDev");
+//        testObject.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(AVException e) {
+//                if(e == null){
+//                    Log.d("saved","success!");
+//                }
+//            }
+//        });
     }
 
     private void initViews(){
-
+        Log.d("TimeTest","Time 2:"+System.currentTimeMillis());
         bottomNavigationView=findViewById(R.id.bottom_navigation_view);
         navigateHome=new MyImgButton(this);
         navigateDashboard=new MyImgButton(this);
         navigateContacts=new MyImgButton(this);
         navigateUser = new MyImgButton(this);
 
-        int selectedColor=getResources().getColor(R.color.main_blue);
-        int unselectedColor=getResources().getColor(R.color.line_gray);
+        Resources res = getResources();
+        //int selectedColor=getResources().getColor(R.color.main_blue);
+        int selectedColor = Color.parseColor("#1E8BE8");
+        int unselectedColor=Color.parseColor("#CCCCCC");
 
         navigateHome.setSelectedImgId(R.drawable.ic_home_selected);
         navigateHome.setUnSelectedImgId(R.drawable.ic_home_unselected);
@@ -119,6 +118,8 @@ public class NavigationActivity extends AppCompatActivity {
 
         bottomNavigationView.setBtnList(btnList);
         bottomNavigationView.setCurrentItem(0);
+
+        Log.d("TimeTest","Time 3:"+System.currentTimeMillis());
         // init fragmentList
         viewPager=findViewById(R.id.navigation_view_pager);
         HomeFragment fh=new HomeFragment();
@@ -126,6 +127,8 @@ public class NavigationActivity extends AppCompatActivity {
         ContactsFragment fc=new ContactsFragment();
         //LCIMConversationListFragment fc = new LCIMConversationListFragment();
         UserFragment fu=new UserFragment();
+
+        Log.d("TimeTest","Time 4:"+System.currentTimeMillis());
 
         fragmentList=new ArrayList<Fragment>();
         fragmentList.add(fh);
@@ -193,5 +196,11 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
         //viewPager.setPageTransformer(true,new ZoomInTransform());
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d("TimeTest","onResume current time:"+System.currentTimeMillis());
     }
 }

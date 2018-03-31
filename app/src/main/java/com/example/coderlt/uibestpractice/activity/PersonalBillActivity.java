@@ -28,6 +28,7 @@ public class PersonalBillActivity extends AppCompatActivity implements View.OnCl
     private Fragment  billDetailFragment;
     private FragmentManager fm;
     private FragmentTransaction fmt;
+    private TimePickerView pvTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +46,11 @@ public class PersonalBillActivity extends AppCompatActivity implements View.OnCl
             case R.id.month_select_iv:
                 Utils.showToast("Select Month.");
                 // TODO 回头自己写一个日期选择动画，从底部弹出 window 那种，比较优雅
-                TimePickerView pvTime = new TimePickerBuilder(PersonalBillActivity.this,
-                        new OnTimeSelectListener() {
-                            @Override
-                            public void onTimeSelect(Date date, View v) {
-                                Utils.showToast("Date picked: "+date);
-                            }
-                        }).isDialog(true)
-                        .build();
+                pvTime.show();
+                break;
+            case R.id.month_tv:
+                Utils.showToast("Select Month.");
+                // TODO 回头自己写一个日期选择动画，从底部弹出 window 那种，比较优雅
                 pvTime.show();
                 break;
             default:
@@ -106,5 +104,14 @@ public class PersonalBillActivity extends AppCompatActivity implements View.OnCl
         billTab.addTab(billTab.newTab().setText("明细"));
         billTab.addTab(billTab.newTab().setText("类别报表"));
         billTab.addTab(billTab.newTab().setText("账户"));
+
+        pvTime = new TimePickerBuilder(PersonalBillActivity.this,
+                new OnTimeSelectListener() {
+                    @Override
+                    public void onTimeSelect(Date date, View v) {
+                        Utils.showToast("Date picked: "+date);
+                    }
+                }).isDialog(true)
+                .build();
     }
 }

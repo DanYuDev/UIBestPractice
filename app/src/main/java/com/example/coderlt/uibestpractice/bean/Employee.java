@@ -11,6 +11,7 @@ public class Employee implements Serializable{
     private String jobGrade;
     private int age;
     private String avatarUrl;
+    private String phoneNumber;
 
     public String getName() {
         return name;
@@ -42,5 +43,13 @@ public class Employee implements Serializable{
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
