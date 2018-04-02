@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/adv_banner"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="110dp"
         android:layout_below="@id/title_layout_shadow"
         android:background="@drawable/banner_adv">
     </RelativeLayout>
