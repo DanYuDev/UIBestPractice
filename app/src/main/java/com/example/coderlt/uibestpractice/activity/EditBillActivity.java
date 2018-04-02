@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,6 +46,7 @@ public class EditBillActivity extends AppCompatActivity implements View.OnClickL
     private ImageView cameraIv;
     private TextView  caculateTv;
     private ImageView noteIv;
+    private TextView noteTv;
     private ImageView cancelIv;
     private StringBuilder sb = null;
     private MyDatabaseHelper dbHelper;
@@ -85,6 +87,9 @@ public class EditBillActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.delete_iv:
                 Utils.showToast("delete num");
+                if(sb.length()==0)break;
+                sb = new StringBuilder(sb.substring(0,sb.length()-1));
+                caculateTv.setText(sb);
                 break;
             case R.id.cancel_iv:
                 noteIv.setVisibility(View.INVISIBLE);
@@ -105,9 +110,14 @@ public class EditBillActivity extends AppCompatActivity implements View.OnClickL
         deleteIv = findViewById(R.id.delete_iv);
         cancelIv = findViewById(R.id.cancel_iv);
         noteIv = findViewById(R.id.note_iv);
+        noteTv = findViewById(R.id.note_tv);
 
         cameraIv.setOnClickListener(this);
         cancelIv.setOnClickListener(this);
+        deleteIv.setOnClickListener(this);
+        noteIv.setOnClickListener(this);
+        noteTv.setOnClickListener(this);
+
 
         outInTabLayout.addTab(outInTabLayout.newTab());
         outInTabLayout.addTab(outInTabLayout.newTab());
@@ -138,6 +148,7 @@ public class EditBillActivity extends AppCompatActivity implements View.OnClickL
                         editBill.setDate(new Date());
                         // 只有当 editbill 完全设置时，才可以存入数据库
                         saveToSql(db);
+                        finish();
                     }
                 }else{
                     if(str.equals(".") && sb.toString().contains("."))return;
@@ -153,6 +164,10 @@ public class EditBillActivity extends AppCompatActivity implements View.OnClickL
         outInTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                TextView title = (TextView)(((LinearLayout) ((LinearLayout) outInTabLayout.getChildAt(0)).
+                        getChildAt(tab.getPosition())).getChildAt(1));
+                title.setBackgroundResource(R.drawable.tab_tv_bg);
+                title.setPadding(45,15,45,15);
                 if("收入".equals(tab.getText())){
                     balanceList.clear();
                     balanceList.addAll(Arrays.asList(specificIncomeGroups));
@@ -165,7 +180,11 @@ public class EditBillActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
+            public void onTabUnselected(TabLayout.Tab tab) {
+                TextView title = (TextView)(((LinearLayout) ((LinearLayout) outInTabLayout.getChildAt(0)).
+                        getChildAt(tab.getPosition())).getChildAt(1));
+                title.setBackground(null);
+            }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });

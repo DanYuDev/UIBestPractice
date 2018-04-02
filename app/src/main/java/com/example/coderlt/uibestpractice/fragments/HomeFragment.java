@@ -2,49 +2,42 @@ package com.example.coderlt.uibestpractice.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.View.MyImgButton;
-import com.example.coderlt.uibestpractice.activity.ImageWallTestActivity;
+import com.example.coderlt.uibestpractice.activity.ApprovalActivity;
 import com.example.coderlt.uibestpractice.activity.PersonalBillActivity;
-import com.example.coderlt.uibestpractice.activity.SalesDetailActivity;
+import com.example.coderlt.uibestpractice.activity.PublishTaskActivity;
+import com.example.coderlt.uibestpractice.activity.ScheduleActivity;
+import com.example.coderlt.uibestpractice.activity.SchemeActivity;
+import com.example.coderlt.uibestpractice.activity.SectionTrainingActivity;
 import com.example.coderlt.uibestpractice.activity.ShopActivity;
+import com.example.coderlt.uibestpractice.activity.ShopOrdersActivity;
 import com.example.coderlt.uibestpractice.adapter.FuncRecyclerAdapter;
-import com.example.coderlt.uibestpractice.adapter.ScheduleAdapter;
-import com.example.coderlt.uibestpractice.adapter.ScheduleArrayAdapter;
 import com.example.coderlt.uibestpractice.bean.Option;
-import com.example.coderlt.uibestpractice.bean.ScheduleBean;
 import com.example.coderlt.uibestpractice.utils.Constant;
 import com.example.coderlt.uibestpractice.utils.FileUtil;
 import com.example.coderlt.uibestpractice.utils.JsonUtils;
 import com.example.coderlt.uibestpractice.utils.Utils;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.internal.Util;
 
 /**
  * Created by coderlt on 2018/1/7.
@@ -144,8 +137,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             public void onItemClicked(int position) {
                 //Utils.showToast(options.get(position).getName());
                 switch (options.get(position).getName()){
+                    case "传达任务":
+                        startActivity(new Intent(mContext, PublishTaskActivity.class));
+                        break;
+                    case "店铺订单":
+                        startActivity(new Intent(mContext,ShopOrdersActivity.class));
+                        break;
                     case "记一笔":
                         startActivity(new Intent(mContext,PersonalBillActivity.class));
+                        break;
+                    case "日程":
+                        startActivity(new Intent(mContext, ScheduleActivity.class));
+                        break;
+                    case "审批":
+                        startActivity(new Intent(mContext, ApprovalActivity.class));
+                        break;
+                    case "营销策划":
+                        startActivity(new Intent(mContext, SchemeActivity.class));
+                        break;
+                    case "组织架构":
+                        startActivity(new Intent(mContext,ShopActivity.class));
+                        break;
+                    case "部门培训":
+                        startActivity(new Intent(mContext, SectionTrainingActivity.class));
                         break;
                     default:
                         Utils.showToast("攻城狮正在努力Coding...");

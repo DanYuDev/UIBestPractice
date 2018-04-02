@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -30,11 +31,13 @@ public class SpecificCyclerAdapter extends RecyclerView.Adapter <SpecificCyclerA
     public class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView iv;
         public TextView tv;
+        public View v;
 
         public ViewHolder(View v){
             super(v);
             iv=v.findViewById(R.id.func_iv);
             tv=v.findViewById(R.id.func_tv);
+            this.v=v;
         }
     }
 
@@ -58,14 +61,36 @@ public class SpecificCyclerAdapter extends RecyclerView.Adapter <SpecificCyclerA
         Log.d(TAG,"on bind VH ");
         holder.tv.setText(option.getName());
         Glide.with(mContext).load(option.getIconId()).into(holder.iv);
-        holder.iv.setOnClickListener(new View.OnClickListener() {
+//        holder.iv.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (listener!=null){
+//                    listener.onSpecificSelected(option);
+//                }else{
+//                    Utils.showToast("Should set on listener.");
+//                }
+//            }
+//        });
+
+        holder.v.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if (listener!=null){
-                    listener.onSpecificSelected(option);
-                }else{
-                    Utils.showToast("Should set on listener.");
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        v.setBackgroundResource(R.color.mid_blue);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        v.setBackground(null);
+                        if (listener!=null){
+                            listener.onSpecificSelected(option);
+                        }else{
+                            Utils.showToast("Should set on listener.");
+                        }
+                        break;
+                    default:
+                        break;
                 }
+                return true;
             }
         });
     }

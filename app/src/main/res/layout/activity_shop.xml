@@ -4,119 +4,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="com.example.coderlt.uibestpractice.activity.ShopActivity">
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
-        <RelativeLayout
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:elevation="3dp">
+        <!--必须设置 point_layout ，不然崩溃-->
+        <com.example.coderlt.uibestpractice.View.MyAutoViewPager
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:focusableInTouchMode="true"
-            android:focusable="true"
-            android:elevation="3dp">
-               <!--必须设置 point_layout ，不然崩溃-->
-            <com.kcode.autoscrollviewpager.view.AutoScrollViewPager
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:id="@+id/shop_banner"
-                app:point_layout="right|center" />
-            <RelativeLayout
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/shop_banner"
-                android:layout_marginTop="-50dp"
-                android:layout_marginRight="12dp"
-                android:elevation="3dp"
-                android:background="@android:color/white">
-                <ImageView
-                    android:id="@+id/company_logo_iv"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_default_avatar"
-                    android:scaleType="centerCrop" />
-            </RelativeLayout>
-            <TextView
-                android:id="@+id/company_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                android:text="杭派健康管理有限公司"
-                android:layout_below="@id/shop_banner"
-                android:layout_margin="10dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:shadowColor="#919191"
-                android:shadowDx="1.5"
-                android:shadowDy="1.5"
-                android:shadowRadius="1.5"/>
-
-        <!--杭派公司的丁丁等级-->
-            <RelativeLayout
-                android:id="@+id/level_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/company_tv"
-                android:layout_alignStart="@+id/company_tv"
-                android:layout_below="@+id/company_tv"
-                android:elevation="3dp">
-                <ImageView
-                    android:id="@+id/badge_iv"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_badge"
-                    android:layout_marginLeft="-5dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="杭派等级：VIP_5"
-                    android:textColor="@color/main_blue"
-                    android:textSize="15sp"
-                    android:layout_toRightOf="@id/badge_iv"
-                    android:layout_centerInParent="true"/>
-            </RelativeLayout>
-
-            <EditText
-                android:id="@+id/search_et"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_below="@id/level_layout"
-                android:drawableLeft="@android:drawable/ic_menu_search"
-                android:background="@color/background_gray"
-                android:hint="搜索联系人"
-                android:textSize="14sp"/>
-
-            <View
-                android:id="@+id/seperator_view"
-                android:layout_width="match_parent"
-                android:layout_height="6dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@id/search_et"
-                android:background="@color/background_gray"
-                />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="1000dp"
-                android:layout_below="@id/seperator_view"
-                android:elevation="3dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="组织架构\n可以连接到不同的档案墙"
-                    android:layout_centerInParent="true" />
-                <ListView
-                    android:id="@+id/organization_listview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </ListView>
-            </RelativeLayout>
+            android:layout_height="220dp"
+            android:id="@+id/shop_banner"
+            app:point_layout="right|center" />
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/shop_banner"
+            android:layout_marginTop="-50dp"
+            android:layout_marginRight="12dp"
+            android:elevation="3dp"
+            android:background="@android:color/white">
+            <ImageView
+                android:id="@+id/company_logo_iv"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_default_avatar"
+                android:scaleType="centerCrop" />
         </RelativeLayout>
-    </ScrollView>
+        <TextView
+            android:id="@+id/company_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="杭派健康管理有限公司"
+            android:layout_below="@id/shop_banner"
+            android:layout_margin="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:shadowColor="#919191"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"/>
+        <!--杭派公司的丁丁等级-->
+        <RelativeLayout
+            android:id="@+id/level_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/company_tv"
+            android:layout_below="@id/shop_banner"
+            android:layout_marginTop="10dp"
+            android:elevation="3dp">
+            <ImageView
+                android:id="@+id/badge_iv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_badge"
+                android:layout_marginLeft="2dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VIP5"
+                android:textColor="@color/main_blue"
+                android:textSize="13sp"
+                android:layout_toRightOf="@id/badge_iv"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+        <EditText
+            android:id="@+id/search_et"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/company_tv"
+            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:background="@drawable/btn_light_gray"
+            android:hint="搜索联系人"
+            android:textSize="13sp"/>
+        <ListView
+            android:id="@+id/organization_listview"
+            android:layout_below="@id/search_et"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </ListView>
+    </RelativeLayout>
     <include
         layout="@layout/title_layout_shadow" />
 </RelativeLayout>

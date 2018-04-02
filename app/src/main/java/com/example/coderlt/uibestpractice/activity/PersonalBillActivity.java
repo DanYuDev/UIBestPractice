@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,9 +19,11 @@ import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.fragments.BillDetailFragment;
 import com.example.coderlt.uibestpractice.utils.Utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PersonalBillActivity extends AppCompatActivity implements View.OnClickListener{
+    private static final String TAG = "PersonalBillActivity";
     private FloatingActionButton writeFab;
     private TextView titleText;
     private ImageView monthIv;
@@ -29,6 +32,7 @@ public class PersonalBillActivity extends AppCompatActivity implements View.OnCl
     private FragmentManager fm;
     private FragmentTransaction fmt;
     private TimePickerView pvTime;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +114,9 @@ public class PersonalBillActivity extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         Utils.showToast("Date picked: "+date);
+                        String dateStr = sdf.format(date);
+                        Log.d(TAG,"The select date is :"+dateStr);
+                        ((BillDetailFragment)billDetailFragment).refreshData(dateStr.substring(0,7));
                     }
                 }).isDialog(true)
                 .build();

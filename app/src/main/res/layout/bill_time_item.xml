@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="35dp">
+    android:layout_height="45dp">
     <TextView
         android:id="@+id/bill_date_tv"
         android:layout_width="wrap_content"
@@ -9,7 +9,8 @@
         android:text="22日-星期四"
         android:textSize="14sp"
         android:layout_marginLeft="15dp"
-        android:gravity="center_vertical"/>
+        android:gravity="center_vertical"
+        android:textColor="@android:color/holo_red_light"/>
     <TextView
         android:id="@+id/bill_sum__tv"
         android:layout_width="wrap_content"
@@ -22,6 +23,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/line_gray"
+        android:background="@color/mid_blue_a"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

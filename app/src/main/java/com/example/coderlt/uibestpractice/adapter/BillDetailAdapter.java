@@ -32,12 +32,19 @@ public class BillDetailAdapter extends ArrayAdapter {
         this.bills = bills;
     }
 
+    /**
+     * 如果listView条目出现错乱，那么很可能是 adapter 复用错误，特别是复杂的 adapter
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         Bill bill = bills.get(position);
         int viewType = bill.getViewType();
-        if(convertView == null){
-            if(viewType == Bill.TYPE_BILL){
+        if(viewType == Bill.TYPE_BILL){
+            if(convertView==null)
                 convertView = LayoutInflater.from(mContext).inflate(resId,parent,false);
                 ImageView billIv = convertView.findViewById(R.id.bill_type_iv);
                 TextView billName = convertView.findViewById(R.id.bill_detail_tv);
@@ -46,7 +53,8 @@ public class BillDetailAdapter extends ArrayAdapter {
                 Glide.with(mContext).load(bill.getSpecificGroup().getIconId()).into(billIv);
                 billName.setText(bill.getSpecificGroup().getName());
                 billAmount.setText(bill.getAmount()+"");
-            }else{
+        }else{
+            if(convertView==null)
                 convertView = LayoutInflater.from(mContext)
                         .inflate(R.layout.bill_time_item,parent,false);
                 TextView dateTv = convertView.findViewById(R.id.bill_date_tv);
@@ -54,7 +62,6 @@ public class BillDetailAdapter extends ArrayAdapter {
 
                 dateTv.setText(sdf.format(bill.getDate()));
                 sumTv.setText("支出:"+bill.getOut()+"  收入:"+bill.getIn());
-            }
         }
         return convertView;
     }

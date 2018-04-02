@@ -14,7 +14,7 @@
         app:tabBackground="@color/tab_bg_gray"
         app:tabIndicatorColor="@color/main_blue"
         app:tabIndicatorHeight="2dp"
-        app:tabSelectedTextColor="@color/main_blue" />
+        app:tabSelectedTextColor="@android:color/white" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/specific_cycler"
         android:layout_width="match_parent"

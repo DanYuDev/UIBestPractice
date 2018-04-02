@@ -42,11 +42,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'net.robinx:lib.blurview:1.0.2'
-    compile 'in.srain.cube:ultra-ptr:1.0.11'
-    compile 'de.hdodenhof:circleimageview:2.2.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'net.robinx:lib.blurview:1.0.2'
+    implementation 'in.srain.cube:ultra-ptr:1.0.11'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
     //compile ('com.android.support:support-v4:21.0.3')
     // LeanCloud 基础包
     implementation 'cn.leancloud.android:avoscloud-sdk:v4.6.4'
@@ -64,9 +64,9 @@ dependencies {
     // LeanCloud 应用内搜索包
     implementation 'cn.leancloud.android:avoscloud-search:v4.6.4@aar'
     // LeanCoud 封装的 UI 包 ChatKit
-    compile project(':leancloudchatkit')
+    implementation project(':leancloudchatkit')
     // https://github.com/fccaikai/AutoScrollViewPager
-    compile 'com.github.fccaikai:AutoScrollViewPager:1.0.1'
+    implementation 'com.github.fccaikai:AutoScrollViewPager:1.0.1'
     implementation files('libs/core-3.2.1.jar')
-    compile 'com.contrarywind:Android-PickerView:4.0.1'
+    implementation 'com.contrarywind:Android-PickerView:4.0.1'
 }

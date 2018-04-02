@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.example.coderlt.uibestpractice.R;
+import com.example.coderlt.uibestpractice.View.MyAutoViewPager;
 import com.example.coderlt.uibestpractice.adapter.OrganizationAdapter;
 import com.example.coderlt.uibestpractice.bean.Organization;
 import com.example.coderlt.uibestpractice.bean.Section;
@@ -46,7 +47,7 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     private final MediaType MEDIA_TYPE_JSON = MediaType.parse("json/application;charset=utf-8");
     private Map para;
     private String paraJson;
-    private AutoScrollViewPager mViewPager;
+    private MyAutoViewPager mViewPager;
     private Organization organization;
     private ListView organizationCycler;
     private OrganizationAdapter adapter;
@@ -96,9 +97,8 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
     private void initViews(){
         titleTv = findViewById(R.id.title_tv);
         titleLayout = findViewById(R.id.title_layout_shadow);
-        mViewPager = (AutoScrollViewPager) findViewById(R.id.shop_banner);
+        mViewPager = (MyAutoViewPager) findViewById(R.id.shop_banner);
         titleRight = findViewById(R.id.title_right);
-
         titleLayout.setBackgroundColor(Color.parseColor("#881E8BE8"));
         titleRight.setImageResource(R.drawable.ic_add_friend);
 
@@ -114,7 +114,6 @@ public class ShopActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
         mViewPager.setAdapter(adapter);
-
         adapter.add(Arrays.asList(paths));
     }
 
