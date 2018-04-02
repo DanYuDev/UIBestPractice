@@ -11,6 +11,7 @@ import com.example.coderlt.uibestpractice.R;
 public class ShopOrdersActivity extends AppCompatActivity implements View.OnClickListener{
     private ImageView searchIv;
     private EditText searchEt;
+    private View verticalLine;
     private ObjectAnimator searchAnimator;
 
     @Override
@@ -21,12 +22,13 @@ public class ShopOrdersActivity extends AppCompatActivity implements View.OnClic
         initViews();
 
         searchAnimator = ObjectAnimator.ofFloat(searchEt,"scaleX",0.2f,1f)
-                .setDuration(500);
+                .setDuration(600);
     }
 
     private void initViews(){
         searchIv = findViewById(R.id.search_iv);
         searchEt = findViewById(R.id.search_et);
+        verticalLine = findViewById(R.id.vertical_line);
 
         searchIv.setOnClickListener(this);
     }
@@ -36,6 +38,7 @@ public class ShopOrdersActivity extends AppCompatActivity implements View.OnClic
         switch (v.getId()){
             case R.id.search_iv:
                 searchIv.setVisibility(View.INVISIBLE);
+                verticalLine.setVisibility(View.INVISIBLE);
                 searchEt.setVisibility(View.VISIBLE);
                 searchAnimator.start();
                 break;

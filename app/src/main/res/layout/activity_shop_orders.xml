@@ -7,10 +7,17 @@
     tools:context="com.example.coderlt.uibestpractice.activity.ShopOrdersActivity">
     <include layout="@layout/title_layout_shadow"/>
     <RelativeLayout
+        android:id="@+id/adv_banner"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/title_layout_shadow"
+        android:background="@drawable/banner_adv">
+    </RelativeLayout>
+    <RelativeLayout
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_below="@id/title_layout_shadow"
+        android:layout_below="@id/adv_banner"
         android:background="@android:color/white">
         <TextView
             android:id="@+id/filter_tv"
@@ -49,10 +56,41 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"/>
+        <View
+            android:id="@+id/vertical_line"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/line_gray"
+            android:layout_toLeftOf="@id/search_iv"/>
     </RelativeLayout>
     <View
+        android:id="@+id/seperator_view"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_below="@id/top_layout"
         android:background="@color/line_gray"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/seperator_view"
+        android:background="@android:color/white"
+        android:padding="10dp">
+        <include
+            layout="@layout/shop_order_item"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/item1"
+            android:background="@android:color/white"/>
+        <include
+            layout="@layout/shop_order_item"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/item2"
+            android:layout_below="@id/item1"
+            android:background="@android:color/white"/>
+    </RelativeLayout>
 </RelativeLayout>
