@@ -28,7 +28,7 @@ public class AdvActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adv);
 
-        preferences=getSharedPreferences(Constant.USER_PREF_NAME,MODE_PRIVATE);
+        startActivity(new Intent(AdvActivity.this,LoginActivity.class));
 
 //      TODO 暂时注释是为了测试
 //        if(preferences.getString(Constant.USER.USER_PHONE,"-1").equals("-1")){
@@ -38,7 +38,7 @@ public class AdvActivity extends AppCompatActivity {
 //            startActivity(new Intent(this,NavigationActivity.class));
 //        }
 
-        new Thread(loginRunnable).start();
-        overridePendingTransition(R.anim.anim_enter_2,R.anim.anim_exit_2);
+        //new Thread(loginRunnable).start();
+        //overridePendingTransition(R.anim.anim_enter_2,R.anim.anim_exit_2);
     }
 }

@@ -64,7 +64,7 @@ dependencies {
     // LeanCloud 应用内搜索包
     implementation 'cn.leancloud.android:avoscloud-search:v4.6.4@aar'
     // LeanCoud 封装的 UI 包 ChatKit
-    implementation project(':leancloudchatkit')
+    compile project(':leancloudchatkit')
     // https://github.com/fccaikai/AutoScrollViewPager
     implementation 'com.github.fccaikai:AutoScrollViewPager:1.0.1'
     implementation files('libs/core-3.2.1.jar')

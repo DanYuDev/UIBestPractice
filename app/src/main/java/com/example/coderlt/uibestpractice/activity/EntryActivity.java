@@ -3,6 +3,7 @@ package com.example.coderlt.uibestpractice.activity;
 import android.animation.ValueAnimator;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RotateDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.coderlt.uibestpractice.MyApplication;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.View.EditSpinnerText;
 import com.example.coderlt.uibestpractice.utils.Constant;
@@ -39,11 +41,23 @@ public class EntryActivity extends AppCompatActivity {
     private String params;
     private ProgressDialog dialog;
     private Drawable rightDrawable;
+    private SharedPreferences preferences;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
+
+        preferences = getSharedPreferences(Constant.USER_PREF_NAME,MODE_PRIVATE);
+        preferences.edit()
+                .putInt(Constant.USER.USER_STATUS,Constant.LOG_IN)
+                .apply();
+        userId = getIntent().getStringExtra(Constant.USER.USER_ID);
+        MyApplication.clientId = userId;
+        preferences.edit()
+                .putString(Constant.USER.USER_ID,userId)
+                .apply();
         initViews();
     }
 
@@ -63,7 +77,7 @@ public class EntryActivity extends AppCompatActivity {
                 }else{
                     intent = new Intent(EntryActivity.this,NavigationActivity.class);
                 }
-                intent.putExtra(Constant.USER.USER_ID,getIntent().getStringExtra(Constant.USER.USER_ID));
+                intent.putExtra(Constant.USER.USER_ID,userId);
                 startActivity(intent);
                 //dialog.dismiss();
                 //uploadIdentification();

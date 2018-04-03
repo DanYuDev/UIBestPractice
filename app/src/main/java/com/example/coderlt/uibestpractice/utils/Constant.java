@@ -14,6 +14,8 @@ public class Constant {
 
     public static final int LOGIN_BY_VERIFICATION=0x111;
     public static final int LOGIN_BY_PASSWORD=0x222;
+    public static final int LOG_IN=0x333;
+    public static final int LOG_OUT=0x444;
 
     public static final String LOGIN_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/login/admin";
     public static final String REG_URL= "http://192.168.125.99:8080/HangPaiSoftCamp/admin/middle/add";
@@ -34,6 +36,7 @@ public class Constant {
         public static final String USER_CREDIT="user_credit";    //系统积分
         public static final String USER_AUTH="user_auth";      //登陆权限，对应
         public static final String USER_ADDRESS="user_address";
+        public static final String USER_STATUS = "user_status";
     }
 
     public static class BILL{

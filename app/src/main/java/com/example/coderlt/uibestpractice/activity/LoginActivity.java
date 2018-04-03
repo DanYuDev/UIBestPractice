@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 case LOGIN_SUCCESS:
                     Utils.showToast("Login success.");
                     //((LoginActivity)context).editSharedpreference();
-                    wr.get().leanCloudLogin();
+                    wr.get().wechatLogin();
                     //context.startActivity(new Intent(context,NavigationActivity.class));
                     //((LoginActivity)context).overridePendingTransition(R.anim.anim_enter_2,
                     //        R.anim.anim_exit_2);
@@ -136,6 +136,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         setContentView(R.layout.activity_login);
 
+        preferences = getSharedPreferences(Constant.USER_PREF_NAME,MODE_PRIVATE);
+        if(preferences.getInt(Constant.USER.USER_STATUS,-1)==Constant.LOG_IN){
+            leanCloudLogin(preferences.getString(Constant.USER.USER_ID,"default"));
+        }
         // 设置状态栏颜色
         setBg();
 
@@ -211,7 +215,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 overridePendingTransition(R.anim.anim_enter_1,R.anim.anim_exit_1);
                 break;
             case R.id.login_wechat:
-                leanCloudLogin();
+                wechatLogin();
                 overridePendingTransition(R.anim.anim_enter_1,R.anim.anim_exit_1);
                 break;
             default:
@@ -222,7 +226,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /**
      * 临时的增加 LeanCloud_ID.
      */
-    private void leanCloudLogin(){
+    private void wechatLogin(){
         lcTv = new EditText(this);
         lcTv.setHint("请输入wechat_id");
         AlertDialog alertDialog = new  AlertDialog.Builder(this)
@@ -230,16 +234,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(LoginActivity.this,EntryActivity.class);
-                        String wechatId = lcTv.getText().toString().trim();
-                        MyApplication.clientId = wechatId;
-                        loginChatKit(wechatId);
-                        intent.putExtra(Constant.USER.USER_ID,wechatId);
-                        Log.d(TAG,"WeChat_ID: "+wechatId);
-                        startActivity(intent);
+                        String userId = lcTv.getText().toString().trim();
+                        leanCloudLogin(userId);
                     }
                 })
                 .show();
+    }
+
+    private void leanCloudLogin(String userId){
+        Utils.showToast("user_id:"+userId);
+        loginChatKit(userId);
+        Intent intent = new Intent(LoginActivity.this,EntryActivity.class);
+        intent.putExtra(Constant.USER.USER_ID,userId);
+        startActivity(intent);
     }
 
     private void loginChatKit(final String clientId){

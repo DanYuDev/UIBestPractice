@@ -84,10 +84,18 @@
             android:background="@drawable/btn_light_gray"
             android:hint="搜索联系人"
             android:textSize="13sp"/>
+        <View
+            android:id="@+id/seperator_view"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#EEEEEE"
+            android:layout_below="@id/search_et"
+            android:layout_marginTop="14dp"/>
         <ListView
             android:id="@+id/organization_listview"
-            android:layout_below="@id/search_et"
+            android:layout_below="@id/seperator_view"
             android:layout_marginTop="5dp"
+            android:divider="@null"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
         </ListView>

@@ -92,5 +92,13 @@
             android:id="@+id/item2"
             android:layout_below="@id/item1"
             android:background="@android:color/white"/>
+        <include
+            layout="@layout/shop_order_item"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/item3"
+            android:layout_below="@id/item2"
+            android:background="@android:color/white"/>
     </RelativeLayout>
 </RelativeLayout>
