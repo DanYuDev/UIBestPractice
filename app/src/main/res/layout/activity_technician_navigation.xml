@@ -22,7 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="#EEEEEE"
+        android:elevation="5dp"
         app:menu="@menu/technician_bottom_menu"
-        app:elevation="8dp">
+        app:itemTextColor="@drawable/selector_bnv">
     </android.support.design.widget.BottomNavigationView>
 </RelativeLayout>

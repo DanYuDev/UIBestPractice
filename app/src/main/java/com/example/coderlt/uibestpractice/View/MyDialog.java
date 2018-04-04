@@ -17,6 +17,7 @@ public class MyDialog extends Dialog{
     private static final String  TAG = "MyDialog";
     private Context mContext;
     int     resId;
+    private View view;
     public MyDialog(Context context) {
         super(context);
         mContext=context;
@@ -38,13 +39,17 @@ public class MyDialog extends Dialog{
     public void setLayoutResId(int resId){
         Log.d(TAG,"setLayoutResId() start");
         this.resId=resId;
+        view = View.inflate(mContext, resId,null);
+    }
+
+    public void setMyView(View v){
+        view=v;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG,"onCreate .");
         super.onCreate(savedInstanceState);
-        View view = View.inflate(mContext, resId,null);
         setContentView(view);
     }
 }

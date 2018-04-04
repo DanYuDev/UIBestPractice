@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.multidex.MultiDexApplication;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
@@ -32,7 +33,7 @@ import cn.leancloud.chatkit.utils.LCIMConstants;
  * 通过 user 来保存用户的登陆详细信息
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
     private static Context mContext;
     private static SharedPreferences sharedPreferences;
     private static User user;
@@ -74,7 +75,6 @@ public class MyApplication extends Application {
 
     public static Context getContext(){
         return mContext;
-
     }
 
     public static SharedPreferences getMySp(){

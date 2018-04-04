@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="home"
+        android:title="主页"
         android:id="@+id/home"
         android:icon="@drawable/ic_home_unselected" />
     <item
-        android:title="contacts"
+        android:title="聊天"
         android:id="@+id/contacts"
-        android:icon="@drawable/ic_contacts_unselected"/>
+        android:icon="@drawable/ic_contacts_unselected"
+        android:textColor="@color/text_light_black"/>
     <item
-        android:title="order"
-        android:id="@+id/order"
-        android:icon="@drawable/ic_home_unselected"/>
+        android:title="管理"
+        android:id="@+id/manager"
+        android:icon="@drawable/ic_management"/>
     <item
-        android:title="user"
+        android:title="个人"
         android:id="@+id/user"
-        android:icon="@drawable/ic_home_unselected" />
+        android:icon="@drawable/ic_user_unselected" />
 </menu>
