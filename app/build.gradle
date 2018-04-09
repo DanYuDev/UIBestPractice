@@ -7,20 +7,34 @@ android {
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
+
+    signingConfigs {
+        release {
+            storeFile file('hp.jks')
+            storePassword 'wangzuxian'
+            keyAlias 'yudandev'
+            keyPassword 'wangzuxian'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.release
         }
     }
-
+    // 没有什么能剥夺一个人做梦的权利
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
@@ -69,9 +83,11 @@ dependencies {
     // LeanCloud 应用内搜索包
     implementation 'cn.leancloud.android:avoscloud-search:v4.6.4@aar'
     // LeanCoud 封装的 UI 包 ChatKit
-    compile project(':leancloudchatkit')
+    implementation project(':leancloudchatkit')
     // https://github.com/fccaikai/AutoScrollViewPager
     implementation 'com.github.fccaikai:AutoScrollViewPager:1.0.1'
-    implementation files('libs/core-3.2.1.jar')
     implementation 'com.contrarywind:Android-PickerView:4.0.1'
+
+    //https://github.com/yuzhiqiang1993/zxing
+    implementation 'com.github.yuzhiqiang1993:zxing:2.1.5'
 }

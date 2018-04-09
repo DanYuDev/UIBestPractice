@@ -5,5 +5,5 @@
     android:pivotX="50%"
     android:fromDegrees="0"
     android:toDegrees="360"
-    android:drawable="@drawable/edit_down">
+    android:drawable="@drawable/ic_pull_down">
 </rotate>

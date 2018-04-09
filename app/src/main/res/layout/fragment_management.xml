@@ -19,7 +19,7 @@
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:textSize="16sp"
-            android:textColor="@color/text_dark_black"
+            android:textColor="@color/main_blue"
             android:text="使用中的包间"/>
         <View
             android:layout_width="1px"
@@ -31,7 +31,7 @@
         <com.example.coderlt.uibestpractice.View.EditSpinnerText
             android:id="@+id/type_filter_spinnertv"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:text="类型"
             android:textSize="16sp"
             android:textColor="@color/main_blue"
@@ -40,16 +40,19 @@
             android:layout_marginRight="10dp"
             android:editable="false"
             android:background="@drawable/spinner_et_bg"
+            android:drawableRight="@drawable/arrow_rotate_drawable"
             android:padding="5dp"/>
         <com.example.coderlt.uibestpractice.View.EditSpinnerText
+            android:id="@+id/sort_filter_spinnertv"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:text="排序"
             android:textSize="16sp"
             android:textColor="@color/main_blue"
             android:layout_toLeftOf="@id/type_filter_spinnertv"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:drawableRight="@drawable/arrow_rotate_drawable"
             android:editable="false"
             android:background="@drawable/spinner_et_bg"
             android:padding="5dp" />
@@ -82,33 +85,41 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/item_bg"
+            android:background="@drawable/btn_light_gray"
+            android:layout_margin="5dp"
+            android:elevation="2dp"
             app:text="创建技师"
-            app:text_unselected_color="@color/text_dark_black"
-            app:src_unselected="@drawable/ic_rule"/>
+            app:text_unselected_color="@color/text_light_black"
+            app:src_unselected="@drawable/ic_add_tech"/>
         <com.example.coderlt.uibestpractice.View.MyImgButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/item_bg"
+            android:background="@drawable/btn_light_gray"
+            android:layout_margin="5dp"
+            android:elevation="2dp"
             app:text="创建房间"
-            app:text_unselected_color="@color/text_dark_black"
-            app:src_unselected="@drawable/ic_rule"/>
+            app:text_unselected_color="@color/text_light_black"
+            app:src_unselected="@drawable/ic_add_room"/>
         <com.example.coderlt.uibestpractice.View.MyImgButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/item_bg"
+            android:background="@drawable/btn_light_gray"
+            android:layout_margin="5dp"
+            android:elevation="2dp"
             app:text="排钟"
-            app:text_unselected_color="@color/text_dark_black"
-            app:src_unselected="@drawable/ic_rule"/>
+            app:text_unselected_color="@color/text_light_black"
+            app:src_unselected="@drawable/ic_schedule"/>
         <com.example.coderlt.uibestpractice.View.MyImgButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/item_bg"
+            android:layout_margin="5dp"
+            android:elevation="2dp"
+            android:background="@drawable/btn_light_gray"
             app:text="政务监管"
-            app:text_unselected_color="@color/text_dark_black"
-            app:src_unselected="@drawable/ic_rule"/>
+            app:text_unselected_color="@color/text_light_black"
+            app:src_unselected="@drawable/ic_gavo_platform"/>
     </LinearLayout>
 </RelativeLayout>

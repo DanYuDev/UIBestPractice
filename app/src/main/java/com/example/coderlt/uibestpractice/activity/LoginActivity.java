@@ -105,7 +105,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Utils.showToast("用户名或密码错误");
                     break;
                 case LOGIN_SUCCESS:
-                    Utils.showToast("Login success.");
+                    //
+                    //Utils.showToast("Login success.");
                     //((LoginActivity)context).editSharedpreference();
                     wr.get().wechatLogin();
                     //context.startActivity(new Intent(context,NavigationActivity.class));
@@ -242,7 +243,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void leanCloudLogin(String userId){
-        Utils.showToast("user_id:"+userId);
+       // Utils.showToast("user_id:"+userId);
         loginChatKit(userId);
         Intent intent = new Intent(LoginActivity.this,EntryActivity.class);
         intent.putExtra(Constant.USER.USER_ID,userId);
@@ -254,9 +255,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void done(AVIMClient avimClient, AVIMException e) {
                 if (null == e) {
-                    Utils.showToast(clientId+" logined.");
+                    //Utils.showToast(clientId+" logined.");
                 } else {
-                    Utils.showToast(clientId+" logined failed.\n"+e.toString());
+                    Utils.showToast(clientId+" 登陆失败.\n"+e.toString());
                 }
             }
         });

@@ -20,13 +20,17 @@ public class Constant {
     public static final String LOGIN_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/login/admin";
     public static final String REG_URL= "http://192.168.125.99:8080/HangPaiSoftCamp/admin/middle/add";
     public static final String CHECK_PHONE_URL = "http://localhost:8080/HangPaiSoftCamp/checkPhone.action";
-    public static final String USER_CONFIG_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/configuration/select";
-    public static final String HOME_CONFIG_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/UserOptionsConfiguration/selectAllUOC";
+    public static final String USER_CONFIG_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/configuration/select/user";
+    public static final String HOME_CONFIG_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/configuration/select/home";
     public static final String SALES_URL = "https://www.baidu.co";
     public static final String SHOP_URL = "https://www.baidu.com";
 
     public static MediaType MEDIA_TYPE_JSON
             = MediaType.parse("application/json; charset=utf-8");
+
+    public static class LOGIN_STATUS{
+        public static final String APP_TOKEN = "app_token";
+    }
 
     public static class USER {
         public static final String USER_NAME = "user_name";  //昵称

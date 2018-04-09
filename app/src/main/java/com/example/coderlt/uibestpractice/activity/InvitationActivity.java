@@ -23,8 +23,9 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InvitationActivity extends AppCompatActivity {
+public class InvitationActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "InvitationActivity";
+    private ImageView titleLeft;
     private Button buildQrBtn;
     private ImageView qrIv;
     private Bitmap qrBitmap = null;
@@ -58,17 +59,23 @@ public class InvitationActivity extends AppCompatActivity {
         qrMessage = new StringBuilder();
         qrMessage.append(preferences.getString(Constant.USER.USER_ID,"").trim());
         qrMessage.append(preferences.getString(Constant.USER.USER_PHONE,"").trim());
-        qrMessage.append("Test Message");
+        qrMessage.append("余丹 15068159967");
         initViews();
     }
 
     private void initViews(){
+        titleLeft = findViewById(R.id.title_left);
         buildQrBtn = findViewById(R.id.build_qr_btn);
         qrIv = findViewById(R.id.qr_iv);
 
-        buildQrBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        titleLeft.setOnClickListener(this);
+        buildQrBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.build_qr_btn:
                 if(qrMessage.toString().isEmpty()){
                     Utils.showToast("请登陆或完善您的手机信息");
                     return;
@@ -83,8 +90,13 @@ public class InvitationActivity extends AppCompatActivity {
                         mHandler.sendMessage(msg);
                     }
                 }).start();
-            }
-        });
+                break;
+            case R.id.title_left:
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 
     private Bitmap generateBitmap(String content, int width, int height) {

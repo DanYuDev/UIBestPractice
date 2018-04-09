@@ -42,6 +42,10 @@ public class MyDialog extends Dialog{
         view = View.inflate(mContext, resId,null);
     }
 
+    /**
+     * 适合添加监听接口那种
+     * @param v
+     */
     public void setMyView(View v){
         view=v;
     }

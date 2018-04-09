@@ -34,7 +34,7 @@ import okhttp3.Response;
  */
 public class EntryActivity extends AppCompatActivity {
     private EditSpinnerText editSpinnerText;
-    private String[] array = {"Boss","Manager","Technician"};
+    private String[] array = {"老板","经理/店长","技师"};
     private Button enterBtn;
     private OkHttpClient okHttpClient;
     private MediaType jsonType = MediaType.parse("application/json,utf-8");
@@ -72,7 +72,7 @@ public class EntryActivity extends AppCompatActivity {
                 dialog.setTitle("身份信息上传中...");
                 dialog.show();*/
                 Intent intent;
-                if("Technician".equals(editSpinnerText.getText().toString())){
+                if("经理/店长".equals(editSpinnerText.getText().toString())){
                     intent = new Intent(EntryActivity.this,TechnicianNavigationActivity.class);
                 }else{
                     intent = new Intent(EntryActivity.this,NavigationActivity.class);
@@ -83,6 +83,10 @@ public class EntryActivity extends AppCompatActivity {
                 //uploadIdentification();
             }
         });
+        Drawable rightDrawable= editSpinnerText.getCompoundDrawables()[2];
+        rightDrawable.setBounds(0, 0, 30,
+                30);
+        editSpinnerText.setCompoundDrawables(null,null,rightDrawable,null);
     }
 
     private void uploadIdentification(){

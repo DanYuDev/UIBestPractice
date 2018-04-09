@@ -34,6 +34,7 @@ import okhttp3.internal.Util;
 
 public class EditBillActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "EditBillActivity";
+    private ImageView titleLeft;
     private TextView titleText;
     private TabLayout outInTabLayout;
     private List<SpecificGroup> incomeList = new ArrayList<>();
@@ -80,6 +81,9 @@ public class EditBillActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v){
         switch (v.getId()){
+            case R.id.title_left:
+                finish();
+                break;
             case R.id.camera_iv:
                 Glide.with(this).load(R.drawable.ic_app).into(noteIv);
                 noteIv.setVisibility(View.VISIBLE);
@@ -101,6 +105,7 @@ public class EditBillActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initViews(){
+        titleLeft = findViewById(R.id.title_left);
         titleText = findViewById(R.id.title_tv);
         outInTabLayout = findViewById(R.id.out_in_tablayout);
         specificCycler = findViewById(R.id.specific_cycler);
@@ -112,6 +117,7 @@ public class EditBillActivity extends AppCompatActivity implements View.OnClickL
         noteIv = findViewById(R.id.note_iv);
         noteTv = findViewById(R.id.note_tv);
 
+        titleLeft.setOnClickListener(this);
         cameraIv.setOnClickListener(this);
         cancelIv.setOnClickListener(this);
         deleteIv.setOnClickListener(this);

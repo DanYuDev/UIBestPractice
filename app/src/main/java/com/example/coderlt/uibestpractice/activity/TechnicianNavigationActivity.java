@@ -32,7 +32,7 @@ public class TechnicianNavigationActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_technician_navigation);
-        Utils.showToast("Welcome Technician Part.");
+        Utils.showToast("已进入店长端");
 
         initViews();
     }

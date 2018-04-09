@@ -21,6 +21,8 @@ import com.example.coderlt.uibestpractice.fragments.DashboardFragment;
 import com.example.coderlt.uibestpractice.fragments.HomeFragment;
 import com.example.coderlt.uibestpractice.fragments.UserFragment;
 import com.example.coderlt.uibestpractice.utils.Constant;
+import com.example.coderlt.uibestpractice.utils.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,7 @@ public class NavigationActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         setContentView(R.layout.activity_navigation);
+        Utils.showToast("欢迎进入老板端");
         Log.d("TimeTest","Time 1:"+System.currentTimeMillis());
         clientId = getIntent().getStringExtra(Constant.USER.USER_ID);
         Log.d(TAG,"clientId is : "+clientId);
@@ -86,28 +89,28 @@ public class NavigationActivity extends AppCompatActivity {
         navigateHome.setUnSelectedImgId(R.drawable.ic_home_unselected);
         navigateHome.setSelectedTextColor(selectedColor);
         navigateHome.setUnSelectedTextColor(unselectedColor);
-        navigateHome.setText("Home");
+        navigateHome.setText("主页");
         navigateHome.setUnSelected();
 
         navigateDashboard.setSelectedImgId(R.drawable.ic_dashboard_selected);
         navigateDashboard.setUnSelectedImgId(R.drawable.ic_dashboard_unselected);
         navigateDashboard.setSelectedTextColor(selectedColor);
         navigateDashboard.setUnSelectedTextColor(unselectedColor);
-        navigateDashboard.setText("Dashboard");
+        navigateDashboard.setText("报表");
         navigateDashboard.setUnSelected();
 
         navigateContacts.setSelectedImgId(R.drawable.ic_contacts_selected);
         navigateContacts.setUnSelectedImgId(R.drawable.ic_contacts_unselected);
         navigateContacts.setSelectedTextColor(selectedColor);
         navigateContacts.setUnSelectedTextColor(unselectedColor);
-        navigateContacts.setText("Contacts");
+        navigateContacts.setText("聊天");
         navigateContacts.setUnSelected();
 
         navigateUser.setSelectedImgId(R.drawable.ic_user_selected);
         navigateUser.setUnSelectedImgId(R.drawable.ic_user_unselected);
         navigateUser.setSelectedTextColor(selectedColor);
         navigateUser.setUnSelectedTextColor(unselectedColor);
-        navigateUser.setText("User");
+        navigateUser.setText("个人");
         navigateUser.setUnSelected();
 
         btnList=new ArrayList<>();

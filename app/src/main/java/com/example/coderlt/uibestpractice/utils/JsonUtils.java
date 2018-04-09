@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import com.example.coderlt.uibestpractice.bean.AppInfo;
 import com.example.coderlt.uibestpractice.bean.Employee;
 import com.example.coderlt.uibestpractice.bean.Goods;
 import com.example.coderlt.uibestpractice.bean.Option;
@@ -21,6 +23,17 @@ import java.util.List;
 
 public class JsonUtils {
     public static final String TAG = "JSONUtils";
+
+    public static void dealAppInfo(AppInfo appInfo,String responseText){
+        try{
+            JSONObject jsonObject = JSONObject.parseObject(responseText);
+            appInfo.setAppVersion(jsonObject.getInteger("versionCode"));
+            appInfo.setForced(jsonObject.getBoolean("forced"));
+            appInfo.setApkUrl(jsonObject.getString("apkUrl"));
+        }catch (JSONException ex){
+            ex.printStackTrace();
+        }
+    }
 
     /*
      不能通过返回值的形式返回 options，因为adapter里面的adapter只是fragment里面options的一个引用，
@@ -59,7 +72,6 @@ public class JsonUtils {
                 goods.setPrice(object.getFloat("goods_price"));
                 record.setGoods(goods);
                 record.setCount(object.getInteger("goods_count"));
-
                 sales.add(record);
             }
         }catch (Exception ex){

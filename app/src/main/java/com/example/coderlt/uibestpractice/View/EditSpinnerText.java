@@ -105,7 +105,7 @@ public class EditSpinnerText extends AppCompatEditText {
         setOnClickListener(new ViewGroup.OnClickListener(){
             @Override
             public void onClick(View v){
-                Utils.showToast("PopupWindow:"+spinnerList);
+                //Utils.showToast("PopupWindow:"+spinnerList);
                 popupWindow.showAsDropDown(EditSpinnerText.this,10,0);
                 valueAnimator.start();
             }
