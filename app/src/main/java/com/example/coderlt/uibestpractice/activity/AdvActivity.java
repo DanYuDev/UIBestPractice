@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
@@ -44,6 +45,7 @@ public class AdvActivity extends AppCompatActivity {
     private TextView progressTv;
     private NotificationManager notificationManager;
     private Notification notification;
+    private NotificationCompat.Builder builder;
 
     Runnable loginRunnable=new Runnable() {
         @Override
@@ -63,7 +65,7 @@ public class AdvActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adv);
         notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         checkUpdate();
-        //startActivity(new Intent(AdvActivity.this,LoginActivity.class));
+        startActivity(new Intent(AdvActivity.this,LoginActivity.class));
 
 //      TODO 暂时注释是为了测试
 //        if(preferences.getString(Constant.USER.USER_PHONE,"-1").equals("-1")){
@@ -85,14 +87,14 @@ public class AdvActivity extends AppCompatActivity {
         mDialog.setMyView(dialogLayout);
         mDialog.show();
 
-        notification = new NotificationCompat.Builder(this)
+        builder = new NotificationCompat.Builder(this)
                 .setContentTitle("杭派管理更新程序")
                 .setContentText("This is content text")
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_logo)
-                .build();
-
-        notificationManager.notify(1,notification);
+                .setVibrate(new long[]{0,1000,1000,1000})
+                .setProgress(100,0,false)
+                .setLights(Color.GREEN,1000,1000);
 
         PackageManager pm = getPackageManager();
         PackageInfo pi=null;
@@ -136,6 +138,7 @@ public class AdvActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 Log.d(TAG,"success");
+                notificationManager.cancel(1);
                 String directory = Environment.getExternalStoragePublicDirectory(
                         (Environment.DIRECTORY_DOWNLOADS)).getPath();
                 String fileName = apkUrl.substring(apkUrl.lastIndexOf('/'));
@@ -161,6 +164,8 @@ public class AdvActivity extends AppCompatActivity {
             @Override
             public void onProgress(int progress) {
                 progressTv.setText("download..."+progress+"%");
+                builder.setProgress(100,progress,false);
+                notificationManager.notify(1,builder.build());
             }
         }) ;
         downloadTask.execute(apkUrl);
