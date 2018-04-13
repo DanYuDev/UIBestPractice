@@ -84,7 +84,10 @@
         <activity android:name=".activity.SectionTrainingActivity" />
         <activity android:name=".activity.QRScanActivity" />
         <activity android:name=".activity.IntroductionActivity" />
-
+        <activity android:name=".activity.RuleActivity" />
+        <activity android:name=".activity.HonourActivity" />
+        <activity android:name=".activity.FeedbackActivity" />
+        <activity android:name=".activity.NewShopActivity"></activity>
     </application>
 
 </manifest>

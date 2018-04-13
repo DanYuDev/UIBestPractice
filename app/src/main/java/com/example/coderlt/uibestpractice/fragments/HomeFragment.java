@@ -2,6 +2,7 @@ package com.example.coderlt.uibestpractice.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,12 +13,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.example.coderlt.uibestpractice.R;
+import com.example.coderlt.uibestpractice.View.MyDialog;
 import com.example.coderlt.uibestpractice.View.MyImgButton;
 import com.example.coderlt.uibestpractice.activity.ApprovalActivity;
+import com.example.coderlt.uibestpractice.activity.FeedbackActivity;
+import com.example.coderlt.uibestpractice.activity.HonourActivity;
+import com.example.coderlt.uibestpractice.activity.NewShopActivity;
 import com.example.coderlt.uibestpractice.activity.PersonalBillActivity;
 import com.example.coderlt.uibestpractice.activity.PublishTaskActivity;
+import com.example.coderlt.uibestpractice.activity.RuleActivity;
 import com.example.coderlt.uibestpractice.activity.ScheduleActivity;
 import com.example.coderlt.uibestpractice.activity.SchemeActivity;
 import com.example.coderlt.uibestpractice.activity.SectionTrainingActivity;
@@ -25,6 +36,7 @@ import com.example.coderlt.uibestpractice.activity.ShopActivity;
 import com.example.coderlt.uibestpractice.activity.ShopOrdersActivity;
 import com.example.coderlt.uibestpractice.adapter.FuncRecyclerAdapter;
 import com.example.coderlt.uibestpractice.bean.Option;
+import com.example.coderlt.uibestpractice.bean.ShopInfo;
 import com.example.coderlt.uibestpractice.utils.Constant;
 import com.example.coderlt.uibestpractice.utils.FileUtil;
 import com.example.coderlt.uibestpractice.utils.JsonUtils;
@@ -32,6 +44,7 @@ import com.example.coderlt.uibestpractice.utils.Utils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -45,10 +58,19 @@ import okhttp3.Response;
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "HomeFragment";
+    private SharedPreferences preferences;
     private View view;
     private Context mContext;
-    private MyImgButton salesButton,personalBillBtn;
+    private TextView shopNameTv;
+    private TextView shopManagerTv;
     private RelativeLayout shopLayout;
+    private MyImgButton ruleBtn,honourBtn,feedbackBtn;
+    private MyImgButton newShopBtn,switchBtn;
+    // 店铺选择对话框
+    private MyDialog mDialog;
+    private ListView shopListView;
+    private List<String> shopNameList;
+    private List<ShopInfo> shopList;
     private List<Option> options;
     private RecyclerView optionCycler;
     private FuncRecyclerAdapter funcAdapter;
@@ -117,21 +139,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
     private void logics(){
+        preferences = mContext.getSharedPreferences(Constant.USER_PREF_NAME,Context.MODE_PRIVATE);
         options = new ArrayList<>();
         initViews();
         new Thread(readCacheRunnable).start();
     }
 
     private void initViews(){
-        salesButton = view.findViewById(R.id.sales_img_btn);
-        personalBillBtn = view.findViewById(R.id.personal_bill);
+        // find Views
         shopLayout = view.findViewById(R.id.shop_title);
+        shopNameTv = view.findViewById(R.id.shop_name);
+        shopManagerTv = view.findViewById(R.id.shop_manager);
         optionCycler = view.findViewById(R.id.option_cycler);
+        ruleBtn = view.findViewById(R.id.rule_btn);
+        honourBtn = view.findViewById(R.id.honour_btn);
+        feedbackBtn = view.findViewById(R.id.feedback_btn);
+        newShopBtn = view .findViewById(R.id.new_shop_btn);
+        switchBtn = view.findViewById(R.id.switch_btn);
 
-        salesButton.setOnClickListener(this);
-        personalBillBtn.setOnClickListener(this);
+        // set listener
         shopLayout.setOnClickListener(this);
-
+        shopNameTv.setText(preferences.getString(Constant.SHOP.SHOP_ID,"暂未绑定"));
+        ruleBtn.setOnClickListener(this);
+        honourBtn.setOnClickListener(this);
+        feedbackBtn.setOnClickListener(this);
+        newShopBtn.setOnClickListener(this);
+        switchBtn.setOnClickListener(this);
         funcAdapter = new FuncRecyclerAdapter(options, R.layout.func_item, mContext, new FuncRecyclerAdapter.OnItemClickedListener() {
             @Override
             public void onItemClicked(int position) {
@@ -169,16 +202,30 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(mContext,4);
         optionCycler.setLayoutManager(gridLayoutManager);
         optionCycler.setAdapter(funcAdapter);
+
+        // init data
+
+
     }
 
     @Override
     public void onClick(View v){
         switch (v.getId()){
-            case R.id.sales_img_btn:
-
+            case R.id.rule_btn:
+                startActivity(new Intent(mContext, RuleActivity.class));
                 break;
-            case R.id.personal_bill:
-                Utils.showToast("努力Coding...");
+            case R.id.honour_btn:
+                startActivity(new Intent(mContext, HonourActivity.class));
+                break;
+            case R.id.feedback_btn:
+                startActivity(new Intent(mContext, FeedbackActivity.class));
+                break;
+            case R.id.new_shop_btn:
+                startActivity(new Intent(mContext, NewShopActivity.class));
+                break;
+            case R.id.switch_btn:
+                Utils.showToast("显示切换门店的 Dialog .");
+                switchShop();
                 break;
             case R.id.shop_title:
                 startActivity(new Intent(mContext, ShopActivity.class));
@@ -215,6 +262,37 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 Message msg=new Message();
                 msg.what=REQUEST_FUNC_SUCCESS;
                 mHandler.sendMessage(msg);
+            }
+        });
+    }
+
+    private void switchShop(){
+        shopNameList = new ArrayList<>();
+        shopList = new ArrayList<>();
+        shopList = Arrays.asList(new ShopInfo[]
+                {       new ShopInfo("杭派金地店","0001"),
+                        new ShopInfo("水尚都府店","0002"),
+                        new ShopInfo("诸暨康乐园","0003")}
+                        );
+        shopNameList=Arrays.asList(new String[]{"杭派金地店", "水尚都府店", "诸暨康乐园"});
+        View dialogView = LayoutInflater.from(mContext).inflate(R.layout.dialog_shop_select,null);
+        shopListView = dialogView.findViewById(R.id.shop_listview);
+        ArrayAdapter adapter = new ArrayAdapter(mContext,R.layout.my_simple_item,shopNameList);
+        shopListView.setAdapter(adapter);
+
+        mDialog = new MyDialog(mContext,R.style.Dialog);
+        // mDialog.setTitle("选择已有店铺");
+        mDialog.setMyView(dialogView);
+        mDialog.show();
+
+        // 绑定店铺，思考绑定在哪里
+        shopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                preferences.edit()
+                        .putString(Constant.SHOP.SHOP_ID,shopList.get(position).getShopId())
+                        .apply();
+                mDialog.dismiss();
             }
         });
     }

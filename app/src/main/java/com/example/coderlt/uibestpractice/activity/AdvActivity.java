@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
@@ -16,21 +15,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.example.coderlt.uibestpractice.MyApplication;
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.View.MyDialog;
 import com.example.coderlt.uibestpractice.bean.AppInfo;
 import com.example.coderlt.uibestpractice.service.DownloadListener;
 import com.example.coderlt.uibestpractice.service.DownloadTask;
-import com.example.coderlt.uibestpractice.utils.Constant;
 import com.example.coderlt.uibestpractice.utils.JsonUtils;
-
 import java.io.File;
 import java.io.IOException;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -119,6 +112,7 @@ public class AdvActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String responseText = response.body().string();
+                Log.d(TAG,"responseText"+responseText);
                 AppInfo appInfo = new AppInfo();
                 JsonUtils.dealAppInfo(appInfo,responseText);
                 Log.d(TAG,appInfo.toString());
@@ -167,7 +161,7 @@ public class AdvActivity extends AppCompatActivity {
                 builder.setProgress(100,progress,false);
                 notificationManager.notify(1,builder.build());
             }
-        }) ;
+        });
         downloadTask.execute(apkUrl);
     }
 

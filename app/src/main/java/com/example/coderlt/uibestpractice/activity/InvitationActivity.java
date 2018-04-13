@@ -23,6 +23,11 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 1.这里应该生成一个 二维码，代表了店铺的信息
+ * 2.由于一个老板可能包含好几个，所以应该每个店铺对应一个二维码
+ * 3.二维码主要就包含店铺信息，店铺 ID
+ */
 public class InvitationActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "InvitationActivity";
     private ImageView titleLeft;
