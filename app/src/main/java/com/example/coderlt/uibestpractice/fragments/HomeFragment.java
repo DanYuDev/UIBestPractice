@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.coderlt.uibestpractice.R;
 import com.example.coderlt.uibestpractice.View.MyDialog;
 import com.example.coderlt.uibestpractice.View.MyImgButton;
@@ -59,6 +58,7 @@ import okhttp3.Response;
 public class HomeFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "HomeFragment";
     private SharedPreferences preferences;
+    private TextView titleTv;
     private View view;
     private Context mContext;
     private TextView shopNameTv;
@@ -77,8 +77,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private File cacheFile;
     private String cacheFilePath;
     private OkHttpClient client;
-    private static final int REQUEST_FUNC_SUCCESS= 0;
-    private static final int REQUEST_FUNC_FAILED = 1;
+    private static final int REQUEST_FUNC_SUCCESS = 0;
+    private static final int REQUEST_FUNC_FAILED  = 1;
 
     private class MyHandler extends Handler {
         @Override
@@ -147,6 +147,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private void initViews(){
         // find Views
+        titleTv = view.findViewById(R.id.title_tv);
         shopLayout = view.findViewById(R.id.shop_title);
         shopNameTv = view.findViewById(R.id.shop_name);
         shopManagerTv = view.findViewById(R.id.shop_manager);
@@ -204,8 +205,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         optionCycler.setAdapter(funcAdapter);
 
         // init data
-
-
+        bindShop();
     }
 
     @Override
@@ -270,9 +270,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         shopNameList = new ArrayList<>();
         shopList = new ArrayList<>();
         shopList = Arrays.asList(new ShopInfo[]
-                {       new ShopInfo("杭派金地店","0001"),
-                        new ShopInfo("水尚都府店","0002"),
-                        new ShopInfo("诸暨康乐园","0003")}
+                {       new ShopInfo("杭派金地店","0001","方勤"),
+                        new ShopInfo("水尚都府店","0002","勾霞"),
+                        new ShopInfo("诸暨康乐园","0003","佚名")}
                         );
         shopNameList=Arrays.asList(new String[]{"杭派金地店", "水尚都府店", "诸暨康乐园"});
         View dialogView = LayoutInflater.from(mContext).inflate(R.layout.dialog_shop_select,null);
@@ -291,9 +291,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 preferences.edit()
                         .putString(Constant.SHOP.SHOP_ID,shopList.get(position).getShopId())
+                        .putString(Constant.SHOP.SHOP_MANAGER,shopList.get(position).getManagerName())
+                        .putString(Constant.SHOP.SHOP_NAME,shopList.get(position).getShopName())
                         .apply();
+                bindShop();
                 mDialog.dismiss();
             }
         });
+    }
+
+    /**
+     * 绑定店铺信息
+     */
+    private void bindShop(){
+        shopNameTv.setText(preferences.getString(Constant.SHOP.SHOP_ID,"000"));
+        shopManagerTv.setText(preferences.getString(Constant.SHOP.SHOP_MANAGER,"---"));
+        titleTv.setText(preferences.getString(Constant.SHOP.SHOP_NAME,"XX店铺"));
     }
 }

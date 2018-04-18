@@ -7,10 +7,12 @@ package com.example.coderlt.uibestpractice.bean;
 public class ShopInfo {
     String shopName;
     String shopId;
+    String managerName;
 
-    public ShopInfo(String shopName, String shopId) {
+    public ShopInfo(String shopName, String shopId,String managerName) {
         this.shopName = shopName;
         this.shopId = shopId;
+        this.managerName = managerName;
     }
 
     public String getShopName() {
@@ -29,11 +31,20 @@ public class ShopInfo {
         this.shopId = shopId;
     }
 
+    public String getManagerName() {
+        return managerName;
+    }
+
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
+    }
+
     @Override
     public String toString() {
         return "ShopInfo{" +
                 "shopName='" + shopName + '\'' +
                 ", shopId='" + shopId + '\'' +
+                ", managerName='" + managerName + '\'' +
                 '}';
     }
 }

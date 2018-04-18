@@ -35,6 +35,8 @@ public class Constant {
     public static class SHOP{
         public static final String SHOP_ID = "shop_id";
         public static final String BUILD_SHOP_URL = "http://192.168.125.81:8080/HangPaiSoftCamp/admin/merchant/add";
+        public static final String SHOP_MANAGER = "shop_manager";
+        public static final String SHOP_NAME = "shop_name";
     }
     public static class USER {
         public static final String USER_NAME = "user_name";  //昵称

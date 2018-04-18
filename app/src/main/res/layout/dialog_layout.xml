@@ -9,10 +9,9 @@
         android:id="@+id/dialog_layout"
         android:orientation="vertical"
         android:background="@drawable/corner_dialog">
-        <com.example.coderlt.uibestpractice.View.ProgressWheel
+        <com.example.coderlt.uibestpractice.View.LoadingView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/progress_wheel"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
 </LinearLayout>
