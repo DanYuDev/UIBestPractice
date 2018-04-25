@@ -16,6 +16,8 @@ import android.view.View;
 
 public class LoadingView extends View {
     private static final String TAG = "LoadingView";
+    private final int mDefaultWidth = 150;
+    private final int mDefaultHeight = 150;
     private int mWidth;
     private int mHeight;
     private int min;
@@ -39,6 +41,22 @@ public class LoadingView extends View {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(10);
         //mPaint.setStrokeCap(Paint.Cap.ROUND);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec,int heightMeasureSpec){
+        super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+        int finalMeasuredWidth,finalMeasuredHeight;
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        finalMeasuredWidth = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        finalMeasuredHeight = MeasureSpec.getSize(heightMeasureSpec);
+
+        if(widthSpecMode==MeasureSpec.AT_MOST )
+            finalMeasuredWidth = mDefaultWidth;
+        if(heightSpecMode==MeasureSpec.AT_MOST)
+            finalMeasuredHeight = mDefaultHeight;
+        setMeasuredDimension(finalMeasuredWidth,finalMeasuredHeight);
     }
 
     @Override
